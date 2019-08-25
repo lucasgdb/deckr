@@ -1,0 +1,10 @@
+{
+  "name": "deckr",
+  "version": "1.0.0",
+  "description": "Deck builder & manager for Clash Royale",
+  "main": "index.js",
+  "repository": "git@github.com:lucasnaja/deckr.git",
+  "author": "Lucas Bittencourt",
+  "license": "MIT",
+  "private": true
+}
