@@ -1,13 +1,20 @@
 import React, { useEffect } from 'react'
+import Header from '../../components/Header'
 import './index.css'
 
 const About = () => {
-    useEffect(() => document.title = 'Deckr - About', [])
+    useEffect(() => {
+        document.title = 'Deckr - About'
+    }, [])
 
     return (
-        <div>
-            Página de Sobre
-        </div>
+        <>
+            <Header page="about" />
+
+            <div>
+                About page
+            </div>
+        </>
     )
 }
 

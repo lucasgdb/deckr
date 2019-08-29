@@ -10,7 +10,7 @@ ReactDOM.render(
         <BrowserRouter>
             <Switch>
                 <Route path="/" exact={true} component={DeckBuilder} />
-                <Route path="/sobre/" exact={true} component={About} />
+                <Route path="/about/" exact={true} component={About} />
                 <Route path="*" component={Error404} />
             </Switch>
         </BrowserRouter>

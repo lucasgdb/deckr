@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react'
+import Header from '../../components/Header'
 import Button from 'react-bootstrap/Button'
+import Container from 'react-bootstrap/Container'
 import images from './src/requireAll'
 import { names, cards_png } from './src/information.json'
 import './src/index.css'
@@ -25,17 +27,21 @@ const DeckBuilder = () => {
 
     return (
         <>
-            <div className="cards">
-                {
-                    cardList.map((card, index) =>
-                        <div className="card-container" key={index}>
-                            <img className={`card ${index > 3 ? 'mt-1' : ''}`} src={images[card]} alt={cards_png[card]} title={names[card]} />
-                        </div>
-                    )
-                }
-            </div>
+            <Header page="deckr" />
 
-            <Button onClick={generate}>Generate</Button>
+            <Container>
+                <div className="cards mt-2">
+                    {
+                        cardList.map((card, index) =>
+                            <div className="float-left w-25 h-50" key={index}>
+                                <img className={`card border-0 w-100 h-100 ${index > 3 ? 'mt-1' : ''}`} src={images[card]} alt={cards_png[card]} title={names[card]} />
+                            </div>
+                        )
+                    }
+
+                    <Button className="mt-3 float-right" onClick={generate} variant="dark">Generate</Button>
+                </div>
+            </Container>
         </>
     )
 }
