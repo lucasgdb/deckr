@@ -6,4 +6,4 @@ for (let i = 0; i < cards_png.length; i++) {
     requiredImages.push(require(`../../../cards/${cards_png[i]}.png`))
 }
 
-module.exports = requiredImages
+export default requiredImages

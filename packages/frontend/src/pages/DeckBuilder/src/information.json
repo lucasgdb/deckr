@@ -8,7 +8,11 @@
         "Fireball",
         "Mini P.E.K.K.A",
         "Musketeer",
-        "Giant"
+        "Giant",
+        "Skarmy",
+        "Wall Breakers",
+        "Baby Dragon",
+        "Prince"
     ],
     "cards_png": [
         "no_card",
@@ -19,6 +23,10 @@
         "fireball",
         "mini_pekka",
         "musketeer",
-        "giant"
+        "giant",
+        "skarmy",
+        "wall_breakers",
+        "baby_dragon",
+        "prince"
     ]
 }

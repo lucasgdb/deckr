@@ -1,9 +1,19 @@
 import React, { useEffect, useState } from 'react'
 import Header from '../../components/Header'
-import Button from 'react-bootstrap/Button'
-import Container from 'react-bootstrap/Container'
 import images from './src/requireAll'
-import { names, cards_png } from './src/information.json'
+
+import {
+    Button,
+    Container,
+    Dropdown,
+    ButtonGroup
+} from 'react-bootstrap'
+
+import {
+    names,
+    cards_png
+} from './src/information.json'
+
 import './src/index.css'
 
 const DeckBuilder = () => {
@@ -17,12 +27,32 @@ const DeckBuilder = () => {
         const generatedCards = []
 
         while (generatedCards.length < 8) {
-            const generatedNumber = Math.floor(Math.random() * 8) + 1
+            const generatedNumber = Math.floor(Math.random() * (images.length - 1)) + 1
 
             if (generatedCards.indexOf(generatedNumber) === -1) generatedCards.push(generatedNumber)
         }
 
         setCardList(generatedCards)
+    }
+
+    const clear = () => setCardList([0, 0, 0, 0, 0, 0, 0, 0])
+
+    const shuffle = () => {
+        const
+            shuffled = [],
+            currentCardList = [...cardList],
+            newCardList = []
+
+        while (shuffled.length < 8) {
+            const number = Math.floor(Math.random() * currentCardList.length)
+
+            if (shuffled.indexOf(number) === -1) {
+                shuffled.push(number)
+                newCardList.push(currentCardList[number])
+            }
+        }
+
+        setCardList(newCardList)
     }
 
     return (
@@ -38,8 +68,20 @@ const DeckBuilder = () => {
                             </div>
                         )
                     }
+                </div>
 
-                    <Button className="mt-3 float-right" onClick={generate} variant="dark">Generate</Button>
+                <div className="options border border-dark d-flex justify-content-end mt-2">
+                    <Dropdown drop={window.innerWidth < 768 ? 'left' : 'down'} as={ButtonGroup}>
+                        <Button title="Generate Deck" variant="dark" onClick={generate}>Generate</Button>
+
+                        <Dropdown.Toggle split variant="dark" />
+
+                        <Dropdown.Menu>
+                            <Dropdown.Item title="Clear Deck" onClick={clear}>Clear</Dropdown.Item>
+                            <Dropdown.Item title="Shuffle Deck" onClick={shuffle}>Shuffe</Dropdown.Item>
+                            {/* <Dropdown.Item >Something else</Dropdown.Item> */}
+                        </Dropdown.Menu>
+                    </Dropdown>
                 </div>
             </Container>
         </>

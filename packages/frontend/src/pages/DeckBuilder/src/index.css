@@ -7,3 +7,23 @@
 .cards .card {
     user-select: none
 }
+
+.options {
+    margin: 0 auto;
+    max-width: 600px;
+    min-height: 0;
+    padding: 5px;
+    box-sizing: border-box
+}
+
+@media (max-width: 767px) {
+    .cards {
+        height: 320px
+    }
+}
+
+@media (max-width: 500px) {
+    .cards {
+        height: 62vw
+    }
+}

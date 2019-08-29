@@ -5,17 +5,18 @@ import { Link } from 'react-router-dom'
 
 const Header = props => {
     return (
-        <Navbar bg="dark" variant="dark" sticky="top">
-            <Link className="navbar-brand" to="/"><i className="fas fa-tools mr-1"></i>Deckr</Link>
-            <Nav className="mr-auto">
-                <Link className={`nav-link ${props.page === 'deckr' ? 'active' : ''}`} to="/">
-                    Deck Builder
-                </Link>
-                <Link className={`nav-link ${props.page === 'about' ? 'active' : ''}`} to="/about">
-                    About
-                </Link>
-                {/* <Link to="/">Pricing</Link> */}
-            </Nav>
+        <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
+            <Link className="navbar-brand" to="/">
+                <i className="fas fa-tools mr-1"></i>
+                Deckr
+            </Link>
+            <Navbar.Toggle aria-controls="responsive-navbar-nav" />
+            <Navbar.Collapse id="responsive-navbar-nav">
+                <Nav className="mr-auto">
+                    <Link className={`nav-link ${props.page === 'deckr' ? 'active' : ''}`} to="/">Deck Builder</Link>
+                    <Link className={`nav-link ${props.page === 'about' ? 'active' : ''}`} to="/about">About</Link>
+                </Nav>
+            </Navbar.Collapse>
         </Navbar>
     )
 }
