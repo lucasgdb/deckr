@@ -1,0 +1,24 @@
+{
+    "names": [
+        "No card",
+        "Archers",
+        "Arrows",
+        "Knight",
+        "Minions",
+        "Fireball",
+        "Mini P.E.K.K.A",
+        "Musketeer",
+        "Giant"
+    ],
+    "cards_png": [
+        "no_card",
+        "archers",
+        "arrows",
+        "knight",
+        "minions",
+        "fireball",
+        "mini_pekka",
+        "musketeer",
+        "giant"
+    ]
+}
