@@ -16,6 +16,13 @@
     box-sizing: border-box
 }
 
+.toast {
+    z-index: 10000 !important;
+    width: 260px;
+    top: 5px;
+    right: 5px
+}
+
 @media (max-width: 767px) {
     .cards {
         height: 320px
@@ -25,5 +32,10 @@
 @media (max-width: 500px) {
     .cards {
         height: 62vw
+    }
+
+    .toast {
+        margin-top: 0;
+        bottom: 5px
     }
 }

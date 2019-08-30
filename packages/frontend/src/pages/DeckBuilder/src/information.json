@@ -1,32 +1,47 @@
 {
     "names": [
         "No card",
-        "Archers",
         "Arrows",
-        "Knight",
         "Minions",
+        "Archers",
+        "Knight",
         "Fireball",
         "Mini P.E.K.K.A",
         "Musketeer",
         "Giant",
-        "Skarmy",
-        "Wall Breakers",
+        "Skeleton Army",
+        "Prince",
         "Baby Dragon",
-        "Prince"
+        "Wall Breakers"
     ],
     "cards_png": [
         "no_card",
-        "archers",
         "arrows",
-        "knight",
         "minions",
+        "archers",
+        "knight",
         "fireball",
         "mini_pekka",
         "musketeer",
         "giant",
-        "skarmy",
-        "wall_breakers",
+        "skeleton_army",
+        "prince",
         "baby_dragon",
-        "prince"
+        "wall_breakers"
+    ],
+    "codes": [
+        "",
+        "28000001",
+        "26000005",
+        "26000001",
+        "26000000",
+        "28000000",
+        "26000018",
+        "26000014",
+        "26000003",
+        "26000012",
+        "26000016",
+        "26000015",
+        "26000058"
     ]
 }

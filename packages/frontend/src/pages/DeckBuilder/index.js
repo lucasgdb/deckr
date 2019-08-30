@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, memo } from 'react'
+import icon from './favicon.png'
 import Header from '../../components/Header'
 import images from './src/requireAll'
 
@@ -6,22 +7,49 @@ import {
     Button,
     Container,
     Dropdown,
-    ButtonGroup
+    ButtonGroup,
+    Toast
 } from 'react-bootstrap'
 
 import {
     names,
-    cards_png
+    cards_png,
+    codes
 } from './src/information.json'
+
+import { CopyToClipboard } from 'react-copy-to-clipboard'
 
 import './src/index.css'
 
+const Notification = memo(props => {
+    return (
+        <Toast show={props.copied} onClose={props.toggleToast} delay={3500} autohide className="toast position-absolute">
+            <Toast.Header>
+                <img width="30px" className="rounded mr-2" src={icon} alt="Deckr" />
+                <strong className="mr-auto">Deckr</strong>
+            </Toast.Header>
+
+            <Toast.Body>Link successfully copied.</Toast.Body>
+        </Toast>
+    )
+})
+
 const DeckBuilder = () => {
     const [cardList, setCardList] = useState([0, 0, 0, 0, 0, 0, 0, 0])
+    const [content, setContent] = useState('https://link.clashroyale.com/deck/en?deck=;;;;;;;')
+    const [copied, setCopied] = useState(false)
 
     useEffect(() => {
         document.title = 'Deckr - Deck Builder'
     }, [])
+
+    useEffect(() => {
+        let link = 'https://link.clashroyale.com/deck/en?deck={};{};{};{};{};{};{};{}'
+
+        for (let i = 0; i < cardList.length; i++) link = link.replace('{}', codes[cardList[i]])
+
+        setContent(link)
+    }, [cardList])
 
     const generate = () => {
         const generatedCards = []
@@ -35,7 +63,7 @@ const DeckBuilder = () => {
         setCardList(generatedCards)
     }
 
-    const clear = () => setCardList([0, 0, 0, 0, 0, 0, 0, 0])
+    const clear = () => { setCardList([0, 0, 0, 0, 0, 0, 0, 0]) }
 
     const shuffle = () => {
         const
@@ -59,6 +87,8 @@ const DeckBuilder = () => {
         <>
             <Header page="deckr" />
 
+            <Notification copied={copied} toggleToast={() => setCopied(false)} />
+
             <Container>
                 <div className="cards mt-2">
                     {
@@ -71,6 +101,10 @@ const DeckBuilder = () => {
                 </div>
 
                 <div className="options border border-dark d-flex justify-content-end mt-2">
+                    <CopyToClipboard text={content} onCopy={() => setCopied(true)}>
+                        <Button className="mr-1" title="Copy Deck" variant="dark">Copy</Button>
+                    </CopyToClipboard>
+
                     <Dropdown drop={window.innerWidth < 768 ? 'left' : 'down'} as={ButtonGroup}>
                         <Button title="Generate Deck" variant="dark" onClick={generate}>Generate</Button>
 
@@ -79,7 +113,6 @@ const DeckBuilder = () => {
                         <Dropdown.Menu>
                             <Dropdown.Item title="Clear Deck" onClick={clear}>Clear</Dropdown.Item>
                             <Dropdown.Item title="Shuffle Deck" onClick={shuffle}>Shuffe</Dropdown.Item>
-                            {/* <Dropdown.Item >Something else</Dropdown.Item> */}
                         </Dropdown.Menu>
                     </Dropdown>
                 </div>

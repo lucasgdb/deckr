@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { memo } from 'react'
 import Navbar from 'react-bootstrap/Navbar'
 import Nav from 'react-bootstrap/Nav'
 import { Link } from 'react-router-dom'
 
-const Header = props => {
+const Header = memo(props => {
     return (
         <Navbar collapseOnSelect expand="lg" bg="dark" variant="dark" sticky="top">
             <Link className="navbar-brand" to="/">
@@ -19,6 +19,6 @@ const Header = props => {
             </Navbar.Collapse>
         </Navbar>
     )
-}
+})
 
 export default Header

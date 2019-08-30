@@ -1,6 +1,6 @@
-import React, { Suspense, lazy } from 'react';
-import ReactDOM from 'react-dom';
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import React, { Suspense, lazy } from 'react'
+import ReactDOM from 'react-dom'
+import { BrowserRouter, Switch, Route } from 'react-router-dom'
 const DeckBuilder = lazy(() => import('./pages/DeckBuilder'))
 const About = lazy(() => import('./pages/About'))
 const Error404 = lazy(() => import('./pages/Error404'))
@@ -16,4 +16,4 @@ ReactDOM.render(
         </BrowserRouter>
     </Suspense>,
     document.getElementById('root')
-);
+)
