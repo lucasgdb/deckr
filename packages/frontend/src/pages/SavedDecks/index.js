@@ -1,5 +1,5 @@
 import React, { useEffect, useState, memo } from 'react';
-import { Button, Dropdown } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import api from '../../services/api';
 import Header from '../../components/Header';
@@ -13,6 +13,8 @@ const SavedDecks = memo(() => {
    const [copied, setCopied] = useState(false);
 
    useEffect(() => {
+      document.title = 'Deckr - Saved Decks';
+
       api.get('deck').then(response => {
          setDecks(response.data);
       });
@@ -32,6 +34,13 @@ const SavedDecks = memo(() => {
       setDecks(data.data);
    };
 
+   const open = link => {
+      if (window.innerWidth < 993) {
+         const cards = link.split('?deck=')[1];
+         window.open(`clashroyale://copyDeck?deck=${cards}`);
+      } else window.open(link);
+   };
+
    return (
       <>
          <Header page='decks' />
@@ -43,41 +52,44 @@ const SavedDecks = memo(() => {
          />
 
          {decks.length === 0 ? (
-            <p className='no-decks'>No saved decks.</p>
+            <p className='information'>No saved decks.</p>
          ) : (
-            decks.map(deck => (
-               <div key={deck._id}>
-                  <Deck cards={deck.cards} />
+            <>
+               <p className='information'>{decks.length} saved Decks.</p>
+               {decks.map(deck => (
+                  <div key={deck._id}>
+                     <Deck cards={deck.cards} />
 
-                  <Options>
-                     <Dropdown>
-                        <Dropdown.Toggle className='mr-1' variant='dark'>
-                           Options
-                        </Dropdown.Toggle>
+                     <Options>
+                        <Button
+                           className='mr-1'
+                           title='Open Deck on Clash Royale'
+                           variant='dark'
+                           onClick={() => open(deck.link)}
+                        >
+                           Open
+                        </Button>
 
-                        <Dropdown.Menu>
-                           <Dropdown.Item
-                              title='Copy Deck'
-                              as={CopyToClipboard}
-                              variant='dark'
-                              text={deck.link}
-                              onCopy={() => setCopied(true)}
-                           >
-                              <Button>Copy</Button>
-                           </Dropdown.Item>
-                        </Dropdown.Menu>
-                     </Dropdown>
+                        <CopyToClipboard
+                           className='mr-1'
+                           title='Copy Deck'
+                           text={deck.link}
+                           onCopy={() => setCopied(true)}
+                        >
+                           <Button>Copy</Button>
+                        </CopyToClipboard>
 
-                     <Button
-                        title='Remove Deck'
-                        variant='dark'
-                        onClick={() => removeDeck(deck._id)}
-                     >
-                        Remove
-                     </Button>
-                  </Options>
-               </div>
-            ))
+                        <Button
+                           title='Remove Deck'
+                           variant='danger'
+                           onClick={() => removeDeck(deck._id)}
+                        >
+                           Remove
+                        </Button>
+                     </Options>
+                  </div>
+               ))}
+            </>
          )}
       </>
    );

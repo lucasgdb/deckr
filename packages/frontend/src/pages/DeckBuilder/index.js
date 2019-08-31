@@ -130,16 +130,6 @@ const DeckBuilder = memo(() => {
                   </Dropdown.Item>
 
                   <Dropdown.Item
-                     title='Copy Deck'
-                     as={CopyToClipboard}
-                     variant='dark'
-                     text={content}
-                     onCopy={() => setCopied(true)}
-                  >
-                     <Button>Copy</Button>
-                  </Dropdown.Item>
-
-                  <Dropdown.Item
                      as={Button}
                      variant='dark'
                      title='Clear Deck'
@@ -159,7 +149,16 @@ const DeckBuilder = memo(() => {
                </Dropdown.Menu>
             </Dropdown>
 
-            <Button title='Generate Deck' variant='dark' onClick={generate}>
+            <CopyToClipboard
+               className='mr-1'
+               title='Copy Deck'
+               text={content}
+               onCopy={() => setCopied(true)}
+            >
+               <Button>Copy</Button>
+            </CopyToClipboard>
+
+            <Button title='Generate Deck' variant='success' onClick={generate}>
                Generate
             </Button>
          </Options>
