@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import Header from '../../components/Header';
 import './index.css';
 
-const About = () => {
+const About = memo(() => {
    useEffect(() => {
       document.title = 'Deckr - About';
    }, []);
@@ -14,6 +14,6 @@ const About = () => {
          <div>About page</div>
       </>
    );
-};
+});
 
 export default About;

@@ -1,0 +1,15 @@
+.cards {
+   margin: 0 auto;
+   max-width: 600px !important;
+   height: 360px;
+}
+
+.cards .card {
+   user-select: none;
+}
+
+@media (max-width: 500px) {
+   .cards {
+      height: 62vw;
+   }
+}

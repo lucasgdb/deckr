@@ -1,38 +1,28 @@
-import React, { useEffect, useState, memo } from 'react';
-import { Button, Dropdown, Toast, Row, Col } from 'react-bootstrap';
+import React, { useEffect, useState, useCallback, memo } from 'react';
+import { Button, Dropdown } from 'react-bootstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import icon from './favicon.png';
+import api from '../../services/api';
 import Header from '../../components/Header';
-import images from './src/requireAll';
+import Deck from '../../components/Deck';
+import Notification from '../../components/Notification';
+import Options from '../../components/Options';
+import { names, codes } from '../src/information.json';
 
-import { names, cardsPNG, codes } from './src/information.json';
+const defaultCardList = [
+   { id: 0, card: 0 },
+   { id: 1, card: 0 },
+   { id: 2, card: 0 },
+   { id: 3, card: 0 },
+   { id: 4, card: 0 },
+   { id: 5, card: 0 },
+   { id: 6, card: 0 },
+   { id: 7, card: 0 },
+];
 
-import './src/index.css';
-
-const Notification = memo(props => {
-   const { copied, toggleToast } = props;
-
-   return (
-      <Toast
-         show={copied}
-         onClose={toggleToast}
-         delay={3500}
-         autohide
-         className='toast position-absolute'
-      >
-         <Toast.Header>
-            <img width='30px' className='rounded mr-2' src={icon} alt='Deckr' />
-            <strong className='mr-auto'>Deckr</strong>
-         </Toast.Header>
-
-         <Toast.Body>Link successfully copied.</Toast.Body>
-      </Toast>
-   );
-});
-
-const DeckBuilder = () => {
-   const [cardList, setCardList] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
+const DeckBuilder = memo(() => {
+   const [cardList, setCardList] = useState(defaultCardList);
    const [copied, setCopied] = useState(false);
+   const [saved, setSaved] = useState(false);
    const [content, setContent] = useState(
       'https://link.clashroyale.com/deck/en?deck=;;;;;;;',
    );
@@ -41,33 +31,43 @@ const DeckBuilder = () => {
       document.title = 'Deckr - Deck Builder';
    }, []);
 
-   useEffect(() => {
+   const getLink = useCallback(() => {
       let link =
          'https://link.clashroyale.com/deck/en?deck={};{};{};{};{};{};{};{}';
 
       for (let i = 0; i < cardList.length; i += 1) {
-         link = link.replace('{}', codes[cardList[i]]);
+         link = link.replace('{}', codes[cardList[i].card]);
       }
 
-      setContent(link);
+      return link;
    }, [cardList]);
+
+   useEffect(() => {
+      setContent(getLink());
+   }, [cardList, getLink]);
 
    const generate = () => {
       const generatedCards = [];
+      const numbers = [];
 
-      while (generatedCards.length < 8) {
+      while (numbers.length < 8) {
          const generatedNumber =
-            Math.floor(Math.random() * (images.length - 1)) + 1;
+            Math.floor(Math.random() * (names.length - 1)) + 1;
 
-         if (generatedCards.indexOf(generatedNumber) === -1) {
-            generatedCards.push(generatedNumber);
+         if (numbers.indexOf(generatedNumber) === -1) {
+            numbers.push(generatedNumber);
+
+            generatedCards.push({
+               id: generatedCards.length,
+               card: generatedNumber,
+            });
          }
       }
 
       setCardList(generatedCards);
    };
 
-   const clear = () => setCardList([0, 0, 0, 0, 0, 0, 0, 0]);
+   const clear = () => setCardList(defaultCardList);
 
    const shuffle = () => {
       const shuffled = [];
@@ -86,33 +86,49 @@ const DeckBuilder = () => {
       setCardList(newCardList);
    };
 
+   const save = async () => {
+      await api.post('/deck', {
+         cards: cardList,
+         link: getLink(),
+      });
+
+      setSaved(true);
+   };
+
    return (
       <>
          <Header page='deckr' />
 
-         <Notification copied={copied} toggleToast={() => setCopied(false)} />
+         <Notification
+            text='Link successfully copied.'
+            show={copied}
+            toggleToast={() => setCopied(false)}
+         />
 
-         <Row className='cards mt-2'>
-            {cardList.map((card, index) => (
-               // eslint-disable-next-line react/no-array-index-key
-               <Col xs={3} className='p-0 h-50' key={index}>
-                  <img
-                     className='card border-0 w-100 h-100'
-                     src={images[card]}
-                     alt={cardsPNG[card]}
-                     title={names[card]}
-                  />
-               </Col>
-            ))}
-         </Row>
+         <Notification
+            text='Deck successfully saved.'
+            show={saved}
+            toggleToast={() => setSaved(false)}
+         />
 
-         <div className='options border border-dark d-flex justify-content-end mt-2'>
+         <Deck cards={cardList} />
+
+         <Options>
             <Dropdown>
                <Dropdown.Toggle className='mr-1' variant='dark'>
                   Options
                </Dropdown.Toggle>
 
                <Dropdown.Menu>
+                  <Dropdown.Item
+                     as={Button}
+                     variant='dark'
+                     title='Save Deck'
+                     onClick={save}
+                  >
+                     Save
+                  </Dropdown.Item>
+
                   <Dropdown.Item
                      title='Copy Deck'
                      as={CopyToClipboard}
@@ -146,9 +162,9 @@ const DeckBuilder = () => {
             <Button title='Generate Deck' variant='dark' onClick={generate}>
                Generate
             </Button>
-         </div>
+         </Options>
       </>
    );
-};
+});
 
 export default DeckBuilder;

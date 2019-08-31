@@ -32,6 +32,15 @@ const Header = memo(props => {
 
                <Link
                   className={`nav-link ${
+                     props.page === 'decks' ? 'active' : ''
+                  }`}
+                  to='/decks'
+               >
+                  Saved Decks
+               </Link>
+
+               <Link
+                  className={`nav-link ${
                      props.page === 'about' ? 'active' : ''
                   }`}
                   to='/about'

@@ -1,0 +1,14 @@
+.toast {
+   z-index: 10000 !important;
+   width: 260px;
+   top: 5px;
+   right: 5px;
+}
+
+@media (max-width: 500px) {
+   .toast {
+      top: unset;
+      margin-top: 0;
+      bottom: 5px;
+   }
+}

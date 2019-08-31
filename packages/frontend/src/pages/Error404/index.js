@@ -1,8 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, memo } from 'react';
 import Header from '../../components/Header';
 import './index.css';
 
-const Error404 = () => {
+const Error404 = memo(() => {
    useEffect(() => {
       document.title = 'Deckr - Page not found';
    }, []);
@@ -14,6 +14,6 @@ const Error404 = () => {
          <p>Page not found!</p>
       </>
    );
-};
+});
 
 export default Error404;
