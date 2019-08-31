@@ -1,41 +1,43 @@
 .cards {
-    margin: 0 auto;
-    max-width: 600px;
-    height: 350px
+   margin: 0 auto;
+   max-width: 600px;
+   height: 360px;
 }
 
 .cards .card {
-    user-select: none
+   user-select: none;
 }
 
 .options {
-    margin: 0 auto;
-    max-width: 600px;
-    min-height: 0;
-    padding: 5px;
-    box-sizing: border-box
+   margin: 0 auto;
+   max-width: 600px;
+   min-height: 0;
+   padding: 5px;
+   box-sizing: border-box;
 }
 
 .toast {
-    z-index: 10000 !important;
-    width: 260px;
-    top: 5px;
-    right: 5px
+   z-index: 10000 !important;
+   width: 260px;
+   top: 5px;
+   right: 5px;
 }
 
-@media (max-width: 767px) {
-    .cards {
-        height: 320px
-    }
+@media (max-width: 768px) {
+   .container {
+      padding-right: 0;
+      padding-left: 0;
+   }
 }
 
 @media (max-width: 500px) {
-    .cards {
-        height: 62vw
-    }
+   .cards {
+      height: 62vw;
+   }
 
-    .toast {
-        margin-top: 0;
-        bottom: 5px
-    }
+   .toast {
+      top: unset;
+      margin-top: 0;
+      bottom: 5px;
+   }
 }

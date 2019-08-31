@@ -1,17 +1,21 @@
 {
-    "name": "deckr",
-    "version": "1.0.0",
-    "description": "Deck Builder & Manager for Clash Royale",
-    "repository": "git@github.com:lucasnaja/deckr.git",
-    "author": "lucasnaja <lucasnaja0@gmail.com>",
-    "license": "MIT",
-    "private": true,
-    "scripts": {
-        "start": "yarn workspace @deckr/frontend start"
-    },
-    "workspaces": {
-        "packages": [
-            "packages/*"
-        ]
-    }
+   "name": "deckr",
+   "version": "1.0.0",
+   "description": "Deck Builder & Manager for Clash Royale",
+   "repository": "git@github.com:lucasnaja/deckr.git",
+   "author": "lucasnaja <lucasnaja0@gmail.com>",
+   "license": "MIT",
+   "private": true,
+   "scripts": {
+      "start": "yarn workspace @deckr/frontend start",
+      "prod:start": "yarn workspace @deckr/frontend prod:start",
+      "build": "yarn workspace @deckr/frontend build",
+      "status": "yarn workspace @deckr/frontend front/check",
+      "commit": "yarn workspace @deckr/frontend front/check && git add . && git commit"
+   },
+   "workspaces": {
+      "packages": [
+         "packages/*"
+      ]
+   }
 }

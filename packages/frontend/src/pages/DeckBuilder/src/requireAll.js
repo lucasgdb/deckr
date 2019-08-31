@@ -1,9 +1,11 @@
-const { cards_png } = require('./information.json')
+const { cardsPNG } = require('./information.json');
 
-const requiredImages = []
+const requiredImages = [];
 
-for (let i = 0; i < cards_png.length; i++) {
-    requiredImages.push(require(`../../../cards/${cards_png[i]}.png`))
+/* eslint-disable */
+for (let i = 0; i < cardsPNG.length; i += 1) {
+   requiredImages.push(require(`../../../cards/${cardsPNG[i]}.png`));
 }
+/* eslint-disable */
 
-export default requiredImages
+export default requiredImages;

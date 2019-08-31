@@ -1,124 +1,154 @@
-import React, { useEffect, useState, memo } from 'react'
-import icon from './favicon.png'
-import Header from '../../components/Header'
-import images from './src/requireAll'
+import React, { useEffect, useState, memo } from 'react';
+import { Button, Dropdown, Toast, Row, Col } from 'react-bootstrap';
+import { CopyToClipboard } from 'react-copy-to-clipboard';
+import icon from './favicon.png';
+import Header from '../../components/Header';
+import images from './src/requireAll';
 
-import {
-    Button,
-    Container,
-    Dropdown,
-    ButtonGroup,
-    Toast
-} from 'react-bootstrap'
+import { names, cardsPNG, codes } from './src/information.json';
 
-import {
-    names,
-    cards_png,
-    codes
-} from './src/information.json'
-
-import { CopyToClipboard } from 'react-copy-to-clipboard'
-
-import './src/index.css'
+import './src/index.css';
 
 const Notification = memo(props => {
-    return (
-        <Toast show={props.copied} onClose={props.toggleToast} delay={3500} autohide className="toast position-absolute">
-            <Toast.Header>
-                <img width="30px" className="rounded mr-2" src={icon} alt="Deckr" />
-                <strong className="mr-auto">Deckr</strong>
-            </Toast.Header>
+   const { copied, toggleToast } = props;
 
-            <Toast.Body>Link successfully copied.</Toast.Body>
-        </Toast>
-    )
-})
+   return (
+      <Toast
+         show={copied}
+         onClose={toggleToast}
+         delay={3500}
+         autohide
+         className='toast position-absolute'
+      >
+         <Toast.Header>
+            <img width='30px' className='rounded mr-2' src={icon} alt='Deckr' />
+            <strong className='mr-auto'>Deckr</strong>
+         </Toast.Header>
+
+         <Toast.Body>Link successfully copied.</Toast.Body>
+      </Toast>
+   );
+});
 
 const DeckBuilder = () => {
-    const [cardList, setCardList] = useState([0, 0, 0, 0, 0, 0, 0, 0])
-    const [content, setContent] = useState('https://link.clashroyale.com/deck/en?deck=;;;;;;;')
-    const [copied, setCopied] = useState(false)
+   const [cardList, setCardList] = useState([0, 0, 0, 0, 0, 0, 0, 0]);
+   const [copied, setCopied] = useState(false);
+   const [content, setContent] = useState(
+      'https://link.clashroyale.com/deck/en?deck=;;;;;;;',
+   );
 
-    useEffect(() => {
-        document.title = 'Deckr - Deck Builder'
-    }, [])
+   useEffect(() => {
+      document.title = 'Deckr - Deck Builder';
+   }, []);
 
-    useEffect(() => {
-        let link = 'https://link.clashroyale.com/deck/en?deck={};{};{};{};{};{};{};{}'
+   useEffect(() => {
+      let link =
+         'https://link.clashroyale.com/deck/en?deck={};{};{};{};{};{};{};{}';
 
-        for (let i = 0; i < cardList.length; i++) link = link.replace('{}', codes[cardList[i]])
+      for (let i = 0; i < cardList.length; i += 1) {
+         link = link.replace('{}', codes[cardList[i]]);
+      }
 
-        setContent(link)
-    }, [cardList])
+      setContent(link);
+   }, [cardList]);
 
-    const generate = () => {
-        const generatedCards = []
+   const generate = () => {
+      const generatedCards = [];
 
-        while (generatedCards.length < 8) {
-            const generatedNumber = Math.floor(Math.random() * (images.length - 1)) + 1
+      while (generatedCards.length < 8) {
+         const generatedNumber =
+            Math.floor(Math.random() * (images.length - 1)) + 1;
 
-            if (generatedCards.indexOf(generatedNumber) === -1) generatedCards.push(generatedNumber)
-        }
+         if (generatedCards.indexOf(generatedNumber) === -1) {
+            generatedCards.push(generatedNumber);
+         }
+      }
 
-        setCardList(generatedCards)
-    }
+      setCardList(generatedCards);
+   };
 
-    const clear = () => { setCardList([0, 0, 0, 0, 0, 0, 0, 0]) }
+   const clear = () => setCardList([0, 0, 0, 0, 0, 0, 0, 0]);
 
-    const shuffle = () => {
-        const
-            shuffled = [],
-            currentCardList = [...cardList],
-            newCardList = []
+   const shuffle = () => {
+      const shuffled = [];
+      const currentCardList = [...cardList];
+      const newCardList = [];
 
-        while (shuffled.length < 8) {
-            const number = Math.floor(Math.random() * currentCardList.length)
+      while (shuffled.length < 8) {
+         const number = Math.floor(Math.random() * currentCardList.length);
 
-            if (shuffled.indexOf(number) === -1) {
-                shuffled.push(number)
-                newCardList.push(currentCardList[number])
-            }
-        }
+         if (shuffled.indexOf(number) === -1) {
+            shuffled.push(number);
+            newCardList.push(currentCardList[number]);
+         }
+      }
 
-        setCardList(newCardList)
-    }
+      setCardList(newCardList);
+   };
 
-    return (
-        <>
-            <Header page="deckr" />
+   return (
+      <>
+         <Header page='deckr' />
 
-            <Notification copied={copied} toggleToast={() => setCopied(false)} />
+         <Notification copied={copied} toggleToast={() => setCopied(false)} />
 
-            <Container>
-                <div className="cards mt-2">
-                    {
-                        cardList.map((card, index) =>
-                            <div className="float-left w-25 h-50" key={index}>
-                                <img className={`card border-0 w-100 h-100 ${index > 3 ? 'mt-1' : ''}`} src={images[card]} alt={cards_png[card]} title={names[card]} />
-                            </div>
-                        )
-                    }
-                </div>
+         <Row className='cards mt-2'>
+            {cardList.map((card, index) => (
+               // eslint-disable-next-line react/no-array-index-key
+               <Col xs={3} className='p-0 h-50' key={index}>
+                  <img
+                     className='card border-0 w-100 h-100'
+                     src={images[card]}
+                     alt={cardsPNG[card]}
+                     title={names[card]}
+                  />
+               </Col>
+            ))}
+         </Row>
 
-                <div className="options border border-dark d-flex justify-content-end mt-2">
-                    <CopyToClipboard text={content} onCopy={() => setCopied(true)}>
-                        <Button className="mr-1" title="Copy Deck" variant="dark">Copy</Button>
-                    </CopyToClipboard>
+         <div className='options border border-dark d-flex justify-content-end mt-2'>
+            <Dropdown>
+               <Dropdown.Toggle className='mr-1' variant='dark'>
+                  Options
+               </Dropdown.Toggle>
 
-                    <Dropdown drop={window.innerWidth < 768 ? 'left' : 'down'} as={ButtonGroup}>
-                        <Button title="Generate Deck" variant="dark" onClick={generate}>Generate</Button>
+               <Dropdown.Menu>
+                  <Dropdown.Item
+                     title='Copy Deck'
+                     as={CopyToClipboard}
+                     variant='dark'
+                     text={content}
+                     onCopy={() => setCopied(true)}
+                  >
+                     <Button>Copy</Button>
+                  </Dropdown.Item>
 
-                        <Dropdown.Toggle split variant="dark" />
+                  <Dropdown.Item
+                     as={Button}
+                     variant='dark'
+                     title='Clear Deck'
+                     onClick={clear}
+                  >
+                     Clear
+                  </Dropdown.Item>
 
-                        <Dropdown.Menu>
-                            <Dropdown.Item title="Clear Deck" onClick={clear}>Clear</Dropdown.Item>
-                            <Dropdown.Item title="Shuffle Deck" onClick={shuffle}>Shuffe</Dropdown.Item>
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </div>
-            </Container>
-        </>
-    )
-}
+                  <Dropdown.Item
+                     as={Button}
+                     variant='dark'
+                     title='Shuffle Deck'
+                     onClick={shuffle}
+                  >
+                     Shuffle
+                  </Dropdown.Item>
+               </Dropdown.Menu>
+            </Dropdown>
 
-export default DeckBuilder
+            <Button title='Generate Deck' variant='dark' onClick={generate}>
+               Generate
+            </Button>
+         </div>
+      </>
+   );
+};
+
+export default DeckBuilder;
