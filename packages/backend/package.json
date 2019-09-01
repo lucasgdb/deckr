@@ -7,7 +7,8 @@
    "license": "MIT",
    "private": false,
    "scripts": {
-      "start": "nodemon src/index.js"
+      "start": "nodemon src/index.js",
+      "back/check": "eslint src --fix"
    },
    "dependencies": {
       "cors": "^2.8.5",
