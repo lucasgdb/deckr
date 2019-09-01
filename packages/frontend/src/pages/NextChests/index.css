@@ -1,0 +1,9 @@
+.chest-id {
+   left: 50%;
+   top: 50%;
+   transform: translate(-50%, -50%);
+   font-size: 30px;
+   font-weight: 800;
+   color: white;
+   text-shadow: 2px 2px 7px black;
+}

@@ -19,7 +19,7 @@ const SavedDecks = memo(() => {
    useEffect(() => {
       document.title = 'Deckr - Saved Decks';
 
-      api.get('deck').then(response => {
+      api.get('/decks').then(response => {
          setDecks(response.data);
       });
    }, []);
@@ -29,13 +29,13 @@ const SavedDecks = memo(() => {
    }, [decks]);
 
    const getDecks = async () => {
-      const data = await api.get('deck');
+      const data = await api.get('/decks');
 
       return data;
    };
 
    const removeDeck = async _id => {
-      await api.delete(`/deck/${_id}`);
+      await api.delete(`/decks/${_id}`);
 
       const data = await getDecks();
 

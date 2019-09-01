@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, memo } from 'react';
+import React, { useEffect, useState, useCallback, useRef, memo } from 'react';
 import {
    Button,
    Dropdown,
@@ -28,6 +28,8 @@ const defaultCardList = [
 ];
 
 const DeckBuilder = memo(() => {
+   const txtPasteLink = useRef(null);
+
    const [cardList, setCardList] = useState(defaultCardList);
    const [copied, setCopied] = useState(false);
    const [saved, setSaved] = useState(false);
@@ -35,7 +37,6 @@ const DeckBuilder = memo(() => {
    const [content, setContent] = useState(
       'https://link.clashroyale.com/deck/en?deck=;;;;;;;',
    );
-   const [txtLink, setTxtLink] = useState('');
 
    useEffect(() => {
       document.title = 'Deckr - Deck Builder';
@@ -97,7 +98,7 @@ const DeckBuilder = memo(() => {
    };
 
    const save = async () => {
-      await api.post('/deck', {
+      await api.post('/decks', {
          cards: cardList,
          link: getLink(),
       });
@@ -106,8 +107,14 @@ const DeckBuilder = memo(() => {
    };
 
    const paste = () => {
-      if (txtLink.length > 0 && txtLink.length > 42 && txtLink.includes(';')) {
-         const deck = txtLink.split('?deck=')[1].split(';');
+      const pasteLink = txtPasteLink.current.value;
+
+      if (
+         pasteLink.length > 0 &&
+         pasteLink.length > 42 &&
+         pasteLink.includes(';')
+      ) {
+         const deck = pasteLink.split('?deck=')[1].split(';');
          const newDeck = [];
 
          if (deck.length !== 8) return;
@@ -122,10 +129,6 @@ const DeckBuilder = memo(() => {
          setCardList(newDeck);
          setShow(false);
       }
-   };
-
-   const handleInput = event => {
-      setTxtLink(event.target.value);
    };
 
    return (
@@ -162,7 +165,7 @@ const DeckBuilder = memo(() => {
                   </InputGroup.Prepend>
 
                   <FormControl
-                     onInput={handleInput}
+                     ref={txtPasteLink}
                      placeholder="Paste the Deck's link here."
                   />
                </InputGroup>

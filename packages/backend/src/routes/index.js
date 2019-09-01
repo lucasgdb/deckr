@@ -1,8 +1,13 @@
 const routes = require('express').Router();
-const deckController = require('../controllers/deck.controller');
+const deckController = require('../controllers/decks.controller');
+const playerController = require('../controllers/chests.controller');
 
-routes.get('/deck', deckController.getDecks);
-routes.post('/deck', deckController.createDeck);
-routes.delete('/deck/:_id', deckController.removeDeck);
+// Deck information
+routes.get('/decks', deckController.getDecks);
+routes.post('/decks', deckController.createDeck);
+routes.delete('/decks/:_id', deckController.removeDeck);
+
+// RoyaleAPI
+routes.get('/chests/:id', playerController.getInformation);
 
 module.exports = routes;

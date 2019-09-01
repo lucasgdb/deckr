@@ -5,6 +5,7 @@ import Spinner from './components/Spinner';
 
 const DeckBuilder = lazy(() => import('./pages/DeckBuilder'));
 const SavedDecks = lazy(() => import('./pages/SavedDecks'));
+const NextChests = lazy(() => import('./pages/NextChests'));
 const About = lazy(() => import('./pages/About'));
 const Error404 = lazy(() => import('./pages/Error404'));
 
@@ -13,8 +14,9 @@ ReactDOM.render(
       <BrowserRouter>
          <Switch>
             <Route path='/' exact component={DeckBuilder} />
-            <Route path='/about/' exact component={About} />
             <Route path='/decks' component={SavedDecks} />
+            <Route path='/next' component={NextChests} />
+            <Route path='/about/' exact component={About} />
             <Route path='*' component={Error404} />
          </Switch>
       </BrowserRouter>

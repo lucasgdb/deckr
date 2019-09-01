@@ -41,6 +41,15 @@ const Header = memo(props => {
 
                <Link
                   className={`nav-link ${
+                     props.page === 'next' ? 'active' : ''
+                  }`}
+                  to='/next'
+               >
+                  Next Chests
+               </Link>
+
+               <Link
+                  className={`nav-link ${
                      props.page === 'about' ? 'active' : ''
                   }`}
                   to='/about'
