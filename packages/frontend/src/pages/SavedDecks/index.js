@@ -63,11 +63,9 @@ const SavedDecks = memo(() => {
          {/* eslint-disable-next-line no-nested-ternary */}
          {downloading ? (
             <Spinner />
-         ) : decks.length === 0 ? (
-            <p className='information'>No saved decks.</p>
          ) : (
             <>
-               <p className='information'>{decks.length} saved Decks.</p>
+               <p className='information'>{decks.length} saved Decks</p>
                {decks.map(deck => (
                   <div key={deck._id}>
                      <Deck cards={deck.cards} />

@@ -9,7 +9,7 @@ const About = lazy(() => import('./pages/About'));
 const Error404 = lazy(() => import('./pages/Error404'));
 
 ReactDOM.render(
-   <Suspense fallback={<Spinner />}>
+   <Suspense fallback={<Spinner center />}>
       <BrowserRouter>
          <Switch>
             <Route path='/' exact component={DeckBuilder} />
