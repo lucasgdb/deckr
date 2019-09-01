@@ -1,14 +1,22 @@
-.toast {
-   z-index: 10000 !important;
+.notification {
    width: 260px;
-   top: 5px;
-   right: 5px;
+   margin: 10px 0 0;
+   padding: 0;
+}
+
+.notification:not(:last-child) {
+   margin-bottom: 0;
+}
+
+.notification-container {
+   z-index: 10000 !important;
+   top: 0;
+   right: 10px;
 }
 
 @media (max-width: 500px) {
-   .toast {
+   .notification-container {
       top: unset;
-      margin-top: 0;
-      bottom: 5px;
+      bottom: 10px;
    }
 }

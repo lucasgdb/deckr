@@ -4,13 +4,17 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import api from '../../services/api';
 import Header from '../../components/Header';
 import Deck from '../../components/Deck';
-import Notification from '../../components/Notification';
+import Notification, {
+   NotificationContainer,
+} from '../../components/Notification';
+import Spinner from '../../components/Spinner';
 import Options from '../../components/Options';
 import './index.css';
 
 const SavedDecks = memo(() => {
    const [decks, setDecks] = useState([]);
    const [copied, setCopied] = useState(false);
+   const [downloading, setDownloading] = useState(true);
 
    useEffect(() => {
       document.title = 'Deckr - Saved Decks';
@@ -19,6 +23,10 @@ const SavedDecks = memo(() => {
          setDecks(response.data);
       });
    }, []);
+
+   useEffect(() => {
+      setDownloading(false);
+   }, [decks]);
 
    const getDecks = async () => {
       const data = await api.get('deck');
@@ -44,14 +52,18 @@ const SavedDecks = memo(() => {
    return (
       <>
          <Header page='decks' />
+         <NotificationContainer>
+            <Notification
+               text='Link successfully copied.'
+               show={copied}
+               toggleToast={() => setCopied(false)}
+            />
+         </NotificationContainer>
 
-         <Notification
-            text='Link successfully copied.'
-            show={copied}
-            toggleToast={() => setCopied(false)}
-         />
-
-         {decks.length === 0 ? (
+         {/* eslint-disable-next-line no-nested-ternary */}
+         {downloading ? (
+            <Spinner />
+         ) : decks.length === 0 ? (
             <p className='information'>No saved decks.</p>
          ) : (
             <>

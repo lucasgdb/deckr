@@ -1,10 +1,18 @@
 import React, { useEffect, useState, useCallback, memo } from 'react';
-import { Button, Dropdown } from 'react-bootstrap';
+import {
+   Button,
+   Dropdown,
+   Modal,
+   InputGroup,
+   FormControl,
+} from 'react-bootstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import api from '../../services/api';
 import Header from '../../components/Header';
 import Deck from '../../components/Deck';
-import Notification from '../../components/Notification';
+import Notification, {
+   NotificationContainer,
+} from '../../components/Notification';
 import Options from '../../components/Options';
 import { names, codes } from '../src/information.json';
 
@@ -23,9 +31,11 @@ const DeckBuilder = memo(() => {
    const [cardList, setCardList] = useState(defaultCardList);
    const [copied, setCopied] = useState(false);
    const [saved, setSaved] = useState(false);
+   const [show, setShow] = useState(false);
    const [content, setContent] = useState(
       'https://link.clashroyale.com/deck/en?deck=;;;;;;;',
    );
+   const [txtLink, setTxtLink] = useState('');
 
    useEffect(() => {
       document.title = 'Deckr - Deck Builder';
@@ -95,21 +105,83 @@ const DeckBuilder = memo(() => {
       setSaved(true);
    };
 
+   const paste = () => {
+      if (txtLink.length > 0 && txtLink.length > 42 && txtLink.includes(';')) {
+         const deck = txtLink.split('?deck=')[1].split(';');
+         const newDeck = [];
+
+         if (deck.length !== 8) return;
+
+         for (let i = 0; i < deck.length; i += 1) {
+            const index = codes.indexOf(deck[i]);
+            const card = index === -1 ? 0 : index;
+
+            newDeck.push({ id: i, card });
+         }
+
+         setCardList(newDeck);
+         setShow(false);
+      }
+   };
+
+   const handleInput = event => {
+      setTxtLink(event.target.value);
+   };
+
    return (
       <>
          <Header page='deckr' />
 
-         <Notification
-            text='Link successfully copied.'
-            show={copied}
-            toggleToast={() => setCopied(false)}
-         />
+         <NotificationContainer>
+            <Notification
+               text='Link successfully copied.'
+               show={copied}
+               toggleToast={() => setCopied(false)}
+            />
 
-         <Notification
-            text='Deck successfully saved.'
-            show={saved}
-            toggleToast={() => setSaved(false)}
-         />
+            <Notification
+               text='Deck successfully saved.'
+               show={saved}
+               toggleToast={() => setSaved(false)}
+            />
+         </NotificationContainer>
+
+         <Modal
+            style={{ zIndex: 10001 }}
+            show={show}
+            onHide={() => setShow(false)}
+         >
+            <Modal.Header closeButton>
+               <Modal.Title>Paste a Deck</Modal.Title>
+            </Modal.Header>
+
+            <Modal.Body>
+               <InputGroup>
+                  <InputGroup.Prepend>
+                     <InputGroup.Text>Link</InputGroup.Text>
+                  </InputGroup.Prepend>
+
+                  <FormControl
+                     onInput={handleInput}
+                     placeholder="Paste the Deck's link here."
+                  />
+               </InputGroup>
+            </Modal.Body>
+
+            <Modal.Footer>
+               <Button
+                  title='Close'
+                  variant='danger'
+                  onClick={() => setShow(false)}
+               >
+                  Cancel
+               </Button>
+
+               <Button title='Paste Deck' variant='primary' onClick={paste}>
+                  Paste
+               </Button>
+            </Modal.Footer>
+         </Modal>
 
          <Deck cards={cardList} />
 
@@ -127,6 +199,15 @@ const DeckBuilder = memo(() => {
                      onClick={save}
                   >
                      Save
+                  </Dropdown.Item>
+
+                  <Dropdown.Item
+                     as={Button}
+                     variant='dark'
+                     title='Paste Deck'
+                     onClick={() => setShow(true)}
+                  >
+                     Paste
                   </Dropdown.Item>
 
                   <Dropdown.Item

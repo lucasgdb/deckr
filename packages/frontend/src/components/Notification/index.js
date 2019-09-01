@@ -3,14 +3,22 @@ import { Toast } from 'react-bootstrap';
 import icon from './favicon.png';
 import './index.css';
 
+const NotificationContainer = memo(props => {
+   const { children } = props;
+
+   return (
+      <div className='position-absolute notification-container'>{children}</div>
+   );
+});
+
 const Notification = memo(props => {
    const { show, toggleToast, text } = props;
 
    return (
       <Toast
+         className='notification position-relative'
          onClose={toggleToast}
-         delay={3500}
-         className='toast position-absolute'
+         delay={3000}
          style={{ display: show ? 'block' : 'none' }}
          autohide
       >
@@ -24,4 +32,5 @@ const Notification = memo(props => {
    );
 });
 
+export { NotificationContainer };
 export default Notification;
