@@ -5,6 +5,7 @@
 }
 
 .cards .card {
+   background: transparent;
    user-select: none;
 }
 

@@ -11,7 +11,7 @@ const About = memo(() => {
       <>
          <Header page="about" />
 
-         <div>About page</div>
+         <p className="information">App made by Lucas Bittencourt &lt;3</p>
       </>
    );
 });

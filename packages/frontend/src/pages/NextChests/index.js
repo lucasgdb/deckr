@@ -57,7 +57,12 @@ const NextChests = () => {
    };
 
    return (
-      <div>
+      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
+      <div
+         onKeyUp={event => {
+            if (event.which === 13) connect();
+         }}
+      >
          <Header page="next" />
 
          <Container className="mt-2">
@@ -97,7 +102,12 @@ const NextChests = () => {
                         src={chestsPNG[chest.chest]}
                         alt={chest.chest}
                      />
-                     <p className="chest-id position-absolute">{chest.id}</p>
+                     <p
+                        title={`${chest.chest} chest`}
+                        className="chest-id position-absolute"
+                     >
+                        {chest.id}
+                     </p>
                   </div>
                ))}
             </div>

@@ -11,7 +11,7 @@ const Error404 = memo(() => {
       <>
          <Header />
 
-         <p>Page not found!</p>
+         <p className="information">Page not found!</p>
       </>
    );
 });

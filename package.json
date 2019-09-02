@@ -10,7 +10,6 @@
       "start:web": "yarn workspace @deckr/frontend start",
       "start:server": "yarn workspace @deckr/backend start",
       "start": "concurrently --kill-others \"yarn start:web\" \"yarn start:server\"",
-      "prod:start": "yarn workspace @deckr/frontend prod:start",
       "build": "yarn workspace @deckr/frontend build",
       "status": "yarn workspace @deckr/frontend front/check && yarn workspace @deckr/backend back/check",
       "commit": "yarn status && git add . && git commit"
