@@ -1,8 +1,8 @@
-import React, { useEffect, memo } from 'react';
+import React, { useEffect } from 'react';
 import Header from '../../components/Header';
 import './styles.css';
 
-const About = memo(() => {
+export default () => {
    useEffect(() => {
       document.title = 'Deckr - About';
    }, []);
@@ -14,6 +14,4 @@ const About = memo(() => {
          <p className="information">App made by Lucas Bittencourt &lt;3</p>
       </>
    );
-});
-
-export default About;
+};

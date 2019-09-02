@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef, memo } from 'react';
+import React, { useEffect, useState, useCallback, useRef } from 'react';
 import {
    Button,
    Dropdown,
@@ -28,7 +28,7 @@ const defaultCardList = [
    { id: 7, card: 0 },
 ];
 
-const DeckBuilder = memo(() => {
+export default () => {
    const txtPasteLink = useRef(null);
 
    const [cardList, setCardList] = useState(defaultCardList);
@@ -291,6 +291,4 @@ const DeckBuilder = memo(() => {
          </Options>
       </>
    );
-});
-
-export default DeckBuilder;
+};

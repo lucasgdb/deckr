@@ -1,10 +1,10 @@
 import React, { memo } from 'react';
 import './styles.css';
 
-const Spinner = memo(({ center }) => (
+const Spinner = ({ center }) => (
    <div className={center ? 'position-absolute loader-center' : ''}>
       <div className="loader" />
    </div>
-));
+);
 
-export default Spinner;
+export default memo(Spinner);

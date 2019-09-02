@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
    InputGroup,
    FormControl,
@@ -23,9 +23,8 @@ const chestsPNG = {
    megaLightning: require('../../chests/megaLightning.png'),
 };
 
-const NextChests = () => {
-   const txtUserID = useRef(null);
-
+export default () => {
+   const [userID, setUserID] = useState('');
    const [chests, setChests] = useState([]);
    const [connecting, setConnecting] = useState(false);
 
@@ -34,8 +33,6 @@ const NextChests = () => {
    }, []);
 
    const connect = async () => {
-      const userID = txtUserID.current.value.trim().toUpperCase();
-
       if (userID.length > 6) {
          setConnecting(true);
 
@@ -49,20 +46,17 @@ const NextChests = () => {
       }
    };
 
-   const handleInput = () => {
-      txtUserID.current.value = txtUserID.current.value
-         .trim()
-         .toUpperCase()
-         .replace(/[^a-zA-Z0-9]+/g, '');
+   const handleInput = event => {
+      setUserID(
+         event.target.value
+            .trim()
+            .toUpperCase()
+            .replace(/[^A-Z0-9]+/g, ''),
+      );
    };
 
    return (
-      // eslint-disable-next-line jsx-a11y/no-static-element-interactions
-      <div
-         onKeyUp={event => {
-            if (event.which === 13) connect();
-         }}
-      >
+      <>
          <Header page="next" />
 
          <Container className="mt-2">
@@ -74,8 +68,11 @@ const NextChests = () => {
                      </InputGroup.Prepend>
 
                      <FormControl
-                        ref={txtUserID}
-                        onInput={handleInput}
+                        value={userID}
+                        onChange={handleInput}
+                        onKeyUp={event => {
+                           if (event.which === 13) connect();
+                        }}
                         placeholder="User ID (e.g: C8Q2QR08)"
                      />
 
@@ -112,8 +109,6 @@ const NextChests = () => {
                ))}
             </div>
          </Container>
-      </div>
+      </>
    );
 };
-
-export default NextChests;

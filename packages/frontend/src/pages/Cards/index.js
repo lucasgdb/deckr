@@ -1,11 +1,11 @@
-import React, { useEffect, useState, memo } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Container, Button } from 'react-bootstrap';
 import Header from '../../components/Header';
 import { names, cardsPNG } from '../src/information.json';
 import images from '../src/requireAll';
 import './styles.css';
 
-const Cards = memo(() => {
+export default () => {
    const [cardsStatus, setCardsStatus] = useState([]);
 
    useEffect(() => {
@@ -37,7 +37,7 @@ const Cards = memo(() => {
    };
 
    return (
-      <div>
+      <>
          <Header page="cards" />
 
          <Container>
@@ -69,8 +69,6 @@ const Cards = memo(() => {
                )}
             </div>
          </Container>
-      </div>
+      </>
    );
-});
-
-export default Cards;
+};

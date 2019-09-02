@@ -3,7 +3,7 @@ import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
 
-const Header = memo(({ page }) => {
+const Header = ({ page }) => {
    return (
       <Navbar
          collapseOnSelect
@@ -59,6 +59,6 @@ const Header = memo(({ page }) => {
          </Navbar.Collapse>
       </Navbar>
    );
-});
+};
 
-export default Header;
+export default memo(Header);

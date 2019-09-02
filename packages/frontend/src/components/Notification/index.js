@@ -7,7 +7,7 @@ const NotificationContainer = memo(({ children }) => (
    <div className="position-absolute notification-container">{children}</div>
 ));
 
-const Notification = memo(({ show, toggleToast, text }) => {
+const Notification = ({ show, toggleToast, text }) => {
    return (
       <Toast
          className="notification position-relative"
@@ -24,7 +24,7 @@ const Notification = memo(({ show, toggleToast, text }) => {
          <Toast.Body>{text}</Toast.Body>
       </Toast>
    );
-});
+};
 
 export { NotificationContainer };
-export default Notification;
+export default memo(Notification);
