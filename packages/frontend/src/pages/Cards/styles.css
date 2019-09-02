@@ -1,0 +1,9 @@
+.grey {
+   filter: grayscale(1);
+}
+
+.card {
+   border: none;
+   background: transparent;
+   cursor: pointer;
+}

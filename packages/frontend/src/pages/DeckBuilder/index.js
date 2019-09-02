@@ -14,7 +14,8 @@ import Notification, {
    NotificationContainer,
 } from '../../components/Notification';
 import Options from '../../components/Options';
-import { names, codes } from '../src/information.json';
+import images from '../src/requireEnabled';
+import { codes } from '../src/information.json';
 
 const defaultCardList = [
    { id: 0, card: 0 },
@@ -37,9 +38,24 @@ const DeckBuilder = memo(() => {
    const [content, setContent] = useState(
       'https://link.clashroyale.com/deck/en?deck=;;;;;;;',
    );
+   const [enabledCards, setEnabledCards] = useState([0]);
 
    useEffect(() => {
       document.title = 'Deckr - Deck Builder';
+
+      if (!localStorage.getItem('cards')) {
+         const cards = images.map(() => true);
+         localStorage.setItem('cards', JSON.stringify(cards));
+      }
+
+      const cards = JSON.parse(localStorage.getItem('cards'));
+      const enabled = [];
+
+      for (let i = 1; i < cards.length; i += 1) {
+         if (cards[i]) enabled.push(i);
+      }
+
+      setEnabledCards(enabled);
    }, []);
 
    const getLink = useCallback(() => {
@@ -61,18 +77,28 @@ const DeckBuilder = memo(() => {
       const generatedCards = [];
       const numbers = [];
 
-      while (numbers.length < 8) {
-         const generatedNumber =
-            Math.floor(Math.random() * (names.length - 1)) + 1;
+      while (
+         numbers.length < (enabledCards.length < 8 ? enabledCards.length : 8)
+      ) {
+         const generatedNumber = Math.floor(
+            Math.random() * enabledCards.length,
+         );
 
          if (numbers.indexOf(generatedNumber) === -1) {
             numbers.push(generatedNumber);
 
             generatedCards.push({
                id: generatedCards.length,
-               card: generatedNumber,
+               card: enabledCards[generatedNumber],
             });
          }
+      }
+
+      for (let i = numbers.length; i < 8; i += 1) {
+         generatedCards.push({
+            id: i,
+            card: 0,
+         });
       }
 
       setCardList(generatedCards);
@@ -115,9 +141,10 @@ const DeckBuilder = memo(() => {
          pasteLink.includes(';')
       ) {
          const deck = pasteLink.split('?deck=')[1].split(';');
-         const newDeck = [];
 
          if (deck.length !== 8) return;
+
+         const newDeck = [];
 
          for (let i = 0; i < deck.length; i += 1) {
             const index = codes.indexOf(deck[i]);
@@ -131,19 +158,26 @@ const DeckBuilder = memo(() => {
       }
    };
 
+   const open = () => {
+      if (window.innerWidth < 993) {
+         const cards = getLink().split('?deck=')[1];
+         window.open(`clashroyale://copyDeck?deck=${cards}`);
+      } else window.open(getLink());
+   };
+
    return (
       <>
-         <Header page='deckr' />
+         <Header page="deckr" />
 
          <NotificationContainer>
             <Notification
-               text='Link successfully copied.'
+               text="Link successfully copied."
                show={copied}
                toggleToast={() => setCopied(false)}
             />
 
             <Notification
-               text='Deck successfully saved.'
+               text="Deck successfully saved."
                show={saved}
                toggleToast={() => setSaved(false)}
             />
@@ -173,14 +207,14 @@ const DeckBuilder = memo(() => {
 
             <Modal.Footer>
                <Button
-                  title='Close'
-                  variant='danger'
+                  title="Close"
+                  variant="danger"
                   onClick={() => setShow(false)}
                >
                   Cancel
                </Button>
 
-               <Button title='Paste Deck' variant='primary' onClick={paste}>
+               <Button title="Paste Deck" variant="primary" onClick={paste}>
                   Paste
                </Button>
             </Modal.Footer>
@@ -190,15 +224,24 @@ const DeckBuilder = memo(() => {
 
          <Options>
             <Dropdown>
-               <Dropdown.Toggle className='mr-1' variant='dark'>
+               <Dropdown.Toggle className="mr-1" variant="dark">
                   Options
                </Dropdown.Toggle>
 
                <Dropdown.Menu>
                   <Dropdown.Item
                      as={Button}
-                     variant='dark'
-                     title='Save Deck'
+                     variant="dark"
+                     title="Open Deck"
+                     onClick={open}
+                  >
+                     Open
+                  </Dropdown.Item>
+
+                  <Dropdown.Item
+                     as={Button}
+                     variant="dark"
+                     title="Save Deck"
                      onClick={save}
                   >
                      Save
@@ -206,8 +249,8 @@ const DeckBuilder = memo(() => {
 
                   <Dropdown.Item
                      as={Button}
-                     variant='dark'
-                     title='Paste Deck'
+                     variant="dark"
+                     title="Paste Deck"
                      onClick={() => setShow(true)}
                   >
                      Paste
@@ -215,8 +258,8 @@ const DeckBuilder = memo(() => {
 
                   <Dropdown.Item
                      as={Button}
-                     variant='dark'
-                     title='Clear Deck'
+                     variant="dark"
+                     title="Clear Deck"
                      onClick={clear}
                   >
                      Clear
@@ -224,8 +267,8 @@ const DeckBuilder = memo(() => {
 
                   <Dropdown.Item
                      as={Button}
-                     variant='dark'
-                     title='Shuffle Deck'
+                     variant="dark"
+                     title="Shuffle Deck"
                      onClick={shuffle}
                   >
                      Shuffle
@@ -234,15 +277,15 @@ const DeckBuilder = memo(() => {
             </Dropdown>
 
             <CopyToClipboard
-               className='mr-1'
-               title='Copy Deck'
+               className="mr-1"
+               title="Copy Deck"
                text={content}
                onCopy={() => setCopied(true)}
             >
                <Button>Copy</Button>
             </CopyToClipboard>
 
-            <Button title='Generate Deck' variant='success' onClick={generate}>
+            <Button title="Generate Deck" variant="success" onClick={generate}>
                Generate
             </Button>
          </Options>

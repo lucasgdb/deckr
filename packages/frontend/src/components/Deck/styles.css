@@ -8,7 +8,7 @@
    user-select: none;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
    .cards {
       height: 62vw;
    }

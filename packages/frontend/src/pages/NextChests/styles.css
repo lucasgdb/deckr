@@ -5,5 +5,6 @@
    font-size: 30px;
    font-weight: 800;
    color: white;
-   text-shadow: 2px 2px 7px black;
+   text-shadow: 2px 2px 25px black, 2px 2px 35px black, 2px 2px 35px black,
+      2px 2px 35px black, 2px 2px 35px black;
 }

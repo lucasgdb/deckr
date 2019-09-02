@@ -9,7 +9,7 @@ import Notification, {
 } from '../../components/Notification';
 import Spinner from '../../components/Spinner';
 import Options from '../../components/Options';
-import './index.css';
+import './styles.css';
 
 const SavedDecks = memo(() => {
    const [decks, setDecks] = useState([]);
@@ -51,10 +51,10 @@ const SavedDecks = memo(() => {
 
    return (
       <>
-         <Header page='decks' />
+         <Header page="decks" />
          <NotificationContainer>
             <Notification
-               text='Link successfully copied.'
+               text="Link successfully copied."
                show={copied}
                toggleToast={() => setCopied(false)}
             />
@@ -65,24 +65,24 @@ const SavedDecks = memo(() => {
             <Spinner />
          ) : (
             <>
-               <p className='information'>{decks.length} saved Decks</p>
+               <p className="information">{decks.length} saved Decks</p>
                {decks.map(deck => (
                   <div key={deck._id}>
                      <Deck cards={deck.cards} />
 
                      <Options>
                         <Button
-                           className='mr-1'
-                           title='Open Deck on Clash Royale'
-                           variant='dark'
+                           className="mr-1"
+                           title="Open Deck on Clash Royale"
+                           variant="dark"
                            onClick={() => open(deck.link)}
                         >
                            Open
                         </Button>
 
                         <CopyToClipboard
-                           className='mr-1'
-                           title='Copy Deck'
+                           className="mr-1"
+                           title="Copy Deck"
                            text={deck.link}
                            onCopy={() => setCopied(true)}
                         >
@@ -90,8 +90,8 @@ const SavedDecks = memo(() => {
                         </CopyToClipboard>
 
                         <Button
-                           title='Remove Deck'
-                           variant='danger'
+                           title="Remove Deck"
+                           variant="danger"
                            onClick={() => removeDeck(deck._id)}
                         >
                            Remove

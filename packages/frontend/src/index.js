@@ -2,8 +2,10 @@ import React, { Suspense, lazy } from 'react';
 import ReactDOM from 'react-dom';
 import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import Spinner from './components/Spinner';
+import './styles.css';
 
 const DeckBuilder = lazy(() => import('./pages/DeckBuilder'));
+const Cards = lazy(() => import('./pages/Cards'));
 const SavedDecks = lazy(() => import('./pages/SavedDecks'));
 const NextChests = lazy(() => import('./pages/NextChests'));
 const About = lazy(() => import('./pages/About'));
@@ -13,11 +15,12 @@ ReactDOM.render(
    <Suspense fallback={<Spinner center />}>
       <BrowserRouter>
          <Switch>
-            <Route path='/' exact component={DeckBuilder} />
-            <Route path='/decks' component={SavedDecks} />
-            <Route path='/next' component={NextChests} />
-            <Route path='/about/' exact component={About} />
-            <Route path='*' component={Error404} />
+            <Route path="/" exact component={DeckBuilder} />
+            <Route path="/cards" component={Cards} />
+            <Route path="/decks" component={SavedDecks} />
+            <Route path="/next" component={NextChests} />
+            <Route path="/about/" exact component={About} />
+            <Route path="*" component={Error404} />
          </Switch>
       </BrowserRouter>
    </Suspense>,

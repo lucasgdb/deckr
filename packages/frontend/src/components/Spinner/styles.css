@@ -57,7 +57,7 @@
 }
 
 .loader:after {
-   background: #fff;
+   background: #ededed;
    width: 75%;
    height: 75%;
    border-radius: 50%;

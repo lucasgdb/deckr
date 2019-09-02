@@ -1,6 +1,6 @@
 import React, { useEffect, memo } from 'react';
 import Header from '../../components/Header';
-import './index.css';
+import './styles.css';
 
 const About = memo(() => {
    useEffect(() => {
@@ -9,7 +9,7 @@ const About = memo(() => {
 
    return (
       <>
-         <Header page='about' />
+         <Header page="about" />
 
          <div>About page</div>
       </>

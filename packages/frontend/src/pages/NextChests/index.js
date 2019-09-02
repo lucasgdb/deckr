@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap';
 import api from '../../services/api';
 import Header from '../../components/Header';
-import './index.css';
+import './styles.css';
 
 const chestsPNG = {
    wooden: require('../../chests/wooden.png'),
@@ -34,25 +34,34 @@ const NextChests = () => {
    }, []);
 
    const connect = async () => {
-      setConnecting(true);
+      const userID = txtUserID.current.value.trim().toUpperCase();
 
-      try {
-         const { data } = await api.get(
-            `/chests/${txtUserID.current.value.trim().toUpperCase()}`,
-         );
+      if (userID.length > 6) {
+         setConnecting(true);
 
-         setChests(data);
-      } finally {
-         setConnecting(false);
+         try {
+            const { data } = await api.get(`/chests/${userID}`);
+
+            setChests(data);
+         } finally {
+            setConnecting(false);
+         }
       }
+   };
+
+   const handleInput = () => {
+      txtUserID.current.value = txtUserID.current.value
+         .trim()
+         .toUpperCase()
+         .replace(/[^a-zA-Z0-9]+/g, '');
    };
 
    return (
       <div>
-         <Header page='next' />
+         <Header page="next" />
 
-         <Container className='mt-2'>
-            <Row className='justify-content-center'>
+         <Container className="mt-2">
+            <Row className="justify-content-center">
                <Col xs={12} md={8} lg={6}>
                   <InputGroup>
                      <InputGroup.Prepend>
@@ -61,13 +70,15 @@ const NextChests = () => {
 
                      <FormControl
                         ref={txtUserID}
-                        placeholder='User ID (e.g: PVLU0LU0V)'
+                        onInput={handleInput}
+                        placeholder="User ID (e.g: C8Q2QR08)"
                      />
 
                      <Button
+                        title="Connect to API"
                         disabled={connecting}
                         onClick={connect}
-                        className='ml-1'
+                        className="ml-1"
                      >
                         {connecting ? 'Connecting...' : 'Connect'}
                      </Button>
@@ -75,18 +86,18 @@ const NextChests = () => {
                </Col>
             </Row>
 
-            <div className='mt-2 d-flex flex-wrap justify-content-center'>
+            <div className="mt-2 d-flex flex-wrap justify-content-center">
                {chests.map(chest => (
-                  <div key={chest.id} className='mt-2 position-relative'>
+                  <div key={chest.id} className="mt-2 position-relative">
                      <img
                         title={`${chest.chest} chest`}
-                        className='chest-image'
+                        className="chest-image"
                         width={150}
                         height={150}
                         src={chestsPNG[chest.chest]}
                         alt={chest.chest}
                      />
-                     <p className='chest-id position-absolute'>{chest.id}</p>
+                     <p className="chest-id position-absolute">{chest.id}</p>
                   </div>
                ))}
             </div>
