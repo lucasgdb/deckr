@@ -10,9 +10,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import api from '../../services/api';
 import Header from '../../components/Header';
 import Deck from '../../components/Deck';
-import Notification, {
-   NotificationContainer,
-} from '../../components/Notification';
+import Notification from '../../components/Notification';
 import Options from '../../components/Options';
 import images from '../src/requireEnabled';
 import { codes } from '../src/information.json';
@@ -169,7 +167,7 @@ export default () => {
       <>
          <Header page="deckr" />
 
-         <NotificationContainer>
+         <Notification.Container>
             <Notification
                text="Link successfully copied."
                show={copied}
@@ -181,7 +179,7 @@ export default () => {
                show={saved}
                toggleToast={() => setSaved(false)}
             />
-         </NotificationContainer>
+         </Notification.Container>
 
          <Modal
             style={{ zIndex: 10001 }}

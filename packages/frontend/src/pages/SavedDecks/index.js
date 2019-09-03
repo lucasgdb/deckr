@@ -4,9 +4,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard';
 import api from '../../services/api';
 import Header from '../../components/Header';
 import Deck from '../../components/Deck';
-import Notification, {
-   NotificationContainer,
-} from '../../components/Notification';
+import Notification from '../../components/Notification';
 import Spinner from '../../components/Spinner';
 import Options from '../../components/Options';
 import './styles.css';
@@ -52,13 +50,13 @@ export default () => {
    return (
       <>
          <Header page="decks" />
-         <NotificationContainer>
+         <Notification.Container>
             <Notification
                text="Link successfully copied."
                show={copied}
                toggleToast={() => setCopied(false)}
             />
-         </NotificationContainer>
+         </Notification.Container>
 
          {/* eslint-disable-next-line no-nested-ternary */}
          {downloading ? (

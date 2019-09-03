@@ -3,9 +3,9 @@ import { Toast } from 'react-bootstrap';
 import icon from './favicon.png';
 import './styles.css';
 
-const NotificationContainer = memo(({ children }) => (
+const Container = ({ children }) => (
    <div className="position-absolute notification-container">{children}</div>
-));
+);
 
 const Notification = ({ show, toggleToast, text }) => {
    return (
@@ -26,5 +26,6 @@ const Notification = ({ show, toggleToast, text }) => {
    );
 };
 
-export { NotificationContainer };
-export default memo(Notification);
+Notification.Container = memo(Container);
+
+export default Notification;
