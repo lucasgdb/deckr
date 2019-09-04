@@ -1,12 +1,14 @@
 import React, { useEffect, useState, memo } from 'react';
-import { Container, Button } from 'react-bootstrap';
+import { Container, Dropdown } from 'react-bootstrap';
 import Header from '../../components/Header';
-import { names, cardsPNG } from '../src/information.json';
+import Footer from '../../components/Footer';
+import { arenas, names, cardsPNG } from '../src/information.json';
 import images from '../src/requireAll';
 import './styles.css';
 
 export default memo(() => {
    const [cardsStatus, setCardsStatus] = useState([]);
+   const [dropdownText, setDropdownText] = useState('All arenas');
 
    useEffect(() => {
       document.title = 'Deckr - Cards';
@@ -29,8 +31,9 @@ export default memo(() => {
       setCardsStatus(JSON.parse(localStorage.getItem('cards')));
    };
 
-   const selectAll = () => {
-      const cards = images.map(() => true);
+   const select = amount => {
+      const cards = images.map((_, index) => index < amount);
+
       localStorage.setItem('cards', JSON.stringify(cards));
 
       setCardsStatus(JSON.parse(localStorage.getItem('cards')));
@@ -40,35 +43,75 @@ export default memo(() => {
       <>
          <Header page="cards" />
 
-         <Container>
-            <div
-               title="Select all Cards"
-               className="d-flex justify-content-center mt-2"
-            >
-               <Button onClick={selectAll}>Select all Cards</Button>
-            </div>
+         <main>
+            <Container>
+               <div className="d-flex justify-content-center mt-2">
+                  <Dropdown
+                     onSelect={e => {
+                        setDropdownText(e);
+                     }}
+                  >
+                     <Dropdown.Toggle variant="success">
+                        {dropdownText}
+                     </Dropdown.Toggle>
 
-            <div className="mt-2 d-flex flex-wrap justify-content-center">
-               {cardsStatus.map((status, index) =>
-                  index === 0 ? (
-                     ''
-                  ) : (
-                     // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-                     <img
-                        onClick={() => setCardStatus(index)}
-                        onKeyDown={() => {}}
-                        className={`card ${status === true ? '' : 'grey'}`}
-                        key={cardsPNG[index]}
-                        width={150}
-                        height={180}
-                        title={names[index]}
-                        src={images[index]}
-                        alt={cardsPNG[index]}
-                     />
-                  ),
-               )}
-            </div>
-         </Container>
+                     <Dropdown.Menu>
+                        {arenas
+                           .slice()
+                           .reverse()
+                           .map((arena, index) => (
+                              <Dropdown.Item
+                                 key={arena.name}
+                                 as="button"
+                                 title={`Select all cards of ${
+                                    arenas.length - (index + 1) === 0
+                                       ? 'Training Camp arena'
+                                       : `arena ${arenas.length -
+                                            (index + 1)} and down`
+                                 }`}
+                                 eventKey={
+                                    // eslint-disable-next-line no-nested-ternary
+                                    index === 0
+                                       ? 'All arenas'
+                                       : arenas.length - (index + 1) === 0
+                                       ? 'Training Camp'
+                                       : `Arena ${arenas.length - (index + 1)}`
+                                 }
+                                 onClick={() => select(arena.amount + 1)}
+                              >
+                                 {arenas.length - (index + 1) === 0
+                                    ? 'Training Camp'
+                                    : `Arena ${arenas.length - (index + 1)}`}
+                              </Dropdown.Item>
+                           ))}
+                     </Dropdown.Menu>
+                  </Dropdown>
+               </div>
+
+               <div className="mt-2 d-flex flex-wrap justify-content-center justify-content-lg-start">
+                  {cardsStatus.map((status, index) =>
+                     index === 0 ? (
+                        ''
+                     ) : (
+                        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+                        <img
+                           onClick={() => setCardStatus(index)}
+                           onKeyDown={() => {}}
+                           className={`card ${status === true ? '' : 'grey'}`}
+                           key={cardsPNG[index]}
+                           width={130}
+                           height={160}
+                           title={names[index]}
+                           src={images[index]}
+                           alt={cardsPNG[index]}
+                        />
+                     ),
+                  )}
+               </div>
+            </Container>
+         </main>
+
+         <Footer />
       </>
    );
 });

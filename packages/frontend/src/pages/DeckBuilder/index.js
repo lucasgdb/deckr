@@ -12,6 +12,7 @@ import Header from '../../components/Header';
 import Deck from '../../components/Deck';
 import Notification from '../../components/Notification';
 import Options from '../../components/Options';
+import Footer from '../../components/Footer';
 import images from '../src/requireEnabled';
 import { codes } from '../src/information.json';
 
@@ -218,75 +219,85 @@ export default memo(() => {
             </Modal.Footer>
          </Modal>
 
-         <Deck cards={cardList} />
+         <main>
+            <Deck cards={cardList} />
 
-         <Options>
-            <Dropdown>
-               <Dropdown.Toggle className="mr-1" variant="dark">
-                  Options
-               </Dropdown.Toggle>
+            <Options>
+               <Dropdown>
+                  <Dropdown.Toggle className="mr-1" variant="dark">
+                     Options
+                  </Dropdown.Toggle>
 
-               <Dropdown.Menu>
-                  <Dropdown.Item
-                     as={Button}
-                     variant="dark"
-                     title="Open Deck"
-                     onClick={open}
-                  >
-                     Open
-                  </Dropdown.Item>
+                  <Dropdown.Menu>
+                     <Dropdown.Item
+                        as={Button}
+                        variant="dark"
+                        title="Open Deck"
+                        onClick={open}
+                     >
+                        Open
+                     </Dropdown.Item>
 
-                  <Dropdown.Item
-                     as={Button}
-                     variant="dark"
-                     title="Save Deck"
-                     onClick={save}
-                  >
-                     Save
-                  </Dropdown.Item>
+                     <Dropdown.Item
+                        as={Button}
+                        variant="dark"
+                        title="Save Deck"
+                        onClick={save}
+                     >
+                        Save
+                     </Dropdown.Item>
 
-                  <Dropdown.Item
-                     as={Button}
-                     variant="dark"
-                     title="Paste Deck"
-                     onClick={() => setShow(true)}
-                  >
-                     Paste
-                  </Dropdown.Item>
+                     <Dropdown.Divider />
 
-                  <Dropdown.Item
-                     as={Button}
-                     variant="dark"
-                     title="Clear Deck"
-                     onClick={clear}
-                  >
-                     Clear
-                  </Dropdown.Item>
+                     <Dropdown.Item
+                        as={Button}
+                        variant="dark"
+                        title="Paste Deck"
+                        onClick={() => setShow(true)}
+                     >
+                        Paste
+                     </Dropdown.Item>
 
-                  <Dropdown.Item
-                     as={Button}
-                     variant="dark"
-                     title="Shuffle Deck"
-                     onClick={shuffle}
-                  >
-                     Shuffle
-                  </Dropdown.Item>
-               </Dropdown.Menu>
-            </Dropdown>
+                     <Dropdown.Item
+                        as={Button}
+                        variant="dark"
+                        title="Clear Deck"
+                        onClick={clear}
+                     >
+                        Clear
+                     </Dropdown.Item>
 
-            <CopyToClipboard
-               className="mr-1"
-               title="Copy Deck"
-               text={content}
-               onCopy={() => setCopied(true)}
-            >
-               <Button>Copy</Button>
-            </CopyToClipboard>
+                     <Dropdown.Item
+                        as={Button}
+                        variant="dark"
+                        title="Shuffle Deck"
+                        onClick={shuffle}
+                     >
+                        Shuffle
+                     </Dropdown.Item>
+                  </Dropdown.Menu>
+               </Dropdown>
 
-            <Button title="Generate Deck" variant="success" onClick={generate}>
-               Generate
-            </Button>
-         </Options>
+               <CopyToClipboard
+                  className="mr-1"
+                  title="Copy Deck"
+                  text={content}
+                  onCopy={() => setCopied(true)}
+               >
+                  <Button>Copy</Button>
+               </CopyToClipboard>
+
+               <Button
+                  title="Generate Deck"
+                  variant="success"
+                  onClick={generate}
+               >
+                  Generate
+               </Button>
+            </Options>
+         </main>
+
+         <Footer />
       </>
    );
 });

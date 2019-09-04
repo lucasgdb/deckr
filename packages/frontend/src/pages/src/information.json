@@ -1,4 +1,62 @@
 {
+   "arenas": [
+      {
+         "name": "training_camp",
+         "amount": 12
+      },
+      {
+         "name": "goblin_stadium",
+         "amount": 18
+      },
+      {
+         "name": "bone_pit",
+         "amount": 24
+      },
+      {
+         "name": "barbarian_bowl",
+         "amount": 30
+      },
+      {
+         "name": "pekka_playhouse",
+         "amount": 38
+      },
+      {
+         "name": "spell_valley",
+         "amount": 46
+      },
+      {
+         "name": "builder_workshop",
+         "amount": 54
+      },
+      {
+         "name": "royal_arena",
+         "amount": 62
+      },
+      {
+         "name": "frozen_peak",
+         "amount": 70
+      },
+      {
+         "name": "jungle_arena",
+         "amount": 76
+      },
+      {
+         "name": "hog_mountain",
+         "amount": 83
+      },
+      {
+         "name": "electro_valley",
+         "amount": 89
+      },
+      {
+         "name": "spooky_town",
+         "amount": 94
+      },
+      {
+         "name": "legendary_arena",
+         "amount": 94
+      }
+   ],
    "names": [
       "No card",
       "Arrows",
@@ -9,10 +67,10 @@
       "Mini P.E.K.K.A",
       "Musketeer",
       "Giant",
-      "Skeleton Army",
+      "Wall Breakers",
       "Prince",
       "Baby Dragon",
-      "Wall Breakers",
+      "Skeleton Army",
       "Spear Goblins",
       "Goblins",
       "Goblin Hut",
@@ -30,10 +88,10 @@
       "MP",
       "Musk",
       "Giant",
-      "Skarmy",
+      "WallBreakers",
       "Prince",
       "BabyD",
-      "WallBreakers",
+      "Skarmy",
       "SpearGobs",
       "Gobs",
       "GobHut",
@@ -51,10 +109,10 @@
       "26000018",
       "26000014",
       "26000003",
-      "26000012",
+      "26000058",
       "26000016",
       "26000015",
-      "26000058",
+      "26000012",
       "",
       "",
       "",

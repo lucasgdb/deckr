@@ -7,9 +7,11 @@ import {
    Row,
    Col,
    Button,
+   Spinner,
 } from 'react-bootstrap';
 import api from '../../services/api';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import './styles.css';
 
 const chestsPNG = {
@@ -59,56 +61,69 @@ export default () => {
       <>
          <Header page="next" />
 
-         <Container className="mt-2">
-            <Row className="justify-content-center">
-               <Col xs={12} md={8} lg={6}>
-                  <InputGroup>
-                     <InputGroup.Prepend>
-                        <InputGroup.Text>#</InputGroup.Text>
-                     </InputGroup.Prepend>
+         <main>
+            <Container className="mt-2">
+               <Row className="justify-content-center">
+                  <Col xs={12} md={8} lg={6}>
+                     <InputGroup>
+                        <InputGroup.Prepend>
+                           <InputGroup.Text>#</InputGroup.Text>
+                        </InputGroup.Prepend>
 
-                     <FormControl
-                        value={userID}
-                        onChange={handleInput}
-                        onKeyUp={event => {
-                           if (event.which === 13) connect();
-                        }}
-                        placeholder="User ID (e.g: C8Q2QR08)"
-                     />
+                        <FormControl
+                           value={userID}
+                           onChange={handleInput}
+                           onKeyUp={event => {
+                              if (event.which === 13) connect();
+                           }}
+                           placeholder="User ID (e.g: C8Q2QR08)"
+                        />
 
-                     <Button
-                        title="Connect to API"
-                        disabled={connecting}
-                        onClick={connect}
-                        className="ml-1"
-                     >
-                        {connecting ? 'Connecting...' : 'Connect'}
-                     </Button>
-                  </InputGroup>
-               </Col>
-            </Row>
+                        <InputGroup.Append>
+                           <Button
+                              title="Connect to API"
+                              disabled={connecting}
+                              onClick={connect}
+                           >
+                              {connecting ? (
+                                 <Spinner
+                                    as="span"
+                                    animation="border"
+                                    size="sm"
+                                 />
+                              ) : (
+                                 'Connect'
+                              )}
+                           </Button>
+                        </InputGroup.Append>
+                     </InputGroup>
+                  </Col>
+               </Row>
 
-            <div className="mt-2 d-flex flex-wrap justify-content-center">
-               {chests.map(chest => (
-                  <div key={chest.id} className="mt-2 position-relative">
-                     <img
-                        title={`${chest.chest} chest`}
-                        className="chest-image"
-                        width={150}
-                        height={150}
-                        src={chestsPNG[chest.chest]}
-                        alt={chest.chest}
-                     />
-                     <p
-                        title={`${chest.chest} chest`}
-                        className="chest-id position-absolute"
-                     >
-                        {chest.id}
-                     </p>
-                  </div>
-               ))}
-            </div>
-         </Container>
+               <div className="mt-2 d-flex flex-wrap justify-content-center">
+                  {chests.map(chest => (
+                     <div key={chest.id} className="mt-2 position-relative">
+                        <img
+                           title={`${chest.chest} chest`}
+                           className="chest-image"
+                           width={150}
+                           height={150}
+                           src={chestsPNG[chest.chest]}
+                           alt={chest.chest}
+                        />
+                        <p
+                           title={`${chest.chest} chest`}
+                           className="chest-id position-absolute"
+                        >
+                           {chest.id}
+                        </p>
+                     </div>
+                  ))}
+               </div>
+            </Container>
+         </main>
+
+         <Footer />
       </>
    );
 };

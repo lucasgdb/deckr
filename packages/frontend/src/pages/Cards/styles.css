@@ -3,6 +3,7 @@
 }
 
 .card {
+   user-select: none;
    border: none;
    background: transparent;
    cursor: pointer;

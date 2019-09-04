@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import Header from '../../components/Header';
+import Footer from '../../components/Footer';
 import './styles.css';
 
 export default () => {
@@ -11,7 +12,11 @@ export default () => {
       <>
          <Header page="about" />
 
-         <p className="information">App made by Lucas Bittencourt &lt;3</p>
+         <main>
+            <p className="information">App made by Lucas Bittencourt &lt;3</p>
+         </main>
+
+         <Footer />
       </>
    );
 };

@@ -1,12 +1,12 @@
 import React, { useEffect, useState, memo } from 'react';
-import { Button } from 'react-bootstrap';
+import { Button, Spinner } from 'react-bootstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import api from '../../services/api';
 import Header from '../../components/Header';
 import Deck from '../../components/Deck';
 import Notification from '../../components/Notification';
-import Spinner from '../../components/Spinner';
 import Options from '../../components/Options';
+import Footer from '../../components/Footer';
 import './styles.css';
 
 export default memo(() => {
@@ -50,6 +50,7 @@ export default memo(() => {
    return (
       <>
          <Header page="decks" />
+
          <Notification.Container>
             <Notification
                text="Link successfully copied."
@@ -58,47 +59,53 @@ export default memo(() => {
             />
          </Notification.Container>
 
-         {/* eslint-disable-next-line no-nested-ternary */}
-         {downloading ? (
-            <Spinner />
-         ) : (
-            <>
-               <p className="information">{decks.length} saved Decks</p>
-               {decks.map(deck => (
-                  <div key={deck._id}>
-                     <Deck cards={deck.cards} />
+         <main>
+            {downloading ? (
+               <Spinner
+                  className="center-screen position-relative mt-2"
+                  animation="border"
+               />
+            ) : (
+               <>
+                  <p className="information">{decks.length} saved Decks</p>
+                  {decks.map(deck => (
+                     <div key={deck._id}>
+                        <Deck cards={deck.cards} />
 
-                     <Options>
-                        <Button
-                           className="mr-1"
-                           title="Open Deck on Clash Royale"
-                           variant="dark"
-                           onClick={() => open(deck.link)}
-                        >
-                           Open
-                        </Button>
+                        <Options>
+                           <Button
+                              className="mr-1"
+                              title="Open Deck on Clash Royale"
+                              variant="dark"
+                              onClick={() => open(deck.link)}
+                           >
+                              Open
+                           </Button>
 
-                        <CopyToClipboard
-                           className="mr-1"
-                           title="Copy Deck"
-                           text={deck.link}
-                           onCopy={() => setCopied(true)}
-                        >
-                           <Button>Copy</Button>
-                        </CopyToClipboard>
+                           <CopyToClipboard
+                              className="mr-1"
+                              title="Copy Deck"
+                              text={deck.link}
+                              onCopy={() => setCopied(true)}
+                           >
+                              <Button>Copy</Button>
+                           </CopyToClipboard>
 
-                        <Button
-                           title="Remove Deck"
-                           variant="danger"
-                           onClick={() => removeDeck(deck._id)}
-                        >
-                           Remove
-                        </Button>
-                     </Options>
-                  </div>
-               ))}
-            </>
-         )}
+                           <Button
+                              title="Remove Deck"
+                              variant="danger"
+                              onClick={() => removeDeck(deck._id)}
+                           >
+                              Remove
+                           </Button>
+                        </Options>
+                     </div>
+                  ))}
+               </>
+            )}
+         </main>
+
+         <Footer />
       </>
    );
 });
