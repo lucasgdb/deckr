@@ -12,22 +12,34 @@
       "Skeleton Army",
       "Prince",
       "Baby Dragon",
-      "Wall Breakers"
+      "Wall Breakers",
+      "Spear Goblins",
+      "Goblins",
+      "Goblin Hut",
+      "Hog Rider",
+      "Goblin Barrel",
+      "Hunter"
    ],
    "cardsPNG": [
       "no_card",
-      "arrows",
-      "minions",
-      "archers",
-      "knight",
-      "fireball",
-      "mini_pekka",
-      "musketeer",
-      "giant",
-      "skeleton_army",
-      "prince",
-      "baby_dragon",
-      "wall_breakers"
+      "Arrows",
+      "Minions",
+      "Archers",
+      "Knight",
+      "Fireball",
+      "MP",
+      "Musk",
+      "Giant",
+      "Skarmy",
+      "Prince",
+      "BabyD",
+      "WallBreakers",
+      "SpearGobs",
+      "Gobs",
+      "GobHut",
+      "Hog",
+      "Barrel",
+      "Hunter"
    ],
    "codes": [
       "",
@@ -42,6 +54,12 @@
       "26000012",
       "26000016",
       "26000015",
-      "26000058"
+      "26000058",
+      "",
+      "",
+      "",
+      "",
+      "",
+      ""
    ]
 }

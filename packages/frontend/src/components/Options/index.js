@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import './styles.css';
 
 const Options = ({ children }) => (
@@ -7,4 +7,4 @@ const Options = ({ children }) => (
    </div>
 );
 
-export default memo(Options);
+export default Options;

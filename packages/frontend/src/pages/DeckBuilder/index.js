@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback, useRef } from 'react';
+import React, { useEffect, useState, useCallback, useRef, memo } from 'react';
 import {
    Button,
    Dropdown,
@@ -26,7 +26,7 @@ const defaultCardList = [
    { id: 7, card: 0 },
 ];
 
-export default () => {
+export default memo(() => {
    const txtPasteLink = useRef(null);
 
    const [cardList, setCardList] = useState(defaultCardList);
@@ -289,4 +289,4 @@ export default () => {
          </Options>
       </>
    );
-};
+});

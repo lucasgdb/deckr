@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import './styles.css';
 
 const Spinner = ({ center }) => (
@@ -7,4 +7,4 @@ const Spinner = ({ center }) => (
    </div>
 );
 
-export default memo(Spinner);
+export default Spinner;

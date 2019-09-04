@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
@@ -61,4 +61,4 @@ const Header = ({ page }) => {
    );
 };
 
-export default memo(Header);
+export default Header;

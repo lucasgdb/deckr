@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, memo } from 'react';
 import { Button } from 'react-bootstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
 import api from '../../services/api';
@@ -9,7 +9,7 @@ import Spinner from '../../components/Spinner';
 import Options from '../../components/Options';
 import './styles.css';
 
-export default () => {
+export default memo(() => {
    const [decks, setDecks] = useState([]);
    const [copied, setCopied] = useState(false);
    const [downloading, setDownloading] = useState(true);
@@ -101,4 +101,4 @@ export default () => {
          )}
       </>
    );
-};
+});

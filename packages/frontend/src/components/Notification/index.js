@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React from 'react';
 import { Toast } from 'react-bootstrap';
 import icon from './favicon.png';
 import './styles.css';
@@ -26,6 +26,6 @@ const Notification = ({ show, toggleToast, text }) => {
    );
 };
 
-Notification.Container = memo(Container);
+Notification.Container = Container;
 
 export default Notification;
