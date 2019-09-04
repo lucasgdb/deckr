@@ -4,7 +4,7 @@ const requiredImages = [];
 
 /* eslint-disable */
 for (let i = 0; i < cardsPNG.length; i += 1) {
-   requiredImages.push(require(`../../cards/${cardsPNG[i]}.png`));
+   requiredImages.push(require(`../../images/cards/${cardsPNG[i]}.png`));
 }
 /* eslint-disable */
 

@@ -15,14 +15,14 @@ import Footer from '../../components/Footer';
 import './styles.css';
 
 const chestsPNG = {
-   wooden: require('../../chests/wooden.png'),
-   silver: require('../../chests/silver.png'),
-   golden: require('../../chests/golden.png'),
-   giant: require('../../chests/giant.png'),
-   epic: require('../../chests/epic.png'),
-   magical: require('../../chests/magical.png'),
-   legendary: require('../../chests/legendary.png'),
-   megaLightning: require('../../chests/megaLightning.png'),
+   wooden: require('../../images/chests/wooden.png'),
+   silver: require('../../images/chests/silver.png'),
+   golden: require('../../images/chests/golden.png'),
+   giant: require('../../images/chests/giant.png'),
+   epic: require('../../images/chests/epic.png'),
+   magical: require('../../images/chests/magical.png'),
+   legendary: require('../../images/chests/legendary.png'),
+   megaLightning: require('../../images/chests/megaLightning.png'),
 };
 
 export default () => {

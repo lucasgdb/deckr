@@ -1,4 +1,5 @@
 import React from 'react';
+import { FaTools } from 'react-icons/fa';
 import Navbar from 'react-bootstrap/Navbar';
 import Nav from 'react-bootstrap/Nav';
 import { Link } from 'react-router-dom';
@@ -13,7 +14,7 @@ const Header = ({ page }) => {
          sticky="top"
       >
          <Link className="navbar-brand" to="/">
-            <i className="fas fa-tools mr-1" />
+            <FaTools className="mr-2" />
             Deckr
          </Link>
 

@@ -6,6 +6,29 @@ import { arenas, names, cardsPNG } from '../src/information.json';
 import images from '../src/requireAll';
 import './styles.css';
 
+const Cards = memo(({ cardsStatus, setCardStatus }) => (
+   <div className="mt-2 d-flex flex-wrap justify-content-center justify-content-lg-start">
+      {cardsStatus.map((status, index) =>
+         index === 0 ? (
+            ''
+         ) : (
+            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
+            <img
+               onClick={() => setCardStatus(index)}
+               onKeyDown={() => {}}
+               className={`card ${status === true ? '' : 'grey'}`}
+               key={cardsPNG[index]}
+               width={130}
+               height={160}
+               title={names[index]}
+               src={images[index]}
+               alt={cardsPNG[index]}
+            />
+         ),
+      )}
+   </div>
+));
+
 export default memo(() => {
    const [cardsStatus, setCardsStatus] = useState([]);
    const [dropdownText, setDropdownText] = useState('All arenas');
@@ -63,6 +86,7 @@ export default memo(() => {
                               <Dropdown.Item
                                  key={arena.name}
                                  as="button"
+                                 onClick={() => select(arena.amount + 1)}
                                  title={`Select all cards of ${
                                     arenas.length - (index + 1) === 0
                                        ? 'Training Camp arena'
@@ -77,7 +101,6 @@ export default memo(() => {
                                        ? 'Training Camp'
                                        : `Arena ${arenas.length - (index + 1)}`
                                  }
-                                 onClick={() => select(arena.amount + 1)}
                               >
                                  {arenas.length - (index + 1) === 0
                                     ? 'Training Camp'
@@ -88,26 +111,7 @@ export default memo(() => {
                   </Dropdown>
                </div>
 
-               <div className="mt-2 d-flex flex-wrap justify-content-center justify-content-lg-start">
-                  {cardsStatus.map((status, index) =>
-                     index === 0 ? (
-                        ''
-                     ) : (
-                        // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-                        <img
-                           onClick={() => setCardStatus(index)}
-                           onKeyDown={() => {}}
-                           className={`card ${status === true ? '' : 'grey'}`}
-                           key={cardsPNG[index]}
-                           width={130}
-                           height={160}
-                           title={names[index]}
-                           src={images[index]}
-                           alt={cardsPNG[index]}
-                        />
-                     ),
-                  )}
-               </div>
+               <Cards cardsStatus={cardsStatus} setCardStatus={setCardStatus} />
             </Container>
          </main>
 

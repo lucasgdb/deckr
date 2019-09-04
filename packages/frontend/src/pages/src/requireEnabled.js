@@ -7,7 +7,7 @@ const enabled = JSON.parse(localStorage.getItem('cards')) || [];
 /* eslint-disable */
 for (let i = 0; i < cardsPNG.length; i += 1) {
    if (enabled[i] || enabled[i] === undefined) {
-      requiredImages.push(require(`../../cards/${cardsPNG[i]}.png`));
+      requiredImages.push(require(`../../images/cards/${cardsPNG[i]}.png`));
    }
 }
 /* eslint-disable */
