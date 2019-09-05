@@ -104,7 +104,11 @@ export default () => {
                   {chests.map(chest => (
                      <div key={chest.id} className="mt-2 position-relative">
                         <img
-                           title={`${chest.chest} chest`}
+                           title={`${chest.chest
+                              .split('_')
+                              .map(
+                                 word => word[0].toUpperCase() + word.slice(1),
+                              )} Chest`}
                            className="chest-image"
                            width={150}
                            height={150}
@@ -112,7 +116,11 @@ export default () => {
                            alt={chest.chest}
                         />
                         <p
-                           title={`${chest.chest} chest`}
+                           title={`${chest.chest
+                              .split('_')
+                              .map(
+                                 word => word[0].toUpperCase() + word.slice(1),
+                              )} Chest`}
                            className="chest-id position-absolute"
                         >
                            {chest.id}

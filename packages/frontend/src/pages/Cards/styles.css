@@ -1,10 +1,23 @@
+* {
+   -webkit-user-drag: none;
+}
+
 .grey {
    filter: grayscale(1);
 }
 
-.card {
-   user-select: none;
-   border: none;
-   background: transparent;
-   cursor: pointer;
+.arena {
+   background-color: #343a40;
+}
+
+.arena-name {
+   font-size: 30px;
+}
+
+.arena-img {
+   transition: all 0.5s;
+}
+
+.arena-img:hover {
+   filter: drop-shadow(0 0 10px #fff);
 }

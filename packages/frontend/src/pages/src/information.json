@@ -1,59 +1,74 @@
 {
+   "version": 4,
    "arenas": [
       {
          "name": "training_camp",
+         "extensible_name": "Training Camp",
          "amount": 12
       },
       {
          "name": "goblin_stadium",
+         "extensible_name": "Goblin Stadium",
          "amount": 18
       },
       {
          "name": "bone_pit",
+         "extensible_name": "Bone Pit",
          "amount": 24
       },
       {
          "name": "barbarian_bowl",
+         "extensible_name": "Barbarian Bowl",
          "amount": 30
       },
       {
          "name": "pekka_playhouse",
+         "extensible_name": "P.E.K.K.A's Playhouse",
          "amount": 38
       },
       {
          "name": "spell_valley",
+         "extensible_name": "Spell Valley",
          "amount": 46
       },
       {
          "name": "builder_workshop",
+         "extensible_name": "Builder Workshop",
          "amount": 54
       },
       {
          "name": "royal_arena",
+         "extensible_name": "Royal Arena",
          "amount": 62
       },
       {
          "name": "frozen_peak",
+         "extensible_name": "Frozen Peak",
          "amount": 70
       },
       {
          "name": "jungle_arena",
+         "extensible_name": "Jungle arena",
          "amount": 76
       },
       {
          "name": "hog_mountain",
+         "extensible_name": "Hog Mountain",
          "amount": 83
       },
       {
          "name": "electro_valley",
+         "extensible_name": "Electro Valley",
          "amount": 89
       },
       {
          "name": "spooky_town",
+         "extensible_name": "Spooky Town",
          "amount": 94
       },
       {
          "name": "legendary_arena",
+         "extensible_name": "Legendary Arena",
          "amount": 94
       }
    ],
@@ -76,7 +91,19 @@
       "Goblin Hut",
       "Hog Rider",
       "Goblin Barrel",
-      "Hunter"
+      "Hunter",
+      "Bomber",
+      "Skeletons",
+      "Tombstone",
+      "Valkyrie",
+      "Giant Skeleton",
+      "Witch",
+      "Cannon",
+      "Barbarians",
+      "Barbarian Hut",
+      "Battle Ram",
+      "Barbarian Barrel",
+      "Golem"
    ],
    "cardsPNG": [
       "no_card",
@@ -97,7 +124,19 @@
       "GobHut",
       "Hog",
       "Barrel",
-      "Hunter"
+      "Hunter",
+      "Bomber",
+      "Skellies",
+      "Tombstone",
+      "Valk",
+      "GiantSkelly",
+      "Witch",
+      "Cannon",
+      "Barbs",
+      "BarbHut",
+      "Ram",
+      "BarbBarrel",
+      "Golem"
    ],
    "codes": [
       "",
@@ -113,6 +152,18 @@
       "26000016",
       "26000015",
       "26000012",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
+      "",
       "",
       "",
       "",

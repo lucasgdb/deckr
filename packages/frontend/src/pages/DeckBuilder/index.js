@@ -14,7 +14,7 @@ import Notification from '../../components/Notification';
 import Options from '../../components/Options';
 import Footer from '../../components/Footer';
 import images from '../src/requireEnabled';
-import { codes } from '../src/information.json';
+import { version, codes } from '../src/information.json';
 
 const defaultCardList = [
    { id: 0, card: 0 },
@@ -42,9 +42,14 @@ export default memo(() => {
    useEffect(() => {
       document.title = 'Deckr - Deck Builder';
 
-      if (!localStorage.getItem('cards')) {
+      const correctVersion =
+         JSON.parse(localStorage.getItem('version')) === version;
+
+      if (!localStorage.getItem('cards') || !correctVersion) {
          const cards = images.map(() => true);
+
          localStorage.setItem('cards', JSON.stringify(cards));
+         localStorage.setItem('version', version);
       }
 
       const cards = JSON.parse(localStorage.getItem('cards'));

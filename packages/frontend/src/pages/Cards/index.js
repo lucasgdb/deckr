@@ -1,44 +1,45 @@
+/* eslint-disable global-require */
 import React, { useEffect, useState, memo } from 'react';
 import { Container, Dropdown } from 'react-bootstrap';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { arenas, names, cardsPNG } from '../src/information.json';
+import { version, arenas, names, cardsPNG } from '../src/information.json';
 import images from '../src/requireAll';
 import './styles.css';
 
-const Cards = memo(({ cardsStatus, setCardStatus }) => (
-   <div className="mt-2 d-flex flex-wrap justify-content-center justify-content-lg-start">
-      {cardsStatus.map((status, index) =>
-         index === 0 ? (
-            ''
-         ) : (
-            // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions
-            <img
-               onClick={() => setCardStatus(index)}
-               onKeyDown={() => {}}
-               className={`card ${status === true ? '' : 'grey'}`}
-               key={cardsPNG[index]}
-               width={130}
-               height={160}
-               title={names[index]}
-               src={images[index]}
-               alt={cardsPNG[index]}
-            />
-         ),
-      )}
-   </div>
-));
+const arenasPNG = {
+   training_camp: require('../../images/arenas/training_camp.png'),
+   goblin_stadium: require('../../images/arenas/goblin_stadium.png'),
+   bone_pit: require('../../images/arenas/bone_pit.png'),
+   barbarian_bowl: require('../../images/arenas/barbarian_bowl.png'),
+   pekka_playhouse: require('../../images/arenas/pekka_playhouse.png'),
+   spell_valley: require('../../images/arenas/spell_valley.png'),
+   builder_workshop: require('../../images/arenas/builder_workshop.png'),
+   royal_arena: require('../../images/arenas/royal_arena.png'),
+   frozen_peak: require('../../images/arenas/frozen_peak.png'),
+   jungle_arena: require('../../images/arenas/jungle_arena.png'),
+   hog_mountain: require('../../images/arenas/hog_mountain.png'),
+   electro_valley: require('../../images/arenas/electro_valley.png'),
+   spooky_town: require('../../images/arenas/spooky_town.png'),
+   legendary_arena: require('../../images/arenas/legendary_arena.png'),
+};
 
 export default memo(() => {
    const [cardsStatus, setCardsStatus] = useState([]);
    const [dropdownText, setDropdownText] = useState('All arenas');
+   const [selectedIndex, setSelectedIndex] = useState(0);
 
    useEffect(() => {
       document.title = 'Deckr - Cards';
 
-      if (!localStorage.getItem('cards')) {
+      const correctVersion =
+         Number(localStorage.getItem('version')) === version;
+
+      if (!localStorage.getItem('cards') || !correctVersion) {
          const cards = images.map(() => true);
+
          localStorage.setItem('cards', JSON.stringify(cards));
+         localStorage.setItem('version', version);
       }
 
       setCardsStatus(JSON.parse(localStorage.getItem('cards')));
@@ -67,52 +68,143 @@ export default memo(() => {
          <Header page="cards" />
 
          <main>
-            <Container>
-               <div className="d-flex justify-content-center mt-2">
-                  <Dropdown
-                     onSelect={e => {
-                        setDropdownText(e);
-                     }}
-                  >
-                     <Dropdown.Toggle variant="success">
-                        {dropdownText}
-                     </Dropdown.Toggle>
+            <div className="d-flex justify-content-center mt-2 mb-2">
+               <Dropdown
+                  onSelect={e => {
+                     setDropdownText(e);
+                  }}
+               >
+                  <Dropdown.Toggle title={dropdownText} variant="success">
+                     {dropdownText}
+                  </Dropdown.Toggle>
 
-                     <Dropdown.Menu>
-                        {arenas
-                           .slice()
-                           .reverse()
-                           .map((arena, index) => (
-                              <Dropdown.Item
-                                 key={arena.name}
-                                 as="button"
-                                 onClick={() => select(arena.amount + 1)}
-                                 title={`Select all cards of ${
-                                    arenas.length - (index + 1) === 0
-                                       ? 'Training Camp arena'
-                                       : `arena ${arenas.length -
-                                            (index + 1)} and down`
-                                 }`}
-                                 eventKey={
-                                    // eslint-disable-next-line no-nested-ternary
-                                    index === 0
-                                       ? 'All arenas'
-                                       : arenas.length - (index + 1) === 0
-                                       ? 'Training Camp'
-                                       : `Arena ${arenas.length - (index + 1)}`
+                  <Dropdown.Menu>
+                     {arenas
+                        .slice()
+                        .reverse()
+                        .map((arena, index) => (
+                           <Dropdown.Item
+                              active={index === selectedIndex}
+                              key={arena.name}
+                              as="button"
+                              onClick={() => select(arena.amount + 1)}
+                              onSelect={() => setSelectedIndex(index)}
+                              title={`Select all cards of ${
+                                 arenas.length - (index + 1) === 0
+                                    ? 'Training Camp arena'
+                                    : `arena ${arenas.length -
+                                         (index + 1)} and down`
+                              }`}
+                              eventKey={
+                                 // eslint-disable-next-line no-nested-ternary
+                                 index === 0
+                                    ? 'All arenas'
+                                    : arenas.length - (index + 1) === 0
+                                    ? 'Arena Training Camp'
+                                    : `Arena ${
+                                         arena.extensible_name
+                                      } (${arenas.length - (index + 1)})`
+                              }
+                           >
+                              {arenas.length - (index + 1) === 0
+                                 ? 'Training Camp'
+                                 : `Arena ${arenas.length - (index + 1)}`}
+                           </Dropdown.Item>
+                        ))}
+                  </Dropdown.Menu>
+               </Dropdown>
+            </div>
+
+            {arenas.map((arena, index, array) => (
+               <div key={arena.name} className="bg-dark">
+                  <div className="arena">
+                     <Container className="d-flex align-items-center">
+                        {/* eslint-disable-next-line */}
+                        <img
+                           onClick={() => {
+                              select(arena.amount + 1);
+                           }}
+                           className="arena-img"
+                           style={{ cursor: 'pointer' }}
+                           width={150}
+                           src={arenasPNG[arena.name]}
+                           alt={arena.name}
+                           title={arena.extensible_name}
+                        />
+
+                        <div className="ml-2">
+                           <p className="arena-name m-0 text-light">
+                              {arena.extensible_name}
+                              {index === 0 ? '' : ` (${index})`}
+                           </p>
+
+                           <span className="text-secondary">
+                              Tap the Card to disable and enable it.
+                           </span>
+                        </div>
+                     </Container>
+                  </div>
+
+                  <div className="pt-2 pb-2 bg-light">
+                     <Container className="d-flex flex-wrap justify-content-center justify-content-lg-start">
+                        {cardsPNG
+                           .slice(
+                              array[index - 1] === undefined
+                                 ? 1
+                                 : array[index - 1].amount + 1,
+                              arena.amount + 1,
+                           )
+                           .map((cardPNG, sIndex) => (
+                              // eslint-disable-next-line
+                              <img
+                                 key={cardPNG}
+                                 width={100}
+                                 height={125}
+                                 alt={cardPNG}
+                                 style={{
+                                    userSelect: 'none',
+                                    border: 'none',
+                                    background: 'transparent',
+                                    cursor: 'pointer',
+                                 }}
+                                 onClick={() =>
+                                    setCardStatus(
+                                       array[index - 1] === undefined
+                                          ? sIndex + 1
+                                          : array[index - 1].amount +
+                                               sIndex +
+                                               1,
+                                    )
                                  }
-                              >
-                                 {arenas.length - (index + 1) === 0
-                                    ? 'Training Camp'
-                                    : `Arena ${arenas.length - (index + 1)}`}
-                              </Dropdown.Item>
+                                 className={
+                                    cardsStatus[
+                                       array[index - 1] === undefined
+                                          ? sIndex + 1
+                                          : array[index - 1].amount + sIndex + 1
+                                    ] === true
+                                       ? ''
+                                       : 'grey'
+                                 }
+                                 title={
+                                    names[
+                                       array[index - 1] === undefined
+                                          ? sIndex + 1
+                                          : array[index - 1].amount + sIndex + 1
+                                    ]
+                                 }
+                                 src={
+                                    images[
+                                       array[index - 1] === undefined
+                                          ? sIndex + 1
+                                          : array[index - 1].amount + sIndex + 1
+                                    ]
+                                 }
+                              />
                            ))}
-                     </Dropdown.Menu>
-                  </Dropdown>
+                     </Container>
+                  </div>
                </div>
-
-               <Cards cardsStatus={cardsStatus} setCardStatus={setCardStatus} />
-            </Container>
+            ))}
          </main>
 
          <Footer />

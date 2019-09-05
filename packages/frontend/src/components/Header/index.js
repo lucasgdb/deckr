@@ -13,8 +13,11 @@ const Header = ({ page }) => {
          variant="dark"
          sticky="top"
       >
-         <Link className="navbar-brand" to="/">
-            <FaTools className="mr-2" />
+         <Link title="Deckr" className="navbar-brand" to="/">
+            <FaTools
+               className="position-relative mr-2"
+               style={{ marginTop: -3 }}
+            />
             Deckr
          </Link>
 
@@ -23,6 +26,7 @@ const Header = ({ page }) => {
          <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
                <Link
+                  title="Deck Builder"
                   className={`nav-link ${page === 'deckr' ? 'active' : ''}`}
                   to="/"
                >
@@ -30,6 +34,7 @@ const Header = ({ page }) => {
                </Link>
 
                <Link
+                  title="Cards"
                   className={`nav-link ${page === 'cards' ? 'active' : ''}`}
                   to="/cards"
                >
@@ -37,6 +42,7 @@ const Header = ({ page }) => {
                </Link>
 
                <Link
+                  title="Saved Decks"
                   className={`nav-link ${page === 'decks' ? 'active' : ''}`}
                   to="/decks"
                >
@@ -44,6 +50,7 @@ const Header = ({ page }) => {
                </Link>
 
                <Link
+                  title="Next Chests"
                   className={`nav-link ${page === 'next' ? 'active' : ''}`}
                   to="/next"
                >
@@ -51,6 +58,7 @@ const Header = ({ page }) => {
                </Link>
 
                <Link
+                  title="About"
                   className={`nav-link ${page === 'about' ? 'active' : ''}`}
                   to="/about"
                >

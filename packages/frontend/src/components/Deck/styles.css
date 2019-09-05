@@ -1,3 +1,7 @@
+* {
+   -webkit-user-drag: none;
+}
+
 .cards {
    margin: 0 auto;
    max-width: 600px !important;
