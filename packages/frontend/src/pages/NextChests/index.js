@@ -12,7 +12,6 @@ import {
 import api from '../../services/api';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import './styles.css';
 
 const chestsPNG = {
    wooden: require('../../images/chests/wooden.png'),
@@ -121,7 +120,18 @@ export default () => {
                               .map(
                                  word => word[0].toUpperCase() + word.slice(1),
                               )} Chest`}
-                           className="chest-id position-absolute"
+                           className="position-absolute"
+                           style={{
+                              left: '50%',
+                              top: '50%',
+                              transform: 'translate(-50%, -50%)',
+                              fontSize: 30,
+                              fontWeight: 800,
+                              color: 'white',
+                              textShadow:
+                                 '2px 2px 25px black, 2px 2px 35px black, 2px 2px 35px black, 2px 2px 35px black, 2px 2px 35px black',
+                              cursor: 'default',
+                           }}
                         >
                            {chest.id}
                         </p>

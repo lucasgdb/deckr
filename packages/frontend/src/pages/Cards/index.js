@@ -117,7 +117,7 @@ export default memo(() => {
 
             {arenas.map((arena, index, array) => (
                <div key={arena.name} className="bg-dark">
-                  <div className="arena">
+                  <div style={{ backgroundColor: '#343a40' }}>
                      <Container className="d-flex align-items-center">
                         {/* eslint-disable-next-line */}
                         <img
@@ -133,7 +133,10 @@ export default memo(() => {
                         />
 
                         <div className="ml-2">
-                           <p className="arena-name m-0 text-light">
+                           <p
+                              className="m-0 text-light"
+                              style={{ fontSize: 30 }}
+                           >
                               {arena.extensible_name}
                               {index === 0 ? '' : ` (${index})`}
                            </p>
@@ -146,7 +149,7 @@ export default memo(() => {
                   </div>
 
                   <div className="pt-2 pb-2 bg-light">
-                     <Container className="d-flex flex-wrap justify-content-center justify-content-lg-start">
+                     <Container className="d-flex flex-wrap">
                         {cardsPNG
                            .slice(
                               array[index - 1] === undefined

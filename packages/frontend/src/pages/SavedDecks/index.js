@@ -7,7 +7,6 @@ import Deck from '../../components/Deck';
 import Notification from '../../components/Notification';
 import Options from '../../components/Options';
 import Footer from '../../components/Footer';
-import './styles.css';
 
 export default memo(() => {
    const [decks, setDecks] = useState([]);
@@ -62,12 +61,22 @@ export default memo(() => {
          <main>
             {downloading ? (
                <Spinner
-                  className="center-screen position-relative mt-2"
+                  className="position-relative mt-2"
+                  style={{ left: '50%', transform: 'translateX(-50%)' }}
                   animation="border"
                />
             ) : (
                <>
-                  <p className="information">{decks.length} saved Decks</p>
+                  <p
+                     style={{
+                        fontSize: 30,
+                        color: '#333',
+                        textAlign: 'center',
+                        marginBottom: 0,
+                     }}
+                  >
+                     {decks.length} saved Decks
+                  </p>
                   {decks.map(deck => (
                      <div key={deck._id}>
                         <Deck cards={deck.cards} />

@@ -6,14 +6,6 @@
    filter: grayscale(1);
 }
 
-.arena {
-   background-color: #343a40;
-}
-
-.arena-name {
-   font-size: 30px;
-}
-
 .arena-img {
    transition: all 0.5s;
 }

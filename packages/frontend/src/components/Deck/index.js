@@ -4,7 +4,7 @@ import images from '../../pages/src/requireAll';
 import { names, cardsPNG } from '../../pages/src/information.json';
 import './styles.css';
 
-const Deck = ({ cards }) => {
+export default memo(({ cards }) => {
    return (
       <Row className="cards mt-2">
          {cards.map(card => (
@@ -19,6 +19,4 @@ const Deck = ({ cards }) => {
          ))}
       </Row>
    );
-};
-
-export default memo(Deck);
+});

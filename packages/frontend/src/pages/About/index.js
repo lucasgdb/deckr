@@ -1,7 +1,6 @@
 import React, { useEffect } from 'react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import './styles.css';
 
 export default () => {
    useEffect(() => {
@@ -13,7 +12,16 @@ export default () => {
          <Header page="about" />
 
          <main>
-            <p className="information">App made by Lucas Bittencourt &lt;3</p>
+            <p
+               style={{
+                  fontSize: 30,
+                  color: '#333',
+                  textAlign: 'center',
+                  marginBottom: 0,
+               }}
+            >
+               App made by Lucas Bittencourt &lt;3
+            </p>
          </main>
 
          <Footer />
