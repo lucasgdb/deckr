@@ -15,9 +15,9 @@ Deckr is a Deck Builder & Manager for Clash Royale made with React.js & Node.js 
 
 ### How to use/contribute
 
--  Clone this project.
--  type `sudo yarn` on terminal
--  type `docker container run --name mongodb -p 27017:27017 -d mongo`
+-  clone this project.
+-  type `docker container run --name mongodb -p 27017:27017 -d mongo:latest`
+-  type `sudo yarn` or `yarn` on terminal to install its dependencies.
 -  type `yarn start`
 -  enjoy it!
 

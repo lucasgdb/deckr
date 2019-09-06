@@ -171,7 +171,7 @@ export default memo(() => {
 
    return (
       <>
-         <Header page="deckr" />
+         <Header page="/" />
 
          <Notification.Container>
             <Notification

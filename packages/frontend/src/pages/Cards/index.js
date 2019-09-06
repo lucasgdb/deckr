@@ -117,7 +117,7 @@ export default memo(() => {
 
             {arenas.map((arena, index, array) => (
                <div key={arena.name} className="bg-dark">
-                  <div style={{ backgroundColor: '#343a40' }}>
+                  <div style={{ backgroundColor: '#343a40', height: 170 }}>
                      <Container className="d-flex align-items-center">
                         {/* eslint-disable-next-line */}
                         <img
@@ -135,7 +135,7 @@ export default memo(() => {
                         <div className="ml-2">
                            <p
                               className="m-0 text-light"
-                              style={{ fontSize: 30 }}
+                              style={{ fontSize: 35 }}
                            >
                               {arena.extensible_name}
                               {index === 0 ? '' : ` (${index})`}

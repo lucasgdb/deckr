@@ -25,45 +25,22 @@ export default ({ page }) => {
 
          <Navbar.Collapse id="responsive-navbar-nav">
             <Nav className="mr-auto">
-               <Link
-                  title="Deck Builder"
-                  className={`nav-link ${page === 'deckr' ? 'active' : ''}`}
-                  to="/"
-               >
-                  Deck Builder
-               </Link>
-
-               <Link
-                  title="Cards"
-                  className={`nav-link ${page === 'cards' ? 'active' : ''}`}
-                  to="/cards"
-               >
-                  Cards
-               </Link>
-
-               <Link
-                  title="Saved Decks"
-                  className={`nav-link ${page === 'decks' ? 'active' : ''}`}
-                  to="/decks"
-               >
-                  Saved Decks
-               </Link>
-
-               <Link
-                  title="Next Chests"
-                  className={`nav-link ${page === 'next' ? 'active' : ''}`}
-                  to="/next"
-               >
-                  Next Chests
-               </Link>
-
-               <Link
-                  title="About"
-                  className={`nav-link ${page === 'about' ? 'active' : ''}`}
-                  to="/about"
-               >
-                  About
-               </Link>
+               {[
+                  { title: 'Deck Builder', to: '/', id: 1 },
+                  { title: 'Cards', to: 'cards', id: 2 },
+                  { title: 'Saved Decks', to: 'decks', id: 3 },
+                  { title: 'Next Chests', to: 'next', id: 4 },
+                  { title: 'About', to: 'about', id: 5 },
+               ].map(link => (
+                  <Link
+                     key={link.id}
+                     title={link.title}
+                     className={`nav-link ${page === link.to ? 'active' : ''}`}
+                     to={link.to}
+                  >
+                     {link.title}
+                  </Link>
+               ))}
             </Nav>
          </Navbar.Collapse>
       </Navbar>
