@@ -24,9 +24,10 @@ export default () => {
                </Card>
 
                <Row>
-                  <Col md={4} lg={4} className="pr-md-1">
+                  <Col md={4} className="pr-md-1">
                      <Card body className="mt-2">
                         <Card.Img
+                           title="Lucas Bittencourt"
                            src={lucas}
                            className="img-thumbnail img-fluid"
                            alt="Lucas Bittencourt"
@@ -44,7 +45,7 @@ export default () => {
                      </Card>
                   </Col>
 
-                  <Col md={8} lg={8} className="pl-md-1">
+                  <Col md={8} className="pl-md-1">
                      <Card body className="card-about mt-2">
                         <Card.Title
                            className="text-center"

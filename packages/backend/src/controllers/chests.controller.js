@@ -1,5 +1,5 @@
 const api = require('../services/api');
-const { config } = require('../config/token.json');
+const { config } = require('../configs/token.json');
 
 module.exports = {
    async getInformation(req, res) {
