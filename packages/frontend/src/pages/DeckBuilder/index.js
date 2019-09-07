@@ -13,8 +13,8 @@ import Deck from '../../components/Deck';
 import Notification from '../../components/Notification';
 import Options from '../../components/Options';
 import Footer from '../../components/Footer';
-import images from '../src/requireEnabled';
-import { version, codes } from '../src/information.json';
+import images from '../../configs/requireEnabled';
+import { version, codes } from '../../configs/information.json';
 
 const defaultCardList = [
    { id: 0, card: 0 },

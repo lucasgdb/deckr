@@ -3,8 +3,13 @@ import React, { useEffect, useState, memo } from 'react';
 import { Container, Dropdown } from 'react-bootstrap';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
-import { version, arenas, names, cardsPNG } from '../src/information.json';
-import images from '../src/requireAll';
+import {
+   version,
+   arenas,
+   names,
+   cardsPNG,
+} from '../../configs/information.json';
+import images from '../../configs/requireAll';
 import './styles.css';
 
 const arenasPNG = {
@@ -35,24 +40,38 @@ export default memo(() => {
       const correctVersion =
          Number(localStorage.getItem('version')) === version;
 
-      if (!localStorage.getItem('cards') || !correctVersion) {
+      const gotCards = localStorage.getItem('cards');
+      const parsedGotCards = JSON.parse(gotCards);
+
+      if (gotCards && correctVersion) {
+         if (parsedGotCards.length === images.length)
+            setCardsStatus(parsedGotCards);
+         else {
+            for (let i = parsedGotCards.length; i < images.length; i += 1) {
+               parsedGotCards.push(false);
+            }
+
+            localStorage.setItem('cards', JSON.stringify(parsedGotCards));
+            setCardsStatus(parsedGotCards);
+         }
+      } else {
          const cards = images.map(() => true);
 
          localStorage.setItem('cards', JSON.stringify(cards));
          localStorage.setItem('version', version);
-      }
 
-      setCardsStatus(JSON.parse(localStorage.getItem('cards')));
+         setCardsStatus(cards);
+      }
    }, []);
 
    const setCardStatus = index => {
       const storedStatus = [...cardsStatus];
 
-      storedStatus[index] = storedStatus[index] === false;
+      storedStatus[index] = !storedStatus[index];
 
       localStorage.setItem('cards', JSON.stringify(storedStatus));
 
-      setCardsStatus(JSON.parse(localStorage.getItem('cards')));
+      setCardsStatus(storedStatus);
    };
 
    const select = amount => {
@@ -60,7 +79,7 @@ export default memo(() => {
 
       localStorage.setItem('cards', JSON.stringify(cards));
 
-      setCardsStatus(JSON.parse(localStorage.getItem('cards')));
+      setCardsStatus(cards);
    };
 
    return (
@@ -160,6 +179,7 @@ export default memo(() => {
                            .map((cardPNG, sIndex) => (
                               // eslint-disable-next-line
                               <img
+                                 loading="lazy"
                                  key={cardPNG}
                                  width={100}
                                  height={125}

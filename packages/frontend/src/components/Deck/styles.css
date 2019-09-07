@@ -2,19 +2,8 @@
    -webkit-user-drag: none;
 }
 
-.cards {
-   margin: 0 auto;
-   max-width: 600px !important;
-   height: 360px;
-}
-
-.cards .card {
-   background: transparent;
-   user-select: none;
-}
-
 @media (max-width: 600px) {
    .cards {
-      height: 62vw;
+      height: 60vw !important;
    }
 }
