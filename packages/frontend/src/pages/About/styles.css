@@ -1,0 +1,17 @@
+@media (min-width: 768px) {
+   .card-about {
+      height: 265px;
+   }
+}
+
+@media (min-width: 993px) {
+   .card-about {
+      height: 344px;
+   }
+}
+
+@media (min-width: 1126px) {
+   .card-about {
+      height: 405px;
+   }
+}

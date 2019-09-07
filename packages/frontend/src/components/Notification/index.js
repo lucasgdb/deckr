@@ -1,6 +1,6 @@
 import React from 'react';
 import { Toast } from 'react-bootstrap';
-import icon from './favicon.png';
+import icon from './images/favicon.png';
 import './styles.css';
 
 const Container = ({ children }) => (
