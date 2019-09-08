@@ -29,7 +29,7 @@ module.exports = {
             })),
             ...chests.map(chest => ({
                chest: chest.chest,
-               id: `+${chest.id}`,
+               id: `+${chest.id - 1}`,
             })),
          ]);
       } catch (exception) {

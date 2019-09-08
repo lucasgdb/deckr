@@ -7,7 +7,7 @@ routes.get('/decks', deckController.getDecks);
 routes.post('/decks', deckController.createDeck);
 routes.delete('/decks/:_id', deckController.removeDeck);
 
-// RoyaleAPI
+// RoyaleAPI - chests
 routes.get('/chests/:id', playerController.getInformation);
 
 module.exports = routes;
