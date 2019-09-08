@@ -9,19 +9,19 @@ import {
    Button,
    Spinner,
 } from 'react-bootstrap';
-import api from '../../services/api';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import api from '~/services/api';
+import Header from '~/components/Header';
+import Footer from '~/components/Footer';
 
 const chestsPNG = {
-   wooden: require('../../images/chests/wooden.png'),
-   silver: require('../../images/chests/silver.png'),
-   golden: require('../../images/chests/golden.png'),
-   giant: require('../../images/chests/giant.png'),
-   epic: require('../../images/chests/epic.png'),
-   magical: require('../../images/chests/magical.png'),
-   legendary: require('../../images/chests/legendary.png'),
-   megaLightning: require('../../images/chests/megaLightning.png'),
+   wooden: require('~/images/chests/wooden.png'),
+   silver: require('~/images/chests/silver.png'),
+   golden: require('~/images/chests/golden.png'),
+   giant: require('~/images/chests/giant.png'),
+   epic: require('~/images/chests/epic.png'),
+   magical: require('~/images/chests/magical.png'),
+   legendary: require('~/images/chests/legendary.png'),
+   megaLightning: require('~/images/chests/megaLightning.png'),
 };
 
 export default () => {

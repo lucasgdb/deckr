@@ -1,8 +1,8 @@
 import React, { useEffect } from 'react';
 import { Container, Card, Row, Col } from 'react-bootstrap';
 import { FaInfoCircle } from 'react-icons/fa';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
+import Header from '~/components/Header';
+import Footer from '~/components/Footer';
 import lucas from './images/lucas_bittencourt.jpg';
 import './styles.css';
 

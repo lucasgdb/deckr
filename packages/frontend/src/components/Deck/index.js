@@ -1,7 +1,7 @@
 import React, { memo } from 'react';
 import { Row, Col } from 'react-bootstrap';
-import images from '../../configs/requireAll';
-import { names, cardsPNG } from '../../configs/information.json';
+import images from '~/configs/requireAll';
+import { names, cardsPNG } from '~/configs/information.json';
 import './styles.css';
 
 export default memo(({ cards }) => {

@@ -23,7 +23,8 @@
          "error",
          "absolute-first"
       ],
-      "import/newline-after-import": "error"
+      "import/newline-after-import": "error",
+      "import/no-unresolved": "off"
    },
    "globals": {
       "window": true,

@@ -1,32 +1,27 @@
 /* eslint-disable global-require */
 import React, { useEffect, useState, memo } from 'react';
 import { Container, Dropdown } from 'react-bootstrap';
-import Header from '../../components/Header';
-import Footer from '../../components/Footer';
-import {
-   version,
-   arenas,
-   names,
-   cardsPNG,
-} from '../../configs/information.json';
-import images from '../../configs/requireAll';
+import Header from '~/components/Header';
+import Footer from '~/components/Footer';
+import { version, arenas, names, cardsPNG } from '~/configs/information.json';
+import images from '~/configs/requireAll';
 import './styles.css';
 
 const arenasPNG = {
-   training_camp: require('../../images/arenas/training_camp.png'),
-   goblin_stadium: require('../../images/arenas/goblin_stadium.png'),
-   bone_pit: require('../../images/arenas/bone_pit.png'),
-   barbarian_bowl: require('../../images/arenas/barbarian_bowl.png'),
-   pekka_playhouse: require('../../images/arenas/pekka_playhouse.png'),
-   spell_valley: require('../../images/arenas/spell_valley.png'),
-   builder_workshop: require('../../images/arenas/builder_workshop.png'),
-   royal_arena: require('../../images/arenas/royal_arena.png'),
-   frozen_peak: require('../../images/arenas/frozen_peak.png'),
-   jungle_arena: require('../../images/arenas/jungle_arena.png'),
-   hog_mountain: require('../../images/arenas/hog_mountain.png'),
-   electro_valley: require('../../images/arenas/electro_valley.png'),
-   spooky_town: require('../../images/arenas/spooky_town.png'),
-   legendary_arena: require('../../images/arenas/legendary_arena.png'),
+   training_camp: require('~/images/arenas/training_camp.png'),
+   goblin_stadium: require('~/images/arenas/goblin_stadium.png'),
+   bone_pit: require('~/images/arenas/bone_pit.png'),
+   barbarian_bowl: require('~/images/arenas/barbarian_bowl.png'),
+   pekka_playhouse: require('~/images/arenas/pekka_playhouse.png'),
+   spell_valley: require('~/images/arenas/spell_valley.png'),
+   builder_workshop: require('~/images/arenas/builder_workshop.png'),
+   royal_arena: require('~/images/arenas/royal_arena.png'),
+   frozen_peak: require('~/images/arenas/frozen_peak.png'),
+   jungle_arena: require('~/images/arenas/jungle_arena.png'),
+   hog_mountain: require('~/images/arenas/hog_mountain.png'),
+   electro_valley: require('~/images/arenas/electro_valley.png'),
+   spooky_town: require('~/images/arenas/spooky_town.png'),
+   legendary_arena: require('~/images/arenas/legendary_arena.png'),
 };
 
 export default memo(() => {

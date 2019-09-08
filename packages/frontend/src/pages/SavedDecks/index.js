@@ -1,12 +1,12 @@
 import React, { useEffect, useState, memo } from 'react';
 import { Button, Spinner } from 'react-bootstrap';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import api from '../../services/api';
-import Header from '../../components/Header';
-import Deck from '../../components/Deck';
-import Notification from '../../components/Notification';
-import Options from '../../components/Options';
-import Footer from '../../components/Footer';
+import api from '~/services/api';
+import Header from '~/components/Header';
+import Deck from '~/components/Deck';
+import Notification from '~/components/Notification';
+import Options from '~/components/Options';
+import Footer from '~/components/Footer';
 
 export default memo(() => {
    const [decks, setDecks] = useState([]);
