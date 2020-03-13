@@ -18,7 +18,7 @@
       "axios": "^0.19.2",
       "customize-cra": "^0.6.0",
       "react": "^16.9.0",
-      "react-bootstrap": "^1.0.0-beta.12",
+      "react-bootstrap": "^1.0.0-beta.17",
       "react-copy-to-clipboard": "^5.0.1",
       "react-dom": "^16.9.0",
       "react-icons": "^3.7.0",
