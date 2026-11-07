@@ -3,7 +3,8 @@ import { test } from 'node:test';
 import { NextRequest } from 'next/server.js';
 import { proxy } from './proxy.ts';
 
-const run = (path: string) => proxy(new NextRequest(new URL(path, 'https://deckr.test')));
+const run = (path: string, host = 'deckr.test') =>
+   proxy(new NextRequest(new URL(path, `https://${host}`), { headers: { host } }));
 const rewrittenTo = (response: Response) => {
    const target = response.headers.get('x-middleware-rewrite');
    return target ? new URL(target).pathname : null;
@@ -50,5 +51,23 @@ test('unknown addresses get their language’s 404 page with a 404 status', () =
       const response = run(path);
       assert.equal(rewrittenTo(response), internal, path);
       assert.equal(response.status, 404, path);
+   }
+});
+
+test('the Railway domain redirects permanently to the official one, path and query kept', () => {
+   process.env.SITE_URL = 'https://deckr.lucasbittencourt.dev';
+   try {
+      for (const path of ['/', '/en/cards?x=1', '/robots.txt', '/sitemap.xml']) {
+         const response = run(path, 'deckr-production.up.railway.app');
+         assert.equal(response.status, 308, path);
+         assert.equal(response.headers.get('location'), `https://deckr.lucasbittencourt.dev${path}`, path);
+      }
+
+      // The official host and Railway's healthcheck are served normally.
+      assert.equal(rewrittenTo(run('/', 'deckr.lucasbittencourt.dev')), '/pt-br');
+      assert.equal(rewrittenTo(run('/', 'healthcheck.railway.app')), '/pt-br');
+      assert.equal(run('/robots.txt', 'deckr.lucasbittencourt.dev').headers.get('x-middleware-next'), '1');
+   } finally {
+      delete process.env.SITE_URL;
    }
 });

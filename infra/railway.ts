@@ -30,7 +30,7 @@ const workspaceFiles = ['package.json', 'pnpm-lock.yaml', 'pnpm-workspace.yaml',
 /** Changes that never need a deploy: docs and tests. */
 const ignored = ['!**/*.md', '!**/*.test.ts'];
 
-function app(name: string, directory: string, limits: Limits, healthcheck: string) {
+function app(name: string, directory: string, limits: Limits, healthcheck: string, { sleep = false } = {}) {
    return service(name, {
       source: github(repository, {
          branch: 'main',
@@ -49,8 +49,9 @@ function app(name: string, directory: string, limits: Limits, healthcheck: strin
       },
       deploy: {
          restartPolicyMaxRetries: 5,
-         // Always on: a sleeping API would answer the web app's first request after idle with a 502.
-         sleepApplication: false,
+         // Serverless (sleeps when idle) when `sleep` is set. The web app stays on: it's what visitors and
+         // crawlers hit first, and it wakes the API by calling it.
+         sleepApplication: sleep,
          // Ceilings, not reservations (billing is per use). Measured on the production images under load
          // (Nov 2026): web 55 MB idle, 187 MB / ~1 vCPU peak while converting card art to AVIF cold;
          // API 64 MB idle, 74 MB / 0.19 vCPU peak.
@@ -87,7 +88,7 @@ export default defineRailway(() => {
       },
       allowOnlineResize: true,
       region,
-      sizeMB: 1000,
+      sizeMB: 5000,
    });
 
    // Without an attachment the volume would sit unused and every redeploy would start Mongo empty.
@@ -99,7 +100,9 @@ export default defineRailway(() => {
       },
    };
 
-   const api = app('api', 'apps/api', { vCPU: 0.5, memoryGB: 0.25 }, '/api/health');
+   // Serverless: no traffic, no compute. A request over the private network wakes it; the first one may get a
+   // 502 while it boots, which the web app's API client retries (apps/web/src/lib/api.ts).
+   const api = app('api', 'apps/api', { vCPU: 0.5, memoryGB: 0.25 }, '/api/health', { sleep: true });
    api.networking = {
       // No public domain: only the web app calls it, at api.railway.internal.
       privateNetworkEndpoint: 'api',
@@ -107,6 +110,13 @@ export default defineRailway(() => {
 
    const web = app('web', 'apps/web', { vCPU: 1, memoryGB: 0.5 }, '/');
    web.networking = {
+      // The official address (CNAME to Railway in the lucasbittencourt.dev zone). The Railway domain stays for
+      // Railway's own use; the app redirects it here (next.config.ts), so search engines see one site.
+      customDomains: {
+         'deckr.lucasbittencourt.dev': {
+            port: 3000,
+         },
+      },
       serviceDomains: {
          'deckr-production.up.railway.app': {
             port: 3000,

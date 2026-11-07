@@ -18,8 +18,13 @@ export function languageAlternates(path: string): Record<string, string> {
 }
 
 export function baseOpenGraph(locale: Locale) {
+   const { meta } = getDictionary(locale);
+
    return {
-      siteName: getDictionary(locale).meta.siteName,
+      siteName: meta.siteName,
+      // The language's share image (app/[locale]/opengraph-image.tsx), set here because a page's own `openGraph`
+      // replaces the layout's and would drop it.
+      images: [{ url: `/${locale}/opengraph-image`, width: 1200, height: 630, alt: meta.title }],
       locale: localeConfig[locale].ogLocale,
       alternateLocale: locales.filter((other) => other !== locale).map((other) => localeConfig[other].ogLocale),
       type: 'website' as const,

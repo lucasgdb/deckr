@@ -27,7 +27,7 @@ Open <http://localhost:8080>. Compose starts MongoDB, the API and the Next.js se
 
 ## Deploy (Railway)
 
-`infra/railway.ts` defines the Railway project **deckr**: `web` (public), `api` and MongoDB on the private network, each service rebuilt only when its files change. Commands, resource ceilings and the variables that connect the services: [infra/README.md](infra/README.md).
+Live at **https://deckr.lucasbittencourt.dev**. `infra/railway.ts` defines the Railway project **deckr**: `web` (public), `api` and MongoDB on the private network, each service rebuilt only when its files change. Commands, resource ceilings and the variables that connect the services: [infra/README.md](infra/README.md).
 
 ## Develop locally
 

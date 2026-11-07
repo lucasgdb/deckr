@@ -2,11 +2,11 @@
 
 Defined in [railway.ts](railway.ts), applied to the Railway project **deckr** (`production` environment).
 
-| Resource                                       | What                                                                                 | Network                                                                   |
-| ---------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------- |
-| `web`                                          | Next.js app (`apps/web/Dockerfile`). Serves the pages and forwards `/api/*` to `api` | public: `deckr-production.up.railway.app`, private `web.railway.internal` |
-| `api`                                          | Express API (`apps/api/Dockerfile`)                                                  | private only: `api.railway.internal:3001`                                 |
-| `mongo` (+ `mongo-volume`, 1 GB, daily backup) | MongoDB 9                                                                            | private only: `mongo.railway.internal:27017`                              |
+| Resource                                       | What                                                                                 | Network                                                                                                                                    |
+| ---------------------------------------------- | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| `web`                                          | Next.js app (`apps/web/Dockerfile`). Serves the pages and forwards `/api/*` to `api` | public: **https://deckr.lucasbittencourt.dev** (CNAME in the lucasbittencourt.dev zone); `deckr-production.up.railway.app` redirects there |
+| `api`                                          | Express API (`apps/api/Dockerfile`)                                                  | private only: `api.railway.internal:3001`                                                                                                  |
+| `mongo` (+ `mongo-volume`, 5 GB, daily backup) | MongoDB 9                                                                            | private only: `mongo.railway.internal:27017`                                                                                               |
 
 The browser only ever talks to `web`, so the session cookie is first-party and the API needs no CORS.
 
@@ -19,7 +19,7 @@ Ceilings per service (`limitOverride`; billing is per use, so a ceiling caps cos
 | `web`   | 55 MB, 0 vCPU | 187 MB, ~1 vCPU (converting card art cold; cached for a week after) | 1 vCPU / 512 MB   |
 | `api`   | 64 MB, 0 vCPU | 74 MB, 0.19 vCPU                                                    | 0.5 vCPU / 256 MB |
 
-Mongo keeps the plan's default. Raise a ceiling when its metrics come near it. Nothing sleeps: a sleeping API would answer the web app's first request after idle with a 502.
+Mongo keeps the plan's default. Raise a ceiling when its metrics come near it. `api` is serverless: it sleeps when idle and a request over the private network wakes it (a few seconds). The first request may get a 502 while it boots; the web app's API client retries once. `web` stays on, since visitors and crawlers reach it first.
 
 ## Monorepo deploys
 
@@ -58,12 +58,12 @@ railway config apply --file infra/railway.ts             # apply, asks first
 
 ### web
 
-| Variable                                             | Value                                                                                                                                                                |
-| ---------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `PORT`                                               | `3000`                                                                                                                                                               |
-| `API_URL`                                            | `http://${{api.RAILWAY_PRIVATE_DOMAIN}}:${{api.PORT}}` (read at build time: Railway passes service variables to the Dockerfile's `ARG`s)                             |
-| `SITE_URL`                                           | `https://${{RAILWAY_PUBLIC_DOMAIN}}`, or the custom domain once there is one (canonical URLs, hreflang, sitemap, robots; empty keeps the site out of search engines) |
-| `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION` | optional, for Search Console and Bing Webmaster Tools                                                                                                                |
+| Variable                                             | Value                                                                                                                                                              |
+| ---------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `PORT`                                               | `3000`                                                                                                                                                             |
+| `API_URL`                                            | `http://${{api.RAILWAY_PRIVATE_DOMAIN}}:${{api.PORT}}` (read at build time: Railway passes service variables to the Dockerfile's `ARG`s)                           |
+| `SITE_URL`                                           | `https://deckr.lucasbittencourt.dev` (canonical URLs, hreflang, Open Graph, JSON-LD, sitemap, robots and `llms.txt`; the proxy redirects the Railway domain to it) |
+| `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION` | optional, for Search Console and Bing Webmaster Tools                                                                                                              |
 
 ## Before the first deploy
 

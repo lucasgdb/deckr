@@ -15,25 +15,40 @@ export class ApiRequestError extends Error {
    }
 }
 
+/** Waits before retrying a request that didn't reach the API: it may be waking from sleep (it's serverless). */
+const WAKE_RETRY_DELAYS_MS = [1500, 3000];
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
 export async function request<T>(path: string, init?: RequestInit): Promise<T> {
-   let response: Response;
+   for (let attempt = 0; ; attempt += 1) {
+      let response: Response;
 
-   try {
-      response = await fetch(`/api${path}`, {
-         ...init,
-         headers: { 'content-type': 'application/json', ...init?.headers },
-      });
-   } catch {
-      throw new ApiRequestError(0, 'Couldn’t reach the Deckr server.');
-   }
+      try {
+         response = await fetch(`/api${path}`, {
+            ...init,
+            headers: { 'content-type': 'application/json', ...init?.headers },
+         });
+      } catch {
+         throw new ApiRequestError(0, 'Couldn’t reach the Deckr server.');
+      }
 
-   if (!response.ok) {
+      if (response.ok) return response.status === 204 ? (undefined as T) : ((await response.json()) as T);
+
       let body: Partial<ApiError> = {};
 
       try {
          body = (await response.json()) as ApiError;
       } catch {
          // Body was not JSON; the status alone explains it.
+      }
+
+      // A 5xx without the API's own error body came from in front of it (the web server's proxy, or Railway while
+      // the API wakes up): the API never saw the request, so sending it again is safe, whatever the method.
+      const delay = WAKE_RETRY_DELAYS_MS[attempt];
+      if (response.status >= 500 && !body.code && delay !== undefined) {
+         await sleep(delay);
+         continue;
       }
 
       throw new ApiRequestError(
@@ -43,8 +58,6 @@ export async function request<T>(path: string, init?: RequestInit): Promise<T> {
          body.params ?? {},
       );
    }
-
-   return response.status === 204 ? (undefined as T) : ((await response.json()) as T);
 }
 
 export const api = {
