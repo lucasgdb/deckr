@@ -60,6 +60,27 @@ async function fetchProfile(tag: string, { key, owner }: Pick<PlayerKey, 'key' |
    return toProfile(player, battles, new Date());
 }
 
+/**
+ * Another player's profile, read live with the signed-in player's key (nothing is stored). Players who logged in with
+ * the in-game token read through Deckr's own key and only see their own data, so they can't look anyone else up.
+ */
+export async function lookUpPlayer(tag: string, viewerTag: string): Promise<Omit<PlayerProfile, 'battles'>> {
+   const access = await readKey(viewerTag);
+
+   if (!access) throw new HttpError(401, 'login_required', 'Log in again to compare profiles.');
+
+   if (access.method === 'game-token' && tag !== viewerTag) {
+      throw new HttpError(403, 'own_profile_only', 'With the in-game token you can only see your own profile.');
+   }
+
+   const { battles: _battles, ...profile } = toProfile(
+      await clashRoyale.player(tag, access.key, access.owner),
+      [],
+      new Date(),
+   );
+   return profile;
+}
+
 /** Log in with the player's own developer API key: checks it against Clash Royale and stores it encrypted. */
 export async function connectWithApiKey(tag: string, apiKey: string): Promise<PlayerProfile> {
    const profile = await fetchProfile(tag, { key: apiKey, owner: 'player' });

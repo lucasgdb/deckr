@@ -401,6 +401,56 @@ const en: Dictionary = {
       copyLabel: (deck) => `Copy ${deck}`,
    },
 
+   compare: {
+      open: 'Compare',
+      title: 'Compare profiles',
+      description: 'You against another player: trophies, wins, collection and current deck.',
+      tag: 'Other player’s tag',
+      tagHint: 'The code under the name, on the player’s in-game profile.',
+      tagInvalid: 'Enter a tag with at least 3 letters or numbers.',
+      self: 'That’s your tag. Enter another player’s.',
+      submit: 'Compare',
+      loading: 'Looking up…',
+      loadingLabel: 'Looking up the player',
+      recent: 'Recent opponents',
+      recentLabel: (name, tag) => `Compare with ${name}, #${tag}`,
+      empty: 'Enter a player’s tag or pick a recent opponent to see who comes out ahead on each figure.',
+      you: 'You',
+      versus: 'vs',
+      noClan: 'No clan',
+      summary: (you, them, name) =>
+         you === them
+            ? `Even: ${you} each`
+            : you > them
+              ? `You lead ${you} of ${you + them}`
+              : `${name} leads ${them} of ${you + them}`,
+      stats: 'Side by side',
+      metrics: {
+         trophies: 'Trophies',
+         bestTrophies: 'Best trophies',
+         kingLevel: 'King Level',
+         winRate: 'Win rate',
+         wins: 'Wins',
+         threeCrownWins: 'Three-crown wins',
+         battles: 'Battles',
+         cardsUnlocked: 'Cards unlocked',
+         cardsMaxed: 'Cards at max level',
+         averageLevel: 'Average card level',
+      },
+      row: (metric, you, them, name, leader) =>
+         `${metric}: you ${you}, ${name} ${them}${leader === 'you' ? '. You lead' : leader === 'them' ? `. ${name} leads` : leader === 'tie' ? '. Tied' : ''}.`,
+      decks: 'Current decks',
+      yourDeck: 'Your deck',
+      theirDeck: (name) => `${name}’s deck`,
+      elixir: (value) => `${value} average elixir`,
+      tryDeck: 'Try this deck',
+      cards: 'Collection',
+      onlyYou: 'Only you have',
+      shared: 'In common',
+      onlyThem: (name) => `Only ${name} has`,
+      cardsUnit: (count) => plural(count, 'card', 'cards'),
+   },
+
    login: {
       title: 'Log in with Clash Royale',
       description: 'Deckr reads your profile, cards, current deck and battles through the official Clash Royale API.',
@@ -515,6 +565,8 @@ const en: Dictionary = {
          session_expired: () => 'Your player isn’t connected anymore. Log in again.',
          api_key_missing: () => 'Your saved API key is missing. Log in again.',
          own_chests_only: () => 'With the in-game token you can only see your own chests.',
+         own_profile_only: () =>
+            'With the in-game token you can only see your own profile. Log in with your API key to compare.',
          invalid_deck: () => 'A deck needs exactly 8 known cards.',
          deck_limit: (params) => `You can keep up to ${params.max ?? 200} decks. Remove one to save another.`,
          deck_not_saved: () => 'The deck wasn’t saved.',

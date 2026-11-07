@@ -89,6 +89,14 @@ export interface SessionResponse {
    method: LoginMethod;
 }
 
+/**
+ * `GET /api/players/:tag`: another player's public profile, to compare with your own. Read live from Clash Royale
+ * and not stored; no battle log (comparing doesn't use it, and it saves a request).
+ */
+export interface PlayerLookupResponse {
+   player: Omit<PlayerProfile, 'battles'>;
+}
+
 /** `GET /api/me`: the signed-in player, or nobody. Nobody isn't an error, so it's a 200 like the rest. */
 export type MeResponse = SessionResponse | { player: null; method: null };
 

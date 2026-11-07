@@ -1,9 +1,22 @@
-import { loginSchema, type MeResponse, type ServerInfo, type SessionResponse } from '@deckr/shared';
+import {
+   loginSchema,
+   type MeResponse,
+   type PlayerLookupResponse,
+   playerTagSchema,
+   type ServerInfo,
+   type SessionResponse,
+} from '@deckr/shared';
 import { Router } from 'express';
 import { HttpError } from '../http-error.ts';
 import { serverPublicIp } from '../lib/server-ip.ts';
 import { Player } from '../models/player.ts';
-import { connectWithApiKey, connectWithGameToken, gameTokenLoginSupported, syncPlayer } from '../players.ts';
+import {
+   connectWithApiKey,
+   connectWithGameToken,
+   gameTokenLoginSupported,
+   lookUpPlayer,
+   syncPlayer,
+} from '../players.ts';
 import { currentTag, endSession, requireTag, startSession } from '../session.ts';
 
 export const playersRouter = Router();
@@ -56,4 +69,14 @@ playersRouter.post('/me/sync', async (req, res) => {
    const player = await syncPlayer(tag);
    const stored = await Player.findOne({ tag }, { method: 1 }).lean();
    res.json({ player, method: stored?.method ?? 'api-key' } satisfies SessionResponse);
+});
+
+/** "Compare": another player's profile, by tag. Signed-in players only; it's read with their key. */
+playersRouter.get('/players/:tag', async (req, res) => {
+   const tag = playerTagSchema.safeParse(req.params.tag);
+
+   if (!tag.success) throw new HttpError(400, 'invalid_tag', 'Invalid player tag.');
+
+   const viewer = await requireTag(req);
+   res.json({ player: await lookUpPlayer(tag.data, viewer) } satisfies PlayerLookupResponse);
 });

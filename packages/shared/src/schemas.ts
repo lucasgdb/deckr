@@ -72,6 +72,7 @@ export const apiErrorCodes = [
    'session_expired',
    'api_key_missing',
    'own_chests_only',
+   'own_profile_only',
    'invalid_deck',
    'deck_limit',
    'deck_not_saved',

@@ -1,9 +1,21 @@
 'use client';
 
 import { type BattleSummary, isCompleteDeck, type PlayerProfile, playableCards } from '@deckr/shared';
-import { Copy, Crown, ExternalLink, Layers, LogIn, Pencil, RefreshCw, Swords, Trophy } from 'lucide-react';
+import {
+   ArrowLeftRight,
+   Copy,
+   Crown,
+   ExternalLink,
+   Layers,
+   LogIn,
+   Pencil,
+   RefreshCw,
+   Swords,
+   Trophy,
+} from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
+import { CompareDialog } from '@/components/compare-dialog';
 import { DeckGrid } from '@/components/deck-grid';
 import { PageHeader } from '@/components/page-header';
 import { Prepaint } from '@/components/prepaint';
@@ -70,6 +82,7 @@ export function Profile() {
 /** The profile. With `player` null it renders the same layout, labels and actions, with only the data as placeholders. */
 function PlayerView({ player, syncing }: { player: PlayerProfile | null; syncing: boolean }) {
    const { locale, t } = useI18n();
+   const [comparing, setComparing] = useState(false);
 
    const refresh = async () => {
       try {
@@ -99,9 +112,14 @@ function PlayerView({ player, syncing }: { player: PlayerProfile | null; syncing
                      <RefreshCw aria-hidden className={cn(syncing && 'animate-spin')} />
                      {syncing ? t.common.refreshing : t.common.refresh}
                   </Button>
+                  <Button variant="primary" onClick={() => setComparing(true)} disabled={!player}>
+                     <ArrowLeftRight aria-hidden />
+                     {t.compare.open}
+                  </Button>
                </>
             }
          />
+         {player ? <CompareDialog open={comparing} onOpenChange={setComparing} you={player} /> : null}
 
          <div className="flex flex-col gap-gap">
             <Stats player={player} />

@@ -1,4 +1,4 @@
-import type { ApiError, ApiErrorCode, ApiErrorParams, UpcomingChest } from '@deckr/shared';
+import type { ApiError, ApiErrorCode, ApiErrorParams, PlayerLookupResponse, UpcomingChest } from '@deckr/shared';
 import type { Dictionary } from '@/i18n';
 import { reportKeyRejected } from './key-issue.ts';
 
@@ -69,6 +69,8 @@ export async function request<T>(path: string, init?: RequestInit): Promise<T> {
 
 export const api = {
    upcomingChests: (tag: string) => request<UpcomingChest[]>(`/chests/${encodeURIComponent(tag)}`),
+   /** Another player's profile, to compare with your own. */
+   player: (tag: string) => request<PlayerLookupResponse>(`/players/${encodeURIComponent(tag)}`),
 };
 
 /** What went wrong, in the reader's language. */

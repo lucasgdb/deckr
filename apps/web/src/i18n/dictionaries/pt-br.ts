@@ -420,6 +420,58 @@ const ptBr = {
       copyLabel: (deck: string) => `Copiar ${deck}`,
    },
 
+   /** "Compare" on the profile: you against another player, figure by figure. */
+   compare: {
+      open: 'Comparar',
+      title: 'Comparar perfis',
+      description: 'Você contra outro jogador: troféus, vitórias, coleção e deck atual.',
+      tag: 'Tag do outro jogador',
+      tagHint: 'O código abaixo do nome, no perfil do jogador dentro do jogo.',
+      tagInvalid: 'Digite uma tag com pelo menos 3 letras ou números.',
+      self: 'Essa é a sua tag. Digite a de outro jogador.',
+      submit: 'Comparar',
+      loading: 'Buscando…',
+      loadingLabel: 'Buscando o jogador',
+      recent: 'Oponentes recentes',
+      recentLabel: (name: string, tag: string) => `Comparar com ${name}, #${tag}`,
+      empty: 'Digite a tag de um jogador ou escolha um oponente recente para ver quem leva a melhor em cada número.',
+      you: 'Você',
+      versus: 'vs',
+      noClan: 'Sem clã',
+      summary: (you: number, them: number, name: string) =>
+         you === them
+            ? `Empate: cada um lidera em ${you}`
+            : you > them
+              ? `Você lidera em ${you} de ${you + them}`
+              : `${name} lidera em ${them} de ${you + them}`,
+      stats: 'Números lado a lado',
+      metrics: {
+         trophies: 'Troféus',
+         bestTrophies: 'Recorde de troféus',
+         kingLevel: 'Nível do Rei',
+         winRate: 'Taxa de vitória',
+         wins: 'Vitórias',
+         threeCrownWins: 'Vitórias de 3 coroas',
+         battles: 'Batalhas',
+         cardsUnlocked: 'Cartas liberadas',
+         cardsMaxed: 'Cartas no nível máximo',
+         averageLevel: 'Nível médio das cartas',
+      },
+      /** What a screen reader hears for one row. */
+      row: (metric: string, you: string, them: string, name: string, leader: 'you' | 'them' | 'tie' | null) =>
+         `${metric}: você ${you}, ${name} ${them}${leader === 'you' ? '. Você lidera' : leader === 'them' ? `. ${name} lidera` : leader === 'tie' ? '. Empate' : ''}.`,
+      decks: 'Decks atuais',
+      yourDeck: 'Seu deck',
+      theirDeck: (name: string) => `Deck de ${name}`,
+      elixir: (value: string) => `${value} de elixir médio`,
+      tryDeck: 'Testar este deck',
+      cards: 'Coleção',
+      onlyYou: 'Só você tem',
+      shared: 'Em comum',
+      onlyThem: (name: string) => `Só ${name} tem`,
+      cardsUnit: (count: number) => plural(count, 'carta', 'cartas'),
+   },
+
    login: {
       title: 'Entrar com o Clash Royale',
       description: 'O Deckr lê seu perfil, cartas, deck atual e batalhas pela API oficial do Clash Royale.',
@@ -536,6 +588,8 @@ const ptBr = {
          session_expired: () => 'Seu jogador não está mais conectado. Entre de novo.',
          api_key_missing: () => 'Sua chave da API salva sumiu. Entre de novo.',
          own_chests_only: () => 'Com o token do jogo, você só pode ver os seus próprios baús.',
+         own_profile_only: () =>
+            'Com o token do jogo, você só pode ver o seu próprio perfil. Entre com a sua chave da API para comparar.',
          invalid_deck: () => 'Um deck precisa de exatamente 8 cartas conhecidas.',
          deck_limit: (params) => `Você pode guardar até ${params.max ?? 200} decks. Remova um para salvar outro.`,
          deck_not_saved: () => 'O deck não foi salvo.',
