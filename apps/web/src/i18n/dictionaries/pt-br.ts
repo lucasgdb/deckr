@@ -419,12 +419,50 @@ const ptBr = {
          finding: 'Buscando…',
          unavailable: 'Indisponível',
          copyIp: 'Copiar endereço IP',
+         copied: 'Endereço IP copiado',
          finish: 'Crie a chave, abra-a e copie o token longo para este campo.',
       },
    },
 
    share: {
       label: 'Compartilhar',
+   },
+
+   /** The installable app (PWA): manifest copy and the install button. */
+   pwa: {
+      screenshots: {
+         builder: 'Sorteio inteligente: um deck do meta, com o papel de cada grupo de cartas',
+         cards: 'Escolha quais cartas entram nos sorteios, arena por arena',
+         profile: 'Seu perfil: troféus, deck atual, coleção e batalhas recentes',
+         wide: 'O montador de decks no computador',
+      },
+      install: 'Instalar o app',
+      installed: 'App instalado',
+      iosTitle: 'Instale o Deckr no iPhone ou iPad',
+      iosSteps: {
+         share: 'Toque em Compartilhar, na barra do Safari.',
+         add: 'Escolha “Adicionar à Tela de Início”.',
+         confirm: 'Toque em Adicionar: o Deckr abre como um app, em tela cheia.',
+      },
+      offline: 'Você está sem conexão. As páginas que você já abriu continuam disponíveis.',
+   },
+
+   /** Clash Royale rejected the player's key, usually because Deckr's IP changed. */
+   keyIssue: {
+      banner: (ip: string | null): string =>
+         ip
+            ? `O Clash Royale recusou a sua chave da API: o Deckr agora acessa o jogo pelo endereço ${ip}, que a chave não permite.`
+            : 'O Clash Royale recusou a sua chave da API: o endereço de onde o Deckr acessa o jogo mudou.',
+      fix: 'Atualizar chave',
+      title: 'Atualize a sua chave da API',
+      description:
+         'O endereço IP de onde o Deckr acessa o Clash Royale pode mudar de tempos em tempos. Crie uma chave nova que permita o endereço atual e cole aqui: seus dados e decks continuam na conta.',
+      inlineHint: 'Crie uma chave nova que permita este endereço:',
+      field: 'Nova chave da API',
+      save: 'Salvar chave',
+      saving: 'Salvando…',
+      saved: 'Chave atualizada',
+      later: 'Agora não',
    },
 
    notFound: {

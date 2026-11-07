@@ -54,6 +54,9 @@
 - [x] `compose.dev.yaml`: the Docker stack in development mode, hot reload on 8080
 - [x] Railway infrastructure as code (`infra/railway.ts`): web, API and MongoDB 9 with a daily-backed-up volume, measured resource ceilings, per-service watch patterns for monorepo deploys
 - [x] Chest names always take two lines, so the skeleton and the real cycle have the same height
+- [x] Mobile and tablet pass: equal-column action bars, bottom-sheet dialogs, 16px fields on touch, 40px+ touch targets, notch-safe layout, language switcher in the mobile menu
+- [x] When the server's IP changes, a banner and dialog guide the player through updating their API key
+- [x] PWA: per-language manifest with PNG and maskable icons, screenshots and shortcuts; service worker that keeps card art cached until it changes and opens offline; install button (including iOS steps); asset links for a Play Store build
 - [x] Design system in `apps/web/src/components/ui` on Base UI: Button, LinkButton, Tile, Card, Dialog, ConfirmDialog, Select, Menu, ContextMenu, Popover, Tabs, Tooltip, Field, Input, PrefixInput, InputGroup, SecretInput, Meter, Toggle, Toast, Skeleton, EmptyState, ErrorState, Notice
 - [x] DS rules: pointer cursor on everything clickable, always-visible scrollbar, animated focus ring on fields, no browser autofill, no press effect on buttons that open popups
 - [x] 29 new cards and 5 new arenas (19 arenas that unlock cards, Training Camp to Silent Sanctuary)

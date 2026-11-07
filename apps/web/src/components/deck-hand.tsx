@@ -170,6 +170,10 @@ function SlotItem({ slot, index, onOpen, onToggleLock, onMove, onRemove, dimmed 
                )}
             >
                <CardArt index={slot.card} sizes={artSizes} />
+               {/* Phones: the cost sits on the art, as in the game, so the line below has room for the name. */}
+               <span aria-hidden className="absolute bottom-1 left-1 rounded-full bg-black/75 px-1.5 py-0.5 sm:hidden">
+                  <ElixirCost cost={card.elixir} className="text-ink" />
+               </span>
                {slot.locked ? (
                   <span
                      aria-hidden
@@ -184,20 +188,23 @@ function SlotItem({ slot, index, onOpen, onToggleLock, onMove, onRemove, dimmed 
          {empty ? null : (
             <div
                data-no-drag
-               className="absolute top-1 right-1 opacity-0 transition-opacity group-focus-within:opacity-100 group-hover:opacity-100 has-[[data-popup-open]]:opacity-100 [@media(hover:none)]:opacity-100"
+               className="absolute -top-0.5 -right-0.5 opacity-0 transition-opacity pointer-fine:sm:top-1 pointer-fine:sm:right-1 group-focus-within:opacity-100 group-hover:opacity-100 has-[[data-popup-open]]:opacity-100 [@media(hover:none)]:opacity-100"
             >
                <Menu>
                   <MenuTrigger
                      render={
+                        // A 40px touch area around a small circle, so the button covers little of the card.
                         <Button
                            variant="ghost"
                            size="icon"
-                           className="size-8 bg-black/70 text-ink hover:bg-black/90 sm:size-7"
+                           className="group/menu size-10 bg-transparent text-ink hover:bg-transparent pointer-fine:sm:size-7"
                            aria-label={t.hand.actionsFor(card.name)}
                         />
                      }
                   >
-                     <Ellipsis aria-hidden />
+                     <span className="flex size-7 items-center justify-center rounded-full bg-black/70 transition-colors group-hover/menu:bg-black/90">
+                        <Ellipsis aria-hidden />
+                     </span>
                   </MenuTrigger>
                   <MenuContent>{actions}</MenuContent>
                </Menu>
@@ -210,7 +217,7 @@ function SlotItem({ slot, index, onOpen, onToggleLock, onMove, onRemove, dimmed 
             ) : (
                <>
                   <span className="truncate text-muted">{card.name}</span>
-                  <ElixirCost cost={card.elixir} className="flex-none" />
+                  <ElixirCost cost={card.elixir} className="flex-none max-sm:hidden" />
                </>
             )}
          </div>

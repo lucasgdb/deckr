@@ -36,7 +36,7 @@ export function Input({ className, ...props }: InputProps) {
       <BaseInput
          {...noAutofill}
          className={cn(
-            'h-11 w-full min-w-0 rounded-field border border-control bg-ground px-3 text-ink placeholder:text-faint sm:h-10',
+            'h-11 w-full min-w-0 rounded-field border border-control bg-ground px-3 text-ink placeholder:text-faint pointer-fine:sm:h-10',
             fieldRing,
             className,
          )}
@@ -50,7 +50,7 @@ export function PrefixInput({ prefix, className, ...props }: Omit<InputProps, 'p
    return (
       <div
          className={cn(
-            'flex h-11 items-center rounded-full border border-control bg-ground sm:h-10',
+            'flex h-11 items-center rounded-full border border-control bg-ground pointer-fine:sm:h-10',
             fieldRingWithin,
             className,
          )}
@@ -72,7 +72,7 @@ export function InputGroup({ className, children }: { className?: string; childr
    return (
       <div
          className={cn(
-            'flex h-11 items-center overflow-hidden rounded-full border border-control bg-ground sm:h-9',
+            'flex h-11 items-center overflow-hidden rounded-full border border-control bg-ground pointer-fine:sm:h-9',
             fieldRingWithin,
             className,
          )}
@@ -114,7 +114,7 @@ export function SecretInput({ className, ...props }: Omit<InputProps, 'type'>) {
          <Button
             variant="ghost"
             size="icon"
-            className="mr-1 size-9 sm:size-8"
+            className="mr-0.5 size-10 pointer-fine:sm:mr-1 pointer-fine:sm:size-8"
             onClick={() => setRevealed((value) => !value)}
             aria-label={revealed ? t.common.hideToken : t.common.showToken}
             aria-pressed={revealed}

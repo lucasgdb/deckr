@@ -44,7 +44,8 @@ async function request<T>(path: string, token: string, owner: KeyOwner = 'player
       case 400:
          throw new HttpError(400, 'cr_bad_request', 'Clash Royale rejected the request. Check the player tag.');
       case 403: {
-         const ip = await serverPublicIp();
+         // A rejected key usually means the server's IP changed: report the current one, not a cached one.
+         const ip = await serverPublicIp(true);
          const reason = await response
             .json()
             .then((body) => (body as { reason?: string }).reason)

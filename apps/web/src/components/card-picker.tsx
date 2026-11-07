@@ -46,6 +46,8 @@ interface CardPickerProps {
 /** Choose a card for one deck slot: search by name, narrow by source, elixir and arena. */
 export function CardPicker({ open, onOpenChange, slot, current, deck, onPick, onRemove }: CardPickerProps) {
    const { t } = useI18n();
+   // The dialog mounts in the browser (it's loaded on first open), so the pointer type is known here.
+   const finePointer = window.matchMedia('(pointer: fine)').matches;
    const { pool } = useCardPool();
    const player = usePlayer();
    const [query, setQuery] = useState('');
@@ -75,39 +77,47 @@ export function CardPicker({ open, onOpenChange, slot, current, deck, onPick, on
 
    return (
       <Dialog open={open} onOpenChange={onOpenChange} size="lg" title={title}>
-         <div className="grid gap-3 lg:grid-cols-[minmax(0,1fr)_auto_auto_auto] lg:items-end">
+         {/* Search on its own row, then the filters as a row of chips that scrolls sideways (each shows its whole
+             value); everything on one row from `lg`. */}
+         <div className="grid gap-2 sm:gap-3 lg:grid-cols-[minmax(0,1fr)_auto_auto_auto] lg:items-end">
             <PrefixInput
                prefix={<Search className="size-4" />}
                value={query}
                onChange={(event) => setQuery(event.target.value)}
                placeholder={t.picker.search}
                aria-label={t.picker.search}
-               autoFocus
+               // Only with a mouse: on touch screens it would open the keyboard over the cards.
+               autoFocus={finePointer}
             />
-            <Select
-               label={t.picker.show}
-               inline
-               className="sm:w-48"
-               items={sourceItems}
-               value={source}
-               onValueChange={setSource}
-            />
-            <Select
-               label={t.picker.cost}
-               inline
-               className="sm:w-44"
-               items={costItems(t)}
-               value={cost}
-               onValueChange={setCost}
-            />
-            <Select
-               label={t.picker.arena}
-               inline
-               className="sm:w-56"
-               items={arenaItems(t)}
-               value={arena}
-               onValueChange={setArena}
-            />
+            <div className="-mx-4 flex gap-2 overflow-x-auto px-4 [scrollbar-width:none] sm:-mx-pad sm:px-pad lg:contents">
+               <Select
+                  label={t.picker.show}
+                  inline
+                  compact
+                  className="shrink-0"
+                  items={sourceItems}
+                  value={source}
+                  onValueChange={setSource}
+               />
+               <Select
+                  label={t.picker.cost}
+                  inline
+                  compact
+                  className="shrink-0"
+                  items={costItems(t)}
+                  value={cost}
+                  onValueChange={setCost}
+               />
+               <Select
+                  label={t.picker.arena}
+                  inline
+                  compact
+                  className="shrink-0"
+                  items={arenaItems(t)}
+                  value={arena}
+                  onValueChange={setArena}
+               />
+            </div>
          </div>
 
          <p className="num mt-3 mb-2 text-xs text-faint" aria-live="polite">
@@ -120,7 +130,7 @@ export function CardPicker({ open, onOpenChange, slot, current, deck, onPick, on
                   {t.picker.noResults}
                </p>
             ) : (
-               <ul className="grid grid-cols-[repeat(auto-fill,minmax(84px,1fr))] gap-x-3 gap-y-4">
+               <ul className="grid grid-cols-4 gap-x-2 gap-y-3 sm:grid-cols-[repeat(auto-fill,minmax(84px,1fr))] sm:gap-x-3 sm:gap-y-4">
                   {results.map((card) => {
                      const chosen = card.index === current;
                      const elsewhere = !chosen && inDeck.has(card.index);

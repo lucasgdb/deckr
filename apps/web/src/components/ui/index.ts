@@ -1,4 +1,4 @@
-export { Button, type ButtonVariants, buttonVariants, LinkButton, Tile } from './button';
+export { actionBar, actionBarItem, Button, type ButtonVariants, buttonVariants, LinkButton, Tile } from './button';
 export { Card, CardDescription, CardHeader, CardTitle } from './card';
 export { ConfirmDialog, Dialog, DialogClose, DialogFooter } from './dialog';
 export { Field } from './field';

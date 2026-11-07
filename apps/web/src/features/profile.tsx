@@ -9,6 +9,7 @@ import { PageHeader } from '@/components/page-header';
 import { Prepaint } from '@/components/prepaint';
 import { ShareDeckButton } from '@/components/share-deck-button';
 import {
+   actionBarItem,
    Button,
    Card,
    CardDescription,
@@ -144,9 +145,9 @@ function Stats({ player }: { player: PlayerProfile | null }) {
    return (
       <Card
          aria-label={t.profile.stats}
-         className="grid gap-y-6 sm:grid-cols-3 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))]"
+         className="grid grid-cols-3 gap-y-5 sm:gap-y-6 lg:grid-cols-[minmax(0,1.5fr)_repeat(3,minmax(0,1fr))]"
       >
-         <div className="min-w-0 sm:col-span-3 lg:col-span-1 lg:pr-8">
+         <div className="col-span-3 min-w-0 lg:col-span-1 lg:pr-8">
             <p className="text-muted">{t.profile.trophies}</p>
             <p className="num mt-1.5 flex items-center gap-2.5 text-3xl font-semibold">
                <Trophy aria-hidden className="size-7 text-gold" />
@@ -172,15 +173,21 @@ function Stats({ player }: { player: PlayerProfile | null }) {
          {items.map((item, index) => (
             <div
                key={item.label}
-               // On tablets the trophies take the first row, so the first figure starts a row of its own.
+               // Below `lg` the trophies take the first row and the three figures share the second (three columns,
+               // even on phones), split by hairlines.
                className={cn(
                   'min-w-0 border-border',
-                  index === 0 ? 'lg:border-l lg:pl-8' : 'sm:border-l sm:pl-6 lg:pl-8',
+                  index === 0 ? 'pr-3 lg:border-l lg:pl-8' : 'border-l pr-3 pl-3 sm:pl-6 lg:pl-8',
                )}
             >
-               <p className="text-muted">{item.label}</p>
-               <p className="num mt-1.5 text-2xl font-semibold">{item.value ?? <TextSkeleton className="w-20" />}</p>
-               <p className="num mt-1 text-xs text-faint">{item.detail ?? <TextSkeleton className="w-32" />}</p>
+               {/* Two lines on phones, where the labels wrap, so the three figures line up. */}
+               <p className="text-muted max-sm:min-h-[2lh]">{item.label}</p>
+               <p className="num mt-1.5 text-xl font-semibold sm:text-2xl">
+                  {item.value ?? <TextSkeleton className="w-16" />}
+               </p>
+               <p className="num mt-1 text-xs text-faint">
+                  {item.detail ?? <TextSkeleton className="w-24 max-w-full" />}
+               </p>
             </div>
          ))}
       </Card>
@@ -194,9 +201,11 @@ function DeckActions({ deck, name }: { deck: number[] | null; name: string }) {
    const complete = deck !== null && isCompleteDeck(deck);
    const open = useOpenDeckHref(cards);
 
+   // Four actions: a 2 × 2 grid on phones (four columns would squeeze "Compartilhar"), a row from `sm`.
    return (
-      <div className="flex flex-wrap gap-2">
+      <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
          <Button
+            className={actionBarItem}
             onClick={() => router.push(href(`/?${deckQuery(cards)}`))}
             disabled={!deck}
             aria-label={t.profile.editLabel(name)}
@@ -204,12 +213,13 @@ function DeckActions({ deck, name }: { deck: number[] | null; name: string }) {
             <Pencil aria-hidden />
             {t.profile.editInBuilder}
          </Button>
-         <ShareDeckButton deck={cards} />
-         <Button onClick={() => copyDeckLink(cards, t)} disabled={!complete}>
+         <ShareDeckButton deck={cards} className={actionBarItem} />
+         <Button className={actionBarItem} onClick={() => copyDeckLink(cards, t)} disabled={!complete}>
             <Copy aria-hidden />
             {t.common.copyLink}
          </Button>
          <LinkButton
+            className={actionBarItem}
             href={open.href}
             disabled={!complete}
             target={open.external ? '_blank' : undefined}
@@ -356,12 +366,12 @@ function BattleRowSkeleton() {
 
    return (
       <li className={battleRow}>
-         <div className="flex items-start gap-3">
+         <div className="flex min-w-0 items-start gap-3">
             {/* The same pill as a real result, with its text hidden, so it takes exactly the same space. */}
             <span aria-hidden className={cn(resultPill, 'bg-raised text-transparent')}>
                {t.profile.loss}
             </span>
-            <div className="min-w-0">
+            <div className="min-w-0 flex-1">
                <p className="num font-medium">
                   <TextSkeleton className="w-40" />
                </p>
@@ -396,14 +406,17 @@ function BattleRow({ battle }: { battle: BattleSummary }) {
 
    return (
       <li className={battleRow}>
-         <div className="flex items-start gap-3">
+         <div className="flex min-w-0 items-start gap-3">
             <span className={cn(resultPill, resultStyle[battle.result])}>{t.profile[battle.result]}</span>
-            <div className="min-w-0">
-               <p className="num flex items-center gap-1.5 font-medium">
-                  <Crown aria-hidden className="size-3.5 text-gold" />
-                  {battle.crowns}–{battle.opponentCrowns}
-                  <span className="text-muted">{t.profile.versus}</span>
-                  <span className="truncate">{battle.opponent.name}</span>
+            <div className="min-w-0 flex-1">
+               <p className="num flex min-w-0 items-center gap-1.5 font-medium">
+                  <Crown aria-hidden className="size-3.5 shrink-0 text-gold" />
+                  {/* The score never breaks; a long opponent name is shortened instead. */}
+                  <span className="shrink-0 whitespace-nowrap">
+                     {battle.crowns}–{battle.opponentCrowns}
+                  </span>
+                  <span className="shrink-0 text-muted">{t.profile.versus}</span>
+                  <span className="min-w-0 truncate">{battle.opponent.name}</span>
                </p>
                {/* Always two lines (mode, then trophies and time), so rows keep one height and match the placeholder. */}
                <p className="num text-xs text-faint">

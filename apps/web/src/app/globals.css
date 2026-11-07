@@ -62,6 +62,15 @@
       line-height: 20px;
    }
 
+   /* On touch screens, fields are at least 16px: smaller text makes iOS zoom the page in when a field is focused. */
+   @media (pointer: coarse) {
+      input,
+      textarea,
+      select {
+         font-size: 16px;
+      }
+   }
+
    /* DS rule: everything you can click shows the pointer; disabled controls don't. */
    :where(
       button,
@@ -131,10 +140,13 @@
    width: 100%;
    max-width: var(--container-page);
    margin-inline: auto;
-   padding-inline: 16px;
+   /* Clear of the notch and rounded corners in landscape (viewport-fit=cover). */
+   padding-left: max(16px, env(safe-area-inset-left));
+   padding-right: max(16px, env(safe-area-inset-right));
 
    @variant sm {
-      padding-inline: 24px;
+      padding-left: max(24px, env(safe-area-inset-left));
+      padding-right: max(24px, env(safe-area-inset-right));
    }
 }
 

@@ -3,6 +3,7 @@
 import type { LoginInput, LoginMethod, MeResponse, PlayerProfile, ServerInfo, SessionResponse } from '@deckr/shared';
 import { useEffect, useSyncExternalStore } from 'react';
 import { request } from './api';
+import { clearKeyIssue } from './key-issue';
 import { rememberSignedIn } from './prepaint';
 
 /*
@@ -92,11 +93,14 @@ export async function login(input: LoginInput): Promise<PlayerProfile> {
    });
    saveTag(player.tag);
    set({ status: 'signed-in', player, method, syncing: false });
+   // A new key was accepted: whatever made the old one fail is solved.
+   clearKeyIssue();
    return player;
 }
 
 export async function logout() {
    await request<void>('/session', { method: 'DELETE' });
+   clearKeyIssue();
    set({ status: 'anonymous' });
 }
 
@@ -110,6 +114,7 @@ export async function refreshPlayer(): Promise<PlayerProfile> {
    try {
       const { player, method } = await request<SessionResponse>('/me/sync', { method: 'POST' });
       set({ status: 'signed-in', player, method, syncing: false });
+      clearKeyIssue();
       return player;
    } catch (error) {
       set({ ...previous, syncing: false });

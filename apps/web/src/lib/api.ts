@@ -1,5 +1,6 @@
 import type { ApiError, ApiErrorCode, ApiErrorParams, UpcomingChest } from '@deckr/shared';
 import type { Dictionary } from '@/i18n';
+import { reportKeyRejected } from './key-issue.ts';
 
 /** A failed request. `code` says why, so the message can be shown in the reader's language. */
 export class ApiRequestError extends Error {
@@ -49,6 +50,12 @@ export async function request<T>(path: string, init?: RequestInit): Promise<T> {
       if (response.status >= 500 && !body.code && delay !== undefined) {
          await sleep(delay);
          continue;
+      }
+
+      // The player's API key no longer allows Deckr's IP (it changed): the key-issue banner offers the fix.
+      if (body.code === 'cr_key_rejected') {
+         const ip = body.params?.ip;
+         reportKeyRejected(typeof ip === 'string' ? ip : null);
       }
 
       throw new ApiRequestError(

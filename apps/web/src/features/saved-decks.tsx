@@ -8,6 +8,8 @@ import { PageHeader } from '@/components/page-header';
 import { Prepaint } from '@/components/prepaint';
 import { ShareDeckButton } from '@/components/share-deck-button';
 import {
+   actionBar,
+   actionBarItem,
    Button,
    ConfirmDialog,
    EmptyState,
@@ -25,6 +27,7 @@ import { errorMessage } from '@/lib/api';
 import { copyDeckLink, describeDeck, useOpenDeckHref } from '@/lib/deck-actions';
 import { timeAgo } from '@/lib/format';
 import { removeDeck, retrySavedDecks, useSavedDecks } from '@/lib/saved-decks';
+import { cn } from '@/lib/utils';
 
 /** Rows shown while decks load. */
 const PLACEHOLDER_ROWS = 5;
@@ -145,60 +148,69 @@ function DeckRow({ deck, onRemove }: { deck: SavedDeck | null; onRemove?: () => 
    const complete = deck !== null && isCompleteDeck(cards);
    const open = useOpenDeckHref(cards);
 
+   // One set of elements, placed by grid areas. Phones: name and the "⋯" menu, then the cards, then the actions in
+   // equal columns under them. From `sm`: name, actions and menu on one line above the cards.
    return (
-      <li className="rounded-card bg-surface p-4 sm:p-pad">
-         <div className="mb-3 flex flex-wrap items-center justify-between gap-x-4 gap-y-3 sm:mb-4">
-            <div className="min-w-0">
-               <h2 className="truncate font-medium">{deck ? name : <TextSkeleton className="w-56" />}</h2>
-               {/* Always one line, so every row (and its placeholder) has the same height. */}
-               <p className="truncate text-xs text-faint">
-                  {deck ? (
-                     [t.saved.savedAgo(timeAgo(deck.createdAt, locale)), complete ? null : t.saved.incomplete]
-                        .filter(Boolean)
-                        .join(' · ')
-                  ) : (
-                     <TextSkeleton className="w-28" />
-                  )}
-               </p>
-            </div>
-            <div className="flex items-center gap-2">
-               <LinkButton
-                  href={open.href}
-                  disabled={!complete}
-                  target={open.external ? '_blank' : undefined}
-                  rel="noreferrer"
-               >
-                  <ExternalLink aria-hidden />
-                  {t.common.openInGame}
-               </LinkButton>
-               <ShareDeckButton deck={cards} />
-               <Button onClick={() => copyDeckLink(cards, t)} disabled={!complete}>
-                  <Copy aria-hidden />
-                  {t.common.copyLink}
-               </Button>
-               <Menu>
-                  <MenuTrigger
-                     render={
-                        <Button
-                           variant="ghost"
-                           size="icon"
-                           disabled={!deck}
-                           aria-label={deck ? t.saved.moreActionsFor(name) : t.saved.moreActions}
-                        />
-                     }
-                  >
-                     <Ellipsis aria-hidden />
-                  </MenuTrigger>
-                  <MenuContent>
-                     <MenuItem variant="danger" onClick={onRemove}>
-                        <Trash2 aria-hidden />
-                        {t.saved.remove}
-                     </MenuItem>
-                  </MenuContent>
-               </Menu>
-            </div>
+      <li className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-x-3 gap-y-3 rounded-card bg-surface p-4 [grid-template-areas:'head_menu'_'cards_cards'_'actions_actions'] sm:grid-cols-[minmax(0,1fr)_auto_auto] sm:gap-y-4 sm:p-pad sm:[grid-template-areas:'head_actions_menu'_'cards_cards_cards']">
+         <div className="min-w-0 [grid-area:head]">
+            <h2 className="truncate font-medium">{deck ? name : <TextSkeleton className="w-56 max-w-full" />}</h2>
+            {/* Always one line, so every row (and its placeholder) has the same height. */}
+            <p className="truncate text-xs text-faint">
+               {deck ? (
+                  [t.saved.savedAgo(timeAgo(deck.createdAt, locale)), complete ? null : t.saved.incomplete]
+                     .filter(Boolean)
+                     .join(' · ')
+               ) : (
+                  <TextSkeleton className="w-28" />
+               )}
+            </p>
          </div>
-         <DeckGrid deck={deck?.cards ?? null} variant="strip" label={deck ? t.saved.cardsIn(name) : t.common.cards} />
+         <div className={cn(actionBar, '[grid-area:actions] sm:flex-nowrap')}>
+            <LinkButton
+               className={actionBarItem}
+               href={open.href}
+               disabled={!complete}
+               target={open.external ? '_blank' : undefined}
+               rel="noreferrer"
+            >
+               <ExternalLink aria-hidden />
+               {t.common.openInGame}
+            </LinkButton>
+            <ShareDeckButton deck={cards} className={actionBarItem} />
+            <Button className={actionBarItem} onClick={() => copyDeckLink(cards, t)} disabled={!complete}>
+               <Copy aria-hidden />
+               {t.common.copyLink}
+            </Button>
+         </div>
+         <div className="-mr-2 [grid-area:menu] sm:mr-0">
+            <Menu>
+               <MenuTrigger
+                  render={
+                     <Button
+                        variant="ghost"
+                        size="icon"
+                        disabled={!deck}
+                        aria-label={deck ? t.saved.moreActionsFor(name) : t.saved.moreActions}
+                     />
+                  }
+               >
+                  <Ellipsis aria-hidden />
+               </MenuTrigger>
+               <MenuContent>
+                  <MenuItem variant="danger" onClick={onRemove}>
+                     <Trash2 aria-hidden />
+                     {t.saved.remove}
+                  </MenuItem>
+               </MenuContent>
+            </Menu>
+         </div>
+         <div className="[grid-area:cards]">
+            <DeckGrid
+               deck={deck?.cards ?? null}
+               variant="strip"
+               label={deck ? t.saved.cardsIn(name) : t.common.cards}
+            />
+         </div>
       </li>
    );
 }

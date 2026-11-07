@@ -7,6 +7,7 @@ import { localeConfig, locales, switchLocalePath } from '@/i18n';
 import { useI18n } from '@/i18n/provider';
 import { cn } from '@/lib/utils';
 import { BrandMark } from './brand-mark';
+import { InstallApp } from './pwa';
 
 export function SiteFooter() {
    const { t } = useI18n();
@@ -17,17 +18,21 @@ export function SiteFooter() {
             <BrandMark className="h-4" />
             {t.footer.tagline}
          </span>
-         <LanguageLinks />
+         <LanguageLinks className="sm:order-last sm:basis-full" />
+         <InstallApp className="basis-full sm:order-last sm:basis-auto" />
          <span className="flex flex-wrap items-center gap-x-4 gap-y-2">
             {/* Deckr's privacy policy is published with the other tools, on lucasbittencourt.dev. */}
-            <a href={t.footer.privacyUrl} className="rounded-full text-muted transition-colors hover:text-ink">
+            <a
+               href={t.footer.privacyUrl}
+               className="flex h-11 items-center rounded-full text-muted transition-colors hover:text-ink pointer-fine:sm:h-auto"
+            >
                {t.footer.privacy}
             </a>
             <a
                href="https://lucasbittencourt.dev/"
                target="_blank"
                rel="noopener"
-               className="inline-flex items-center gap-1 rounded-full text-muted transition-colors hover:text-ink"
+               className="inline-flex h-11 items-center gap-1 rounded-full text-muted transition-colors hover:text-ink pointer-fine:sm:h-auto"
             >
                {t.footer.madeBy}
                <ArrowUpRight aria-hidden className="size-3.5" />
@@ -51,14 +56,14 @@ export function SiteFooter() {
 }
 
 /** This page in each language. Plain links, so crawlers find every version too. */
-function LanguageLinks() {
+export function LanguageLinks({ className }: { className?: string }) {
    const { locale, t } = useI18n();
    const pathname = usePathname();
 
    return (
-      <nav aria-label={t.nav.language} className="flex items-center gap-2 sm:order-last sm:basis-full">
+      <nav aria-label={t.nav.language} className={cn('flex items-center gap-2', className)}>
          <Languages aria-hidden className="size-3.5" />
-         <ul className="flex items-center gap-3">
+         <ul className="flex items-center gap-5 pointer-fine:sm:gap-3">
             {locales.map((other) => (
                <li key={other}>
                   <Link
@@ -67,7 +72,8 @@ function LanguageLinks() {
                      lang={localeConfig[other].htmlLang}
                      aria-current={other === locale ? 'true' : undefined}
                      className={cn(
-                        'rounded-full transition-colors hover:text-ink',
+                        // 44px tall on touch screens; the text's own height with a mouse.
+                        'flex h-11 items-center rounded-full transition-colors hover:text-ink pointer-fine:sm:h-auto',
                         other === locale ? 'text-ink' : 'text-muted',
                      )}
                   >

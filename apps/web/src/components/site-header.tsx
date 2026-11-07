@@ -25,6 +25,8 @@ import { logout, openLogin, refreshPlayer, useSession } from '@/lib/session';
 import { cn } from '@/lib/utils';
 import { BrandMark } from './brand-mark';
 import { Prepaint } from './prepaint';
+import { InstallApp } from './pwa';
+import { LanguageLinks } from './site-footer';
 
 const links = [
    { path: '/', key: 'builder' },
@@ -118,25 +120,28 @@ export function SiteHeader() {
          className="sticky top-0 z-30 border-b border-white/[0.06] bg-ground/70 backdrop-blur-xl backdrop-saturate-150"
       >
          <div className="page flex h-16 items-center gap-6">
-            <Link href={href('/')} className="flex items-center gap-3 rounded-full text-lg font-semibold">
+            <Link href={href('/')} className="flex h-11 items-center gap-3 rounded-full text-lg font-semibold">
                <BrandMark className="h-7" />
                Deckr
             </Link>
 
-            <nav aria-label={t.nav.main} className="ml-auto hidden md:block">
+            {/* Phones and portrait tablets fold the links into the menu panel; they sit in the bar from `lg`. */}
+            <nav aria-label={t.nav.main} className="ml-auto hidden lg:block">
                <ul className="flex items-center gap-6 font-medium">
                   <NavLinks pathname={pathname} />
                </ul>
             </nav>
 
-            <div className="ml-auto flex items-center gap-1 md:ml-0">
-               {/* The query string is only known in the browser. */}
-               <Suspense fallback={<LanguageMenuTrigger disabled />}>
-                  <LanguageMenu />
-               </Suspense>
+            <div className="ml-auto flex min-w-0 items-center gap-1 lg:ml-0">
+               {/* The query string is only known in the browser. In the menu panel below `lg`. */}
+               <div className="hidden lg:block">
+                  <Suspense fallback={<LanguageMenuTrigger disabled />}>
+                     <LanguageMenu />
+                  </Suspense>
+               </div>
                <Account />
                <Collapsible.Trigger
-                  className="-mr-2 flex size-11 items-center justify-center rounded-full text-nav hover:text-ink md:hidden"
+                  className="-mr-2 flex size-11 shrink-0 items-center justify-center rounded-full text-nav hover:text-ink lg:hidden"
                   aria-label={menuOpen ? t.nav.closeMenu : t.nav.openMenu}
                >
                   {menuOpen ? <X aria-hidden className="size-5" /> : <MenuIcon aria-hidden className="size-5" />}
@@ -144,13 +149,14 @@ export function SiteHeader() {
             </div>
          </div>
 
-         <Collapsible.Panel
-            render={<nav aria-label={t.nav.main} />}
-            className="h-(--collapsible-panel-height) overflow-hidden border-t border-white/[0.06] transition-[height] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0 md:hidden"
-         >
-            <ul className="page py-2 text-base font-medium">
-               <NavLinks pathname={pathname} className="flex h-12 items-center" />
-            </ul>
+         <Collapsible.Panel className="h-(--collapsible-panel-height) overflow-hidden border-t border-white/[0.06] transition-[height] duration-200 ease-out data-ending-style:h-0 data-starting-style:h-0 lg:hidden">
+            <nav aria-label={t.nav.main}>
+               <ul className="page py-2 text-base font-medium">
+                  <NavLinks pathname={pathname} className="flex h-12 items-center" />
+               </ul>
+            </nav>
+            <LanguageLinks className="page border-t border-white/[0.06] py-1 text-sm text-faint" />
+            <InstallApp className="mx-4 mb-4 sm:mx-6" />
          </Collapsible.Panel>
       </Collapsible.Root>
    );
@@ -176,7 +182,7 @@ function Account() {
          <Prepaint
             ready={session.status === 'anonymous'}
             deps={['session']}
-            placeholder={<Skeleton className="h-11 w-32 rounded-full sm:h-9 sm:w-40" />}
+            placeholder={<Skeleton className="h-11 w-32 rounded-full pointer-fine:sm:h-9 sm:w-40" />}
          >
             {logIn}
          </Prepaint>
@@ -200,7 +206,7 @@ function Account() {
             render={
                <Button
                   variant="ghost"
-                  className="max-w-56 pr-3 pl-3 text-ink"
+                  className="max-w-40 min-w-0 pr-3 pl-3 text-ink sm:max-w-56"
                   aria-label={t.account.label(player.name)}
                />
             }
@@ -210,7 +216,7 @@ function Account() {
                <Trophy aria-hidden className="text-gold" />
                {formatNumber(player.trophies, locale)}
             </span>
-            <ChevronDown aria-hidden className="text-muted" />
+            <ChevronDown aria-hidden className="hidden text-muted sm:block" />
          </MenuTrigger>
          <MenuContent>
             <MenuItem onClick={() => router.push(href('/profile'))}>

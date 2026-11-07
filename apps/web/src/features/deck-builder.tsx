@@ -34,6 +34,8 @@ import { PageHeader } from '@/components/page-header';
 import { Prepaint } from '@/components/prepaint';
 import { ShareDeckButton } from '@/components/share-deck-button';
 import {
+   actionBar,
+   actionBarItem,
    Button,
    Card,
    CardHeader,
@@ -57,6 +59,7 @@ import { formatDecimal } from '@/lib/format';
 import { saveDeck } from '@/lib/saved-decks';
 import { usePlayer, useSession } from '@/lib/session';
 import { type SmartDeck, smartDeck } from '@/lib/smart-deck';
+import { cn } from '@/lib/utils';
 
 // Dialogs are downloaded the first time they're opened, not with the page.
 const CardPicker = dynamic(() => import('@/components/card-picker').then((module) => module.CardPicker), {
@@ -208,8 +211,11 @@ export function DeckBuilder() {
                <CardHeader>
                   <div className="min-w-0">
                      <CardTitle id="deck-title">{t.builder.yourDeck}</CardTitle>
-                     <div className="mt-0.5 flex flex-wrap items-center gap-x-3">
-                        <dl className="num flex flex-wrap items-center gap-x-3 text-muted" aria-live="polite">
+                     <div className="mt-0.5">
+                        <dl
+                           className="num flex flex-wrap items-center gap-x-3 gap-y-0.5 text-muted *:whitespace-nowrap"
+                           aria-live="polite"
+                        >
                            <div className="flex gap-1">
                               <dt className="sr-only">{t.builder.cardCount}</dt>
                               <dd>
@@ -235,7 +241,8 @@ export function DeckBuilder() {
                                  </Prepaint>
                               </dd>
                            </div>
-                           <div className="flex gap-1">
+                           {/* The help button stays next to the last figure, never on a line of its own. */}
+                           <div className="flex items-center gap-1">
                               <dt>{t.builder.cycle}</dt>
                               <dd className="text-ink">
                                  <Prepaint
@@ -246,40 +253,43 @@ export function DeckBuilder() {
                                     {cycle ?? '—'}
                                  </Prepaint>
                               </dd>
+                              <dd>
+                                 <Popover
+                                    title={t.builder.statsHelpTitle}
+                                    trigger={
+                                       <Button
+                                          variant="ghost"
+                                          size="icon"
+                                          className="-my-2.5 size-10 pointer-fine:sm:-my-1 pointer-fine:sm:size-6"
+                                          aria-label={t.builder.statsHelpLabel}
+                                       >
+                                          <CircleHelp aria-hidden />
+                                       </Button>
+                                    }
+                                 >
+                                    <dl className="flex flex-col gap-3">
+                                       <div>
+                                          <dt className="font-medium text-ink">{t.builder.avgElixir}</dt>
+                                          <dd>{t.builder.avgElixirHelp}</dd>
+                                       </div>
+                                       <div>
+                                          <dt className="font-medium text-ink">{t.builder.cycle}</dt>
+                                          <dd>{t.builder.cycleHelp}</dd>
+                                       </div>
+                                    </dl>
+                                 </Popover>
+                              </dd>
                            </div>
                         </dl>
-                        <Popover
-                           title={t.builder.statsHelpTitle}
-                           trigger={
-                              <Button
-                                 variant="ghost"
-                                 size="icon"
-                                 className="-my-1 size-6 sm:size-6"
-                                 aria-label={t.builder.statsHelpLabel}
-                              >
-                                 <CircleHelp aria-hidden />
-                              </Button>
-                           }
-                        >
-                           <dl className="flex flex-col gap-3">
-                              <div>
-                                 <dt className="font-medium text-ink">{t.builder.avgElixir}</dt>
-                                 <dd>{t.builder.avgElixirHelp}</dd>
-                              </div>
-                              <div>
-                                 <dt className="font-medium text-ink">{t.builder.cycle}</dt>
-                                 <dd>{t.builder.cycleHelp}</dd>
-                              </div>
-                           </dl>
-                        </Popover>
                      </div>
                   </div>
-                  <div className="-mx-2 flex flex-wrap gap-1 sm:mx-0 sm:-mr-2">
+                  <div className={cn(actionBar, 'w-full sm:-mr-2 sm:w-auto sm:gap-1')}>
                      {player ? (
                         <Button
                            variant="ghost"
+                           className={actionBarItem}
                            onClick={() => loadDeck(player.currentDeck)}
-                           aria-label={t.builder.myDeckLabel}
+                           title={t.builder.myDeckLabel}
                         >
                            <UserRound aria-hidden />
                            {t.builder.myDeck}
@@ -290,23 +300,35 @@ export function DeckBuilder() {
                            ready={session.status !== 'loading'}
                            deps={['session']}
                            placeholder={
-                              <Button variant="ghost" disabled>
+                              <Button variant="ghost" className={actionBarItem} disabled>
                                  <UserRound aria-hidden />
                                  {t.builder.myDeck}
                               </Button>
                            }
                         />
                      )}
-                     <Button variant="ghost" onClick={() => setPasteOpen(true)} aria-label={t.builder.pasteLabel}>
+                     <Button
+                        variant="ghost"
+                        className={actionBarItem}
+                        onClick={() => setPasteOpen(true)}
+                        title={t.builder.pasteLabel}
+                     >
                         <ClipboardPaste aria-hidden />
                         {t.builder.paste}
                      </Button>
-                     <Button variant="ghost" onClick={undo} disabled={!canUndo} aria-keyshortcuts="Control+Z Meta+Z">
+                     <Button
+                        variant="ghost"
+                        className={actionBarItem}
+                        onClick={undo}
+                        disabled={!canUndo}
+                        aria-keyshortcuts="Control+Z Meta+Z"
+                     >
                         <Undo2 aria-hidden />
                         {t.builder.undo}
                      </Button>
                      <Button
                         variant="ghost"
+                        className={actionBarItem}
                         onClick={() => {
                            editor.clear();
                            setSmart(null);
@@ -356,9 +378,11 @@ export function DeckBuilder() {
                      </InputGroup>
                   </Field>
 
-                  <div className="grid grid-cols-[repeat(auto-fit,minmax(8.5rem,1fr))] gap-2">
-                     <ShareDeckButton deck={deck} />
+                  {/* Always equal columns (2 or 3, with or without the share sheet), so nothing wraps alone. */}
+                  <div className="grid auto-cols-fr grid-flow-col gap-2">
+                     <ShareDeckButton deck={deck} className={actionBarItem} />
                      <LinkButton
+                        className={actionBarItem}
                         href={open.href}
                         disabled={!complete}
                         target={open.external ? '_blank' : undefined}
@@ -367,7 +391,7 @@ export function DeckBuilder() {
                         <ExternalLink aria-hidden />
                         {t.common.openInGame}
                      </LinkButton>
-                     <Button onClick={save} disabled={isEmpty || saving}>
+                     <Button className={actionBarItem} onClick={save} disabled={isEmpty || saving}>
                         <Bookmark aria-hidden />
                         {saving ? t.builder.saving : t.builder.save}
                      </Button>
@@ -390,7 +414,10 @@ export function DeckBuilder() {
                   >
                      <Meter label={t.builder.poolMeter} value={owned.length} max={playableCards.length} />
                   </Prepaint>
-                  <Link href={href('/cards')} className="w-fit font-medium underline-offset-4 hover:underline">
+                  <Link
+                     href={href('/cards')}
+                     className="-my-2.5 flex h-11 w-fit items-center font-medium underline-offset-4 hover:underline pointer-fine:sm:my-0 pointer-fine:sm:h-auto"
+                  >
                      {t.builder.editPool}
                   </Link>
                </Card>

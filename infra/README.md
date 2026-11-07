@@ -64,6 +64,7 @@ railway config apply --file infra/railway.ts             # apply, asks first
 | `API_URL`                                            | `http://${{api.RAILWAY_PRIVATE_DOMAIN}}:${{api.PORT}}` (read at build time: Railway passes service variables to the Dockerfile's `ARG`s)                           |
 | `SITE_URL`                                           | `https://deckr.lucasbittencourt.dev` (canonical URLs, hreflang, Open Graph, JSON-LD, sitemap, robots and `llms.txt`; the proxy redirects the Railway domain to it) |
 | `GOOGLE_SITE_VERIFICATION`, `BING_SITE_VERIFICATION` | optional, for Search Console and Bing Webmaster Tools                                                                                                              |
+| `ANDROID_PACKAGE_NAME`, `ANDROID_CERT_FINGERPRINTS`  | optional, once there's a Play Store build: served at `/.well-known/assetlinks.json` (README → "Installable app")                                                   |
 
 ## Before the first deploy
 

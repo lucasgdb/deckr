@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from 'next';
 import { Inter } from 'next/font/google';
+import { KeyIssueBanner } from '@/components/key-issue';
 import { LoginDialogLoader } from '@/components/login-dialog-loader';
+import { ServiceWorker } from '@/components/pwa';
 import { SiteFooter } from '@/components/site-footer';
 import { SiteHeader } from '@/components/site-header';
 import { Toaster, TooltipProvider } from '@/components/ui';
@@ -31,6 +33,10 @@ export async function generateMetadata({ params }: LayoutProps<'/[locale]'>): Pr
 export const viewport: Viewport = {
    themeColor: '#000000',
    colorScheme: 'dark',
+   // Edge to edge on notched phones (the layout pads with the safe areas), and the on-screen keyboard resizes the
+   // page instead of covering it, so sheets and fields stay above it.
+   viewportFit: 'cover',
+   interactiveWidget: 'resizes-content',
 };
 
 export default async function RootLayout({ children, params }: LayoutProps<'/[locale]'>) {
@@ -55,6 +61,7 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[lo
                         {t.common.skipToContent}
                      </a>
                      <SiteHeader />
+                     <KeyIssueBanner />
                      <main id="main" tabIndex={-1} className="page flex-1 pb-16 outline-none">
                         {children}
                      </main>
@@ -62,6 +69,7 @@ export default async function RootLayout({ children, params }: LayoutProps<'/[lo
                   </div>
                   <LoginDialogLoader />
                   <SavedDecksSync />
+                  <ServiceWorker />
                </TooltipProvider>
                <Toaster />
             </I18nProvider>

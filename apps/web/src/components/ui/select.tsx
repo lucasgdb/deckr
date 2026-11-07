@@ -22,6 +22,8 @@ interface SelectProps<Value extends string> {
    className?: string;
    /** Shows the label beside the trigger instead of above it. */
    inline?: boolean;
+   /** Keeps the label for screen readers only below `xl`, where the value says enough ("Any arena"). */
+   compact?: boolean;
    /** The value isn't known yet: the trigger is disabled and shows this instead (a placeholder, or a default). */
    loading?: ReactNode;
 }
@@ -33,6 +35,7 @@ export function Select<Value extends string>({
    onValueChange,
    className,
    inline,
+   compact,
    loading,
 }: SelectProps<Value>) {
    const pending = loading !== undefined && loading !== null && loading !== false;
@@ -47,10 +50,12 @@ export function Select<Value extends string>({
          }}
       >
          <div className={cn('flex', inline ? 'items-center gap-3' : 'flex-col gap-2', className)}>
-            <BaseSelect.Label className="font-medium whitespace-nowrap">{label}</BaseSelect.Label>
+            <BaseSelect.Label className={cn('font-medium whitespace-nowrap', compact && 'max-xl:sr-only')}>
+               {label}
+            </BaseSelect.Label>
             <BaseSelect.Trigger
                className={cn(
-                  'flex h-11 min-w-0 flex-1 cursor-pointer items-center justify-between gap-3 rounded-full border border-control bg-ground pr-3 pl-4 text-left sm:h-9',
+                  'flex h-11 min-w-0 flex-1 cursor-pointer items-center justify-between gap-3 rounded-full border border-control bg-ground pr-3 pl-4 text-left pointer-fine:sm:h-9',
                   'hover:bg-active data-disabled:cursor-default data-disabled:hover:bg-ground data-popup-open:border-muted data-popup-open:bg-active data-popup-open:ring-4 data-popup-open:ring-ink/15',
                   fieldRing,
                )}

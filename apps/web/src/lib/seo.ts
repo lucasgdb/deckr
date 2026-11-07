@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { defaultLocale, getDictionary, type Locale, localeConfig, locales, localizePath } from '@/i18n';
+import { manifestPath } from './pwa';
 import { isIndexable, type PageKey, pages, siteUrl } from './site';
 
 /*
@@ -49,6 +50,10 @@ export function rootMetadata(locale: Locale): Metadata {
       title: { default: meta.title, template: `%s · ${meta.siteName}` },
       description: meta.description,
       applicationName: meta.siteName,
+      // The installable app, in this language.
+      manifest: manifestPath(locale),
+      appleWebApp: { capable: true, title: meta.siteName, statusBarStyle: 'black' },
+      formatDetection: { telephone: false },
       alternates: { canonical: localizePath('/', locale), languages: languageAlternates('/') },
       openGraph: { ...baseOpenGraph(locale), title: meta.title, description: meta.description },
       twitter: { card: 'summary_large_image' },

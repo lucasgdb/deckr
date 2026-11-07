@@ -27,9 +27,9 @@ export const buttonVariants = cva(
             destructive: 'bg-negative-bg text-negative hover:bg-[#3a2029]',
          },
          size: {
-            /** 44px on touch screens, 36px from `sm` up. */
-            md: 'h-11 px-4 text-sm sm:h-9',
-            icon: 'size-11 sm:size-9',
+            /** 44px on touch screens (phones and tablets); 36px with a mouse from `sm` up. */
+            md: 'h-11 px-4 text-sm pointer-fine:sm:h-9',
+            icon: 'size-11 pointer-fine:sm:size-9',
          },
       },
       defaultVariants: { variant: 'secondary', size: 'md' },
@@ -91,3 +91,13 @@ export function Tile({
       />
    );
 }
+
+/*
+ * A row of actions that never leaves one button on a line of its own. Phones: equal columns, each an icon above a
+ * short label (two lines at most). From `sm` up: an ordinary row that wraps. Put `actionBar` on the container and
+ * `actionBarItem` on each button.
+ */
+export const actionBar = 'grid grid-flow-col auto-cols-fr gap-2 sm:flex sm:flex-wrap';
+
+export const actionBarItem =
+   'max-sm:h-auto max-sm:rounded-2xl max-sm:min-h-14 max-sm:flex-col max-sm:gap-1 max-sm:px-1.5 max-sm:py-2 max-sm:text-center max-sm:text-xs max-sm:leading-tight max-sm:whitespace-normal';

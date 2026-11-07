@@ -41,6 +41,10 @@ services:
             API_URL: http://api:3001
             SITE_URL: ${SITE_URL:-}
       restart: unless-stopped
+      environment:
+         # Optional, for a Play Store build (README → "Installable app").
+         ANDROID_PACKAGE_NAME: ${ANDROID_PACKAGE_NAME:-}
+         ANDROID_CERT_FINGERPRINTS: ${ANDROID_CERT_FINGERPRINTS:-}
       ports:
          - ${WEB_PORT:-8080}:3000
       depends_on:

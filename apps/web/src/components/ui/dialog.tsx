@@ -10,11 +10,18 @@ import { Button } from './button';
 const backdrop =
    'fixed inset-0 min-h-dvh bg-black/70 transition-opacity duration-150 data-ending-style:opacity-0 data-starting-style:opacity-0 supports-[-webkit-touch-callout:none]:absolute';
 
+/*
+ * Phones: a sheet from the bottom edge, full width, that slides up; it scrolls if taller than the screen, keeps clear
+ * of the home indicator, and `lg` (browsing, e.g. the card picker) takes the full height. From `sm` up: centred.
+ */
 const popup = cn(
-   'fixed top-1/2 left-1/2 w-[min(30rem,calc(100vw-32px))] -translate-x-1/2 -translate-y-1/2 rounded-card bg-surface p-5 text-ink sm:p-pad',
-   'data-[size=lg]:flex data-[size=lg]:max-h-[min(48rem,calc(100dvh-32px))] data-[size=lg]:w-[min(60rem,calc(100vw-32px))] data-[size=lg]:flex-col',
+   'fixed inset-x-0 bottom-0 flex max-h-[calc(100dvh-max(24px,env(safe-area-inset-top)))] w-full flex-col overflow-y-auto overscroll-contain rounded-t-card bg-surface px-4 pt-5 pb-[max(20px,env(safe-area-inset-bottom))] text-ink',
+   'data-[size=lg]:h-[calc(100dvh-max(24px,env(safe-area-inset-top)))] data-[size=lg]:overflow-hidden',
+   'transition-[translate,opacity] duration-200 ease-out data-ending-style:translate-y-full data-starting-style:translate-y-full',
+   'sm:inset-x-auto sm:bottom-auto sm:top-1/2 sm:left-1/2 sm:block sm:max-h-[calc(100dvh-32px)] sm:w-[min(30rem,calc(100vw-32px))] sm:-translate-x-1/2 sm:-translate-y-1/2 sm:rounded-card sm:p-pad',
+   'sm:data-[size=lg]:flex sm:data-[size=lg]:h-auto sm:data-[size=lg]:max-h-[min(48rem,calc(100dvh-32px))] sm:data-[size=lg]:w-[min(60rem,calc(100vw-32px))] sm:data-[size=lg]:flex-col',
+   'sm:transition-[scale,opacity] sm:duration-150 sm:data-ending-style:translate-y-[-50%] sm:data-ending-style:scale-[0.98] sm:data-ending-style:opacity-0 sm:data-starting-style:translate-y-[-50%] sm:data-starting-style:scale-[0.98] sm:data-starting-style:opacity-0',
    'shadow-[0_24px_64px_rgb(0_0_0/0.6)] outline outline-raised',
-   'transition-[scale,opacity] duration-150 ease-out data-ending-style:scale-[0.98] data-ending-style:opacity-0 data-starting-style:scale-[0.98] data-starting-style:opacity-0',
 );
 
 interface DialogProps {

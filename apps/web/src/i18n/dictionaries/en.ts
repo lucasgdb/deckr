@@ -404,12 +404,48 @@ const en: Dictionary = {
          finding: 'Finding it…',
          unavailable: 'Unavailable',
          copyIp: 'Copy IP address',
+         copied: 'IP address copied',
          finish: 'Create the key, open it, and copy the long token into this field.',
       },
    },
 
    share: {
       label: 'Share',
+   },
+
+   pwa: {
+      screenshots: {
+         builder: 'Smart roll: a meta deck, with what each group of cards is for',
+         cards: 'Choose which cards rolls use, arena by arena',
+         profile: 'Your profile: trophies, current deck, collection and recent battles',
+         wide: 'The deck builder on a computer',
+      },
+      install: 'Install the app',
+      installed: 'App installed',
+      iosTitle: 'Install Deckr on your iPhone or iPad',
+      iosSteps: {
+         share: 'Tap Share, in Safari’s toolbar.',
+         add: 'Choose “Add to Home Screen”.',
+         confirm: 'Tap Add: Deckr opens like an app, full screen.',
+      },
+      offline: 'You’re offline. Pages you’ve already opened are still available.',
+   },
+
+   keyIssue: {
+      banner: (ip) =>
+         ip
+            ? `Clash Royale rejected your API key: Deckr now reaches the game from ${ip}, which the key doesn't allow.`
+            : 'Clash Royale rejected your API key: the address Deckr reaches the game from changed.',
+      fix: 'Update key',
+      title: 'Update your API key',
+      description:
+         'The IP address Deckr reaches Clash Royale from can change from time to time. Create a new key that allows the current address and paste it here: your data and decks stay in your account.',
+      inlineHint: 'Create a new key that allows this address:',
+      field: 'New API key',
+      save: 'Save key',
+      saving: 'Saving…',
+      saved: 'Key updated',
+      later: 'Not now',
    },
 
    notFound: {

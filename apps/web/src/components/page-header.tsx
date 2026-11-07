@@ -15,7 +15,10 @@ export function PageHeader({ title, summary, actions }: PageHeaderProps) {
             <h1 className="text-xl font-semibold tracking-[-0.01em]">{title}</h1>
             {summary ? <p className="mt-1 text-pretty text-muted">{summary}</p> : null}
          </div>
-         {actions ? <div className="flex flex-wrap items-center gap-2">{actions}</div> : null}
+         {/* Phones: the actions fill the width in equal parts, easy to reach with a thumb. */}
+         {actions ? (
+            <div className="flex w-full flex-wrap items-center gap-2 *:max-sm:flex-1 sm:w-auto">{actions}</div>
+         ) : null}
       </div>
    );
 }
