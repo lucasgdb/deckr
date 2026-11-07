@@ -138,11 +138,35 @@ Cards and arenas without art yet are listed in `apps/web/src/lib/assets.ts` and 
 | `pnpm check`     | Biome lint + format check       |
 | `pnpm check:fix` | Biome with safe fixes applied   |
 
-## Screenshots (v1)
+## Screenshots
 
-![](./images/deckr.png "Deckr")
-![](./images/cards.png "cards")
-![](./images/saved.png "saved")
-![](./images/next.png "next")
-![](./images/about.png "about")
-![](./images/not_found.png "not_found")
+The deck builder after a smart roll, on a computer:
+
+![Deck builder: a Miner Control deck from the smart roll, with its average elixir, share actions and how the deck plays](docs/screenshots/desktop-builder.webp)
+
+On a phone, where Deckr is mostly used:
+
+<table>
+   <tr>
+      <td><img src="docs/screenshots/phone-builder.webp" width="260" alt="Deck builder with a smart-rolled deck and the elixir cost on each card"></td>
+      <td><img src="docs/screenshots/phone-picker.webp" width="260" alt="Card picker: search, filters as chips and four cards per row"></td>
+      <td><img src="docs/screenshots/phone-decks.webp" width="260" alt="My decks: each saved deck with open in game, share and copy link"></td>
+   </tr>
+   <tr>
+      <td align="center">Builder</td>
+      <td align="center">Card picker</td>
+      <td align="center">My decks</td>
+   </tr>
+   <tr>
+      <td><img src="docs/screenshots/phone-cards.webp" width="260" alt="Cards by arena, with the player's levels"></td>
+      <td><img src="docs/screenshots/phone-chests.webp" width="260" alt="Upcoming chest cycle"></td>
+      <td><img src="docs/screenshots/phone-profile.webp" width="260" alt="Profile: trophies, win rate, current deck"></td>
+   </tr>
+   <tr>
+      <td align="center">Cards</td>
+      <td align="center">Chests</td>
+      <td align="center">Profile</td>
+   </tr>
+</table>
+
+Screens with a signed-in player use sample data.
