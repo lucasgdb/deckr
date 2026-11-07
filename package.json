@@ -1,26 +1,29 @@
 {
    "name": "deckr",
-   "version": "1.0.0",
+   "version": "2.0.0",
    "description": "Deck Builder & Manager for Clash Royale",
-   "repository": "git@github.com:lucasnaja/deckr.git",
-   "author": "lucasnaja <lucasnaja0@gmail.com>",
+   "repository": "git@github.com:lucasgdb/deckr.git",
+   "author": "Lucas Bittencourt",
    "license": "MIT",
    "private": true,
-   "scripts": {
-      "start:web": "yarn workspace @deckr/frontend start",
-      "start:server": "yarn workspace @deckr/backend start",
-      "start": "concurrently --kill-others \"yarn start:web\" \"yarn start:server\"",
-      "build": "yarn workspace @deckr/frontend build",
-      "status": "yarn workspace @deckr/frontend front/check && yarn workspace @deckr/backend back/check",
-      "commit": "yarn status && git add . && git commit"
+   "type": "module",
+   "packageManager": "pnpm@12.18.0",
+   "engines": {
+      "node": ">=24"
    },
-   "workspaces": {
-      "packages": [
-         "packages/*"
-      ]
+   "scripts": {
+      "dev": "pnpm --parallel --filter \"./apps/*\" dev",
+      "dev:web": "pnpm --filter @deckr/web dev",
+      "dev:api": "pnpm --filter @deckr/api dev",
+      "build": "pnpm --filter @deckr/web build",
+      "typecheck": "pnpm -r typecheck",
+      "test": "pnpm --filter @deckr/web test",
+      "check": "biome check .",
+      "check:fix": "biome check --write .",
+      "db": "docker compose up -d mongo"
    },
    "devDependencies": {
-      "concurrently": "^5.1.0",
-      "husky": "^4.2.3"
+      "@biomejs/biome": "2.6.6",
+      "typescript": "7.0.2"
    }
 }

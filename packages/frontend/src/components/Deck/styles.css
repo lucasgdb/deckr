@@ -1,9 +1,0 @@
-* {
-   -webkit-user-drag: none;
-}
-
-@media (max-width: 600px) {
-   .cards {
-      height: 60vw !important;
-   }
-}

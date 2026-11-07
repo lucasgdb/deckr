@@ -1,0 +1,5 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 28 28" role="img" aria-labelledby="title">
+   <title id="title">Deckr</title>
+   <rect x="3" y="1" width="22" height="26" rx="5" fill="#f2b33d"/>
+   <path d="M10 8h4.2c3.3 0 5.3 2.3 5.3 6s-2 6-5.3 6H10z" fill="none" stroke="#000" stroke-width="2.6"/>
+</svg>

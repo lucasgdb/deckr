@@ -1,0 +1,41 @@
+{
+   "name": "@deckr/web",
+   "version": "2.0.0",
+   "private": true,
+   "type": "module",
+   "license": "MIT",
+   "sideEffects": [
+      "*.css"
+   ],
+   "scripts": {
+      "dev": "next dev --port 3000",
+      "build": "next build",
+      "start": "next start --port 3000",
+      "typecheck": "next typegen && tsc -p tsconfig.json",
+      "test": "node --test \"src/**/*.test.ts\"",
+      "images": "node scripts/optimize-images.mjs"
+   },
+   "dependencies": {
+      "@base-ui/react": "1.9.0",
+      "@deckr/shared": "workspace:*",
+      "@dnd-kit/dom": "0.5.3",
+      "@dnd-kit/helpers": "0.5.3",
+      "@dnd-kit/react": "0.5.3",
+      "class-variance-authority": "0.7.1",
+      "clsx": "2.1.1",
+      "lucide-react": "1.70.0",
+      "next": "16.4.5",
+      "react": "19.3.1",
+      "react-dom": "19.3.1",
+      "tailwind-merge": "3.7.0"
+   },
+   "devDependencies": {
+      "@tailwindcss/postcss": "4.3.5",
+      "@types/node": "26.6.6",
+      "@types/react": "19.3.0",
+      "@types/react-dom": "19.3.0",
+      "sharp": "0.35.5",
+      "tailwindcss": "4.3.5",
+      "typescript": "7.0.2"
+   }
+}

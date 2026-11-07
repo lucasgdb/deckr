@@ -1,0 +1,52 @@
+name: deckr
+
+services:
+   mongo:
+      image: mongo:9.0
+      restart: unless-stopped
+      ports:
+         - 127.0.0.1:27017:27017
+      volumes:
+         - mongo-data:/data/db
+      healthcheck:
+         test: ["CMD", "mongosh", "--quiet", "--eval", "db.adminCommand('ping').ok"]
+         interval: 10s
+         timeout: 5s
+         retries: 5
+         start_period: 20s
+
+   api:
+      build:
+         context: .
+         dockerfile: apps/api/Dockerfile
+      restart: unless-stopped
+      environment:
+         PORT: 3001
+         MONGODB_URI: mongodb://mongo:27017/deckr
+         DATA_DIR: /data
+         TOKEN_SECRET: ${TOKEN_SECRET:-}
+         CLASH_ROYALE_API_KEY: ${CLASH_ROYALE_API_KEY:-}
+         COOKIE_SECURE: ${COOKIE_SECURE:-false}
+      volumes:
+         - api-data:/data
+      depends_on:
+         mongo:
+            condition: service_healthy
+
+   web:
+      build:
+         context: .
+         dockerfile: apps/web/Dockerfile
+         args:
+            API_URL: http://api:3001
+            SITE_URL: ${SITE_URL:-}
+      restart: unless-stopped
+      ports:
+         - ${WEB_PORT:-8080}:3000
+      depends_on:
+         api:
+            condition: service_healthy
+
+volumes:
+   mongo-data:
+   api-data:

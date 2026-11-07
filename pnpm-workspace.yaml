@@ -1,0 +1,34 @@
+packages:
+   - apps/*
+   - packages/*
+   - infra
+minimumReleaseAgeExclude:
+   - "@biomejs/biome@2.6.6"
+   - "@biomejs/cli-android-arm64@2.6.6"
+   - "@biomejs/cli-android-x64@2.6.6"
+   - "@biomejs/cli-darwin-arm64@2.6.6"
+   - "@biomejs/cli-darwin-x64@2.6.6"
+   - "@biomejs/cli-linux-arm64-musl@2.6.6"
+   - "@biomejs/cli-linux-arm64@2.6.6"
+   - "@biomejs/cli-linux-x64-musl@2.6.6"
+   - "@biomejs/cli-linux-x64@2.6.6"
+   - "@biomejs/cli-win32-arm64@2.6.6"
+   - "@biomejs/cli-win32-x64@2.6.6"
+   - "@tailwindcss/node@4.3.5"
+   - "@tailwindcss/oxide-android-arm64@4.3.5"
+   - "@tailwindcss/oxide-darwin-arm64@4.3.5"
+   - "@tailwindcss/oxide-darwin-x64@4.3.5"
+   - "@tailwindcss/oxide-freebsd-x64@4.3.5"
+   - "@tailwindcss/oxide-linux-arm-gnueabihf@4.3.5"
+   - "@tailwindcss/oxide-linux-arm64-gnu@4.3.5"
+   - "@tailwindcss/oxide-linux-arm64-musl@4.3.5"
+   - "@tailwindcss/oxide-linux-x64-gnu@4.3.5"
+   - "@tailwindcss/oxide-linux-x64-musl@4.3.5"
+   - "@tailwindcss/oxide-wasm32-wasi@4.3.5"
+   - "@tailwindcss/oxide-win32-arm64-msvc@4.3.5"
+   - "@tailwindcss/oxide-win32-x64-msvc@4.3.5"
+   - "@tailwindcss/oxide@4.3.5"
+   - "@tailwindcss/vite@4.3.5"
+   - lucide-react@1.70.0
+   - tailwindcss@4.3.5
+   - "@tailwindcss/postcss@4.3.5"

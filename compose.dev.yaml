@@ -1,0 +1,54 @@
+# Development mode for the same stack: same database, volumes, ports and .env, but the API and the web app run
+# from the source on disk and reload on every save (Next.js hot reload, `node --watch`).
+#
+#   docker compose -f compose.yaml -f compose.dev.yaml up -d
+#
+# Uses the dependencies installed on the host (`pnpm install`), so the image is the Debian one (same libc as
+# the host's native packages). Back to the production build: `docker compose up -d --build`.
+
+services:
+   api:
+      build: !reset null
+      image: node:24
+      user: node
+      working_dir: /app/apps/api
+      command: ["node", "--watch", "src/index.ts"]
+      volumes:
+         - .:/app
+      healthcheck:
+         test:
+            [
+               "CMD",
+               "node",
+               "-e",
+               "fetch('http://127.0.0.1:3001/api/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))",
+            ]
+         interval: 5s
+         timeout: 3s
+         retries: 10
+         start_period: 10s
+
+   web:
+      build: !reset null
+      image: node:24
+      user: node
+      working_dir: /app/apps/web
+      command: ["node_modules/.bin/next", "dev", "--port", "3000", "--hostname", "0.0.0.0"]
+      environment:
+         API_URL: http://api:3001
+         NEXT_TELEMETRY_DISABLED: 1
+         SITE_URL: ${SITE_URL:-}
+      volumes:
+         - .:/app
+      healthcheck:
+         test:
+            [
+               "CMD",
+               "node",
+               "-e",
+               "fetch('http://127.0.0.1:3000/api/health').then((r) => process.exit(r.ok ? 0 : 1), () => process.exit(1))",
+            ]
+         interval: 5s
+         timeout: 3s
+         retries: 20
+         start_period: 30s

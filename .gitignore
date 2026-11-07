@@ -1,3 +1,13 @@
 node_modules
-yarn-error.log
-build
+dist
+coverage
+.env
+.env.*
+!.env.example
+*.log
+.DS_Store
+.taste-skill
+.next
+next-env.d.ts
+*.tsbuildinfo
+.data

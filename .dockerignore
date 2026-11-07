@@ -1,0 +1,9 @@
+**/node_modules
+**/dist
+**/.env
+**/.env.*
+.git
+.taste-skill
+images
+*.log
+**/.next

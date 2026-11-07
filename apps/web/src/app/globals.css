@@ -1,0 +1,156 @@
+@import "tailwindcss";
+
+/*
+ * Deckr design tokens — true-black flat.
+ * One #000 ground; elevation by lightness alone (#111 card, #2a2a2a nested); no borders or shadows on
+ * resting surfaces. The card art carries the colour; Clash Royale gold is the one data hue (figures,
+ * the "Next" chest, the pool meter) and never touches buttons or navigation.
+ */
+@theme {
+   --font-sans: var(--font-inter), system-ui, sans-serif;
+
+   --color-ground: #000000;
+   --color-surface: #111111;
+   --color-raised: #2a2a2a;
+   --color-raised-hover: #363636;
+   --color-active: #222222;
+   --color-border: #1a1a1a;
+   --color-control: #444444;
+   --color-ink: #ffffff;
+   --color-ink-hover: #e6e6e6;
+   --color-nav: #bbbbbb;
+   --color-muted: #b4b4b4;
+   --color-faint: #949494;
+   --color-gold: #f2b33d;
+   --color-negative: #e5566f;
+   --color-negative-bg: #2c1a20;
+
+   --radius-card: 20px;
+   --radius-field: 10px;
+   --radius-art: 10px;
+
+   --spacing-gap: 14px;
+   --spacing-pad: 22px;
+   --container-page: 1152px;
+
+   --animate-dialog-in: dialog-in 160ms ease-out;
+
+   @keyframes dialog-in {
+      from {
+         opacity: 0;
+         transform: translateY(8px) scale(0.98);
+      }
+   }
+}
+
+@layer base {
+   html {
+      /* Always reserve the scrollbar, so pages with and without scrolling share one width. */
+      overflow-y: scroll;
+      color-scheme: dark;
+      background: var(--color-ground);
+      color: var(--color-ink);
+      font-family: var(--font-sans);
+      -webkit-font-smoothing: antialiased;
+      -webkit-tap-highlight-color: transparent;
+   }
+
+   body {
+      min-height: 100dvh;
+      background: var(--color-ground);
+      font-size: 14px;
+      line-height: 20px;
+   }
+
+   /* DS rule: everything you can click shows the pointer; disabled controls don't. */
+   :where(
+      button,
+      a[href],
+      label[for],
+      summary,
+      [role="button"],
+      [role="option"],
+      [role="menuitem"],
+      [role="tab"],
+      [role="combobox"],
+      [aria-pressed]
+   ) {
+      cursor: pointer;
+   }
+
+   :where(:disabled, [data-disabled], [aria-disabled="true"]) {
+      cursor: not-allowed;
+   }
+
+   /* If a browser autofills anyway, keep the field's own colours instead of its tinted background. */
+   input:-webkit-autofill,
+   input:-webkit-autofill:hover,
+   input:-webkit-autofill:focus {
+      -webkit-text-fill-color: var(--color-ink);
+      caret-color: var(--color-ink);
+      transition:
+         background-color 600000s 0s,
+         color 600000s 0s;
+   }
+
+   img {
+      -webkit-user-drag: none;
+      user-select: none;
+   }
+
+   :focus-visible {
+      outline: 2px solid var(--color-ink);
+      outline-offset: 2px;
+   }
+
+   ::selection {
+      background: var(--color-gold);
+      color: #000;
+   }
+
+   dialog::backdrop {
+      background: rgb(0 0 0 / 0.72);
+   }
+
+   @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+         animation-duration: 0.01ms !important;
+         transition-duration: 0.01ms !important;
+         scroll-behavior: auto !important;
+      }
+   }
+}
+
+@utility num {
+   font-variant-numeric: tabular-nums;
+}
+
+@utility page {
+   width: 100%;
+   max-width: var(--container-page);
+   margin-inline: auto;
+   padding-inline: 16px;
+
+   @variant sm {
+      padding-inline: 24px;
+   }
+}
+
+/* Prepaint (lib/prepaint.ts): before the client knows the stored pool, draft, decks or session, show the server's default
+   value when nothing is stored, or its placeholder when something is. */
+[data-prepaint-placeholder],
+html[data-stored-pool] [data-prepaint-default~="pool"],
+html[data-stored-draft] [data-prepaint-default~="draft"],
+html[data-stored-decks] [data-prepaint-default~="decks"],
+html[data-signed-in] [data-prepaint-default~="session"] {
+   display: none;
+}
+
+html[data-stored-pool] [data-prepaint-placeholder~="pool"],
+html[data-stored-draft] [data-prepaint-placeholder~="draft"],
+html[data-stored-decks] [data-prepaint-placeholder~="decks"],
+html[data-signed-in] [data-prepaint-placeholder~="session"] {
+   display: contents;
+}

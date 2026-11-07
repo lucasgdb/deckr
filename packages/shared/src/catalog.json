@@ -1,0 +1,970 @@
+{
+   "version": 5,
+   "arenas": [
+      {
+         "level": 0,
+         "slug": "training-camp",
+         "name": "Training Camp"
+      },
+      {
+         "level": 1,
+         "slug": "goblin-stadium",
+         "name": "Goblin Stadium"
+      },
+      {
+         "level": 2,
+         "slug": "bone-pit",
+         "name": "Bone Pit"
+      },
+      {
+         "level": 3,
+         "slug": "barbarian-bowl",
+         "name": "Barbarian Bowl"
+      },
+      {
+         "level": 4,
+         "slug": "spell-valley",
+         "name": "Spell Valley"
+      },
+      {
+         "level": 5,
+         "slug": "builders-workshop",
+         "name": "Builder's Workshop"
+      },
+      {
+         "level": 6,
+         "slug": "pekkas-playhouse",
+         "name": "P.E.K.K.A's Playhouse"
+      },
+      {
+         "level": 7,
+         "slug": "royal-arena",
+         "name": "Royal Arena"
+      },
+      {
+         "level": 8,
+         "slug": "frozen-peak",
+         "name": "Frozen Peak"
+      },
+      {
+         "level": 9,
+         "slug": "jungle-arena",
+         "name": "Jungle Arena"
+      },
+      {
+         "level": 10,
+         "slug": "hog-mountain",
+         "name": "Hog Mountain"
+      },
+      {
+         "level": 11,
+         "slug": "electro-valley",
+         "name": "Electro Valley"
+      },
+      {
+         "level": 12,
+         "slug": "spooky-town",
+         "name": "Spooky Town"
+      },
+      {
+         "level": 13,
+         "slug": "rascals-hideout",
+         "name": "Rascal's Hideout"
+      },
+      {
+         "level": 14,
+         "slug": "serenity-peak",
+         "name": "Serenity Peak"
+      },
+      {
+         "level": 15,
+         "slug": "miners-mine",
+         "name": "Miner's Mine"
+      },
+      {
+         "level": 16,
+         "slug": "executioners-kitchen",
+         "name": "Executioner's Kitchen"
+      },
+      {
+         "level": 17,
+         "slug": "royal-crypt",
+         "name": "Royal Crypt"
+      },
+      {
+         "level": 18,
+         "slug": "silent-sanctuary",
+         "name": "Silent Sanctuary"
+      }
+   ],
+   "cards": [
+      {
+         "name": "No card",
+         "slug": "",
+         "code": "",
+         "arena": 0,
+         "elixir": null
+      },
+      {
+         "name": "Arrows",
+         "slug": "arrows",
+         "code": "28000001",
+         "arena": 0,
+         "elixir": 3
+      },
+      {
+         "name": "Minions",
+         "slug": "minions",
+         "code": "26000005",
+         "arena": 0,
+         "elixir": 3
+      },
+      {
+         "name": "Archers",
+         "slug": "archers",
+         "code": "26000001",
+         "arena": 0,
+         "elixir": 3
+      },
+      {
+         "name": "Knight",
+         "slug": "knight",
+         "code": "26000000",
+         "arena": 0,
+         "elixir": 3
+      },
+      {
+         "name": "Fireball",
+         "slug": "fireball",
+         "code": "28000000",
+         "arena": 0,
+         "elixir": 4
+      },
+      {
+         "name": "Mini P.E.K.K.A",
+         "slug": "mini-pekka",
+         "code": "26000018",
+         "arena": 0,
+         "elixir": 4
+      },
+      {
+         "name": "Musketeer",
+         "slug": "musketeer",
+         "code": "26000014",
+         "arena": 0,
+         "elixir": 4
+      },
+      {
+         "name": "Giant",
+         "slug": "giant",
+         "code": "26000003",
+         "arena": 0,
+         "elixir": 5
+      },
+      {
+         "name": "Wall Breakers",
+         "slug": "wall-breakers",
+         "code": "26000058",
+         "arena": 12,
+         "elixir": 2
+      },
+      {
+         "name": "Prince",
+         "slug": "prince",
+         "code": "26000016",
+         "arena": 7,
+         "elixir": 5
+      },
+      {
+         "name": "Baby Dragon",
+         "slug": "baby-dragon",
+         "code": "26000015",
+         "arena": 6,
+         "elixir": 4
+      },
+      {
+         "name": "Skeleton Army",
+         "slug": "skeleton-army",
+         "code": "26000012",
+         "arena": 6,
+         "elixir": 3
+      },
+      {
+         "name": "Spear Goblins",
+         "slug": "spear-goblins",
+         "code": "26000019",
+         "arena": 1,
+         "elixir": 2
+      },
+      {
+         "name": "Goblins",
+         "slug": "goblins",
+         "code": "26000002",
+         "arena": 1,
+         "elixir": 2
+      },
+      {
+         "name": "Goblin Hut",
+         "slug": "goblin-hut",
+         "code": "27000001",
+         "arena": 1,
+         "elixir": 4
+      },
+      {
+         "name": "Hog Rider",
+         "slug": "hog-rider",
+         "code": "26000021",
+         "arena": 5,
+         "elixir": 4
+      },
+      {
+         "name": "Goblin Barrel",
+         "slug": "goblin-barrel",
+         "code": "28000004",
+         "arena": 6,
+         "elixir": 3
+      },
+      {
+         "name": "Hunter",
+         "slug": "hunter",
+         "code": "26000044",
+         "arena": 10,
+         "elixir": 4
+      },
+      {
+         "name": "Bomber",
+         "slug": "bomber",
+         "code": "26000013",
+         "arena": 2,
+         "elixir": 2
+      },
+      {
+         "name": "Skeletons",
+         "slug": "skeletons",
+         "code": "26000010",
+         "arena": 2,
+         "elixir": 1
+      },
+      {
+         "name": "Tombstone",
+         "slug": "tombstone",
+         "code": "27000009",
+         "arena": 2,
+         "elixir": 3
+      },
+      {
+         "name": "Valkyrie",
+         "slug": "valkyrie",
+         "code": "26000011",
+         "arena": 2,
+         "elixir": 4
+      },
+      {
+         "name": "Giant Skeleton",
+         "slug": "giant-skeleton",
+         "code": "26000020",
+         "arena": 8,
+         "elixir": 6
+      },
+      {
+         "name": "Witch",
+         "slug": "witch",
+         "code": "26000007",
+         "arena": 6,
+         "elixir": 5
+      },
+      {
+         "name": "Cannon",
+         "slug": "cannon",
+         "code": "27000000",
+         "arena": 3,
+         "elixir": 3
+      },
+      {
+         "name": "Barbarians",
+         "slug": "barbarians",
+         "code": "26000008",
+         "arena": 3,
+         "elixir": 5
+      },
+      {
+         "name": "Barbarian Hut",
+         "slug": "barbarian-hut",
+         "code": "27000005",
+         "arena": 9,
+         "elixir": 6
+      },
+      {
+         "name": "Battle Ram",
+         "slug": "battle-ram",
+         "code": "26000036",
+         "arena": 3,
+         "elixir": 4
+      },
+      {
+         "name": "Barbarian Barrel",
+         "slug": "barbarian-barrel",
+         "code": "28000015",
+         "arena": 9,
+         "elixir": 2
+      },
+      {
+         "name": "Golem",
+         "slug": "golem",
+         "code": "26000009",
+         "arena": 10,
+         "elixir": 8
+      },
+      {
+         "name": "Zap",
+         "slug": "zap",
+         "code": "28000008",
+         "arena": 5,
+         "elixir": 2
+      },
+      {
+         "name": "Minion Horde",
+         "slug": "minion-horde",
+         "code": "26000022",
+         "arena": 10,
+         "elixir": 5
+      },
+      {
+         "name": "Inferno Tower",
+         "slug": "inferno-tower",
+         "code": "27000003",
+         "arena": 4,
+         "elixir": 5
+      },
+      {
+         "name": "Mega Minion",
+         "slug": "mega-minion",
+         "code": "26000039",
+         "arena": 3,
+         "elixir": 3
+      },
+      {
+         "name": "Lightning",
+         "slug": "lightning",
+         "code": "28000007",
+         "arena": 8,
+         "elixir": 6
+      },
+      {
+         "name": "P.E.K.K.A",
+         "slug": "pekka",
+         "code": "26000004",
+         "arena": 6,
+         "elixir": 7
+      },
+      {
+         "name": "Miner",
+         "slug": "miner",
+         "code": "26000032",
+         "arena": 11,
+         "elixir": 3
+      },
+      {
+         "name": "Lava Hound",
+         "slug": "lava-hound",
+         "code": "26000029",
+         "arena": 13,
+         "elixir": 7
+      },
+      {
+         "name": "Bats",
+         "slug": "bats",
+         "code": "26000049",
+         "arena": 5,
+         "elixir": 2
+      },
+      {
+         "name": "Fire Spirit",
+         "slug": "fire-spirit",
+         "code": "26000031",
+         "arena": 4,
+         "elixir": 1
+      },
+      {
+         "name": "Furnace",
+         "slug": "furnace",
+         "code": "27000010",
+         "arena": 10,
+         "elixir": 4
+      },
+      {
+         "name": "Wizard",
+         "slug": "wizard",
+         "code": "26000017",
+         "arena": 4,
+         "elixir": 5
+      },
+      {
+         "name": "Tornado",
+         "slug": "tornado",
+         "code": "28000012",
+         "arena": 15,
+         "elixir": 3
+      },
+      {
+         "name": "Poison",
+         "slug": "poison",
+         "code": "28000009",
+         "arena": 9,
+         "elixir": 4
+      },
+      {
+         "name": "Magic Archer",
+         "slug": "magic-archer",
+         "code": "26000062",
+         "arena": 13,
+         "elixir": 4
+      },
+      {
+         "name": "Night Witch",
+         "slug": "night-witch",
+         "code": "26000048",
+         "arena": 14,
+         "elixir": 4
+      },
+      {
+         "name": "Mortar",
+         "slug": "mortar",
+         "code": "27000002",
+         "arena": 5,
+         "elixir": 4
+      },
+      {
+         "name": "Skeleton Barrel",
+         "slug": "skeleton-barrel",
+         "code": "26000056",
+         "arena": 9,
+         "elixir": 3
+      },
+      {
+         "name": "Rocket",
+         "slug": "rocket",
+         "code": "28000003",
+         "arena": 5,
+         "elixir": 6
+      },
+      {
+         "name": "Flying Machine",
+         "slug": "flying-machine",
+         "code": "26000057",
+         "arena": 5,
+         "elixir": 4
+      },
+      {
+         "name": "X-Bow",
+         "slug": "x-bow",
+         "code": "27000008",
+         "arena": 10,
+         "elixir": 6
+      },
+      {
+         "name": "Balloon",
+         "slug": "balloon",
+         "code": "26000006",
+         "arena": 7,
+         "elixir": 5
+      },
+      {
+         "name": "The Log",
+         "slug": "the-log",
+         "code": "28000011",
+         "arena": 11,
+         "elixir": 2
+      },
+      {
+         "name": "Inferno Dragon",
+         "slug": "inferno-dragon",
+         "code": "26000037",
+         "arena": 11,
+         "elixir": 4
+      },
+      {
+         "name": "Royal Recruits",
+         "slug": "royal-recruits",
+         "code": "26000047",
+         "arena": 7,
+         "elixir": 7
+      },
+      {
+         "name": "Royal Giant",
+         "slug": "royal-giant",
+         "code": "26000024",
+         "arena": 7,
+         "elixir": 6
+      },
+      {
+         "name": "Heal Spirit",
+         "slug": "heal-spirit",
+         "code": "28000016",
+         "arena": 13,
+         "elixir": 1
+      },
+      {
+         "name": "Three Musketeers",
+         "slug": "three-musketeers",
+         "code": "26000028",
+         "arena": 7,
+         "elixir": 9
+      },
+      {
+         "name": "Dark Prince",
+         "slug": "dark-prince",
+         "code": "26000027",
+         "arena": 7,
+         "elixir": 4
+      },
+      {
+         "name": "Guards",
+         "slug": "guards",
+         "code": "26000025",
+         "arena": 6,
+         "elixir": 3
+      },
+      {
+         "name": "Mega Knight",
+         "slug": "mega-knight",
+         "code": "26000055",
+         "arena": 11,
+         "elixir": 7
+      },
+      {
+         "name": "Princess",
+         "slug": "princess",
+         "code": "26000026",
+         "arena": 11,
+         "elixir": 3
+      },
+      {
+         "name": "Giant Snowball",
+         "slug": "giant-snowball",
+         "code": "28000017",
+         "arena": 8,
+         "elixir": 2
+      },
+      {
+         "name": "Ice Spirit",
+         "slug": "ice-spirit",
+         "code": "26000030",
+         "arena": 8,
+         "elixir": 1
+      },
+      {
+         "name": "Elixir Collector",
+         "slug": "elixir-collector",
+         "code": "27000007",
+         "arena": 15,
+         "elixir": 6
+      },
+      {
+         "name": "Ice Golem",
+         "slug": "ice-golem",
+         "code": "26000038",
+         "arena": 8,
+         "elixir": 2
+      },
+      {
+         "name": "Freeze",
+         "slug": "freeze",
+         "code": "28000005",
+         "arena": 8,
+         "elixir": 4
+      },
+      {
+         "name": "Bowler",
+         "slug": "bowler",
+         "code": "26000034",
+         "arena": 13,
+         "elixir": 5
+      },
+      {
+         "name": "Lumberjack",
+         "slug": "lumberjack",
+         "code": "26000035",
+         "arena": 14,
+         "elixir": 4
+      },
+      {
+         "name": "Ice Wizard",
+         "slug": "ice-wizard",
+         "code": "26000023",
+         "arena": 12,
+         "elixir": 3
+      },
+      {
+         "name": "Rascals",
+         "slug": "rascals",
+         "code": "26000053",
+         "arena": 13,
+         "elixir": 5
+      },
+      {
+         "name": "Goblin Gang",
+         "slug": "goblin-gang",
+         "code": "26000041",
+         "arena": 9,
+         "elixir": 3
+      },
+      {
+         "name": "Earthquake",
+         "slug": "earthquake",
+         "code": "28000014",
+         "arena": 12,
+         "elixir": 3
+      },
+      {
+         "name": "Dart Goblin",
+         "slug": "dart-goblin",
+         "code": "26000040",
+         "arena": 9,
+         "elixir": 3
+      },
+      {
+         "name": "Goblin Giant",
+         "slug": "goblin-giant",
+         "code": "26000060",
+         "arena": 9,
+         "elixir": 6
+      },
+      {
+         "name": "Bandit",
+         "slug": "bandit",
+         "code": "26000046",
+         "arena": 13,
+         "elixir": 3
+      },
+      {
+         "name": "Elite Barbarians",
+         "slug": "elite-barbarians",
+         "code": "26000043",
+         "arena": 10,
+         "elixir": 6
+      },
+      {
+         "name": "Bomb Tower",
+         "slug": "bomb-tower",
+         "code": "27000004",
+         "arena": 4,
+         "elixir": 4
+      },
+      {
+         "name": "Royal Hogs",
+         "slug": "royal-hogs",
+         "code": "26000059",
+         "arena": 7,
+         "elixir": 5
+      },
+      {
+         "name": "Rage",
+         "slug": "rage",
+         "code": "28000002",
+         "arena": 14,
+         "elixir": 2
+      },
+      {
+         "name": "Cannon Cart",
+         "slug": "cannon-cart",
+         "code": "26000054",
+         "arena": 15,
+         "elixir": 5
+      },
+      {
+         "name": "Fisherman",
+         "slug": "fisherman",
+         "code": "26000061",
+         "arena": 15,
+         "elixir": 3
+      },
+      {
+         "name": "Ram Rider",
+         "slug": "ram-rider",
+         "code": "26000051",
+         "arena": 11,
+         "elixir": 5
+      },
+      {
+         "name": "Tesla",
+         "slug": "tesla",
+         "code": "27000006",
+         "arena": 10,
+         "elixir": 4
+      },
+      {
+         "name": "Zappies",
+         "slug": "zappies",
+         "code": "26000052",
+         "arena": 10,
+         "elixir": 4
+      },
+      {
+         "name": "Clone",
+         "slug": "clone",
+         "code": "28000013",
+         "arena": 15,
+         "elixir": 3
+      },
+      {
+         "name": "Electro Dragon",
+         "slug": "electro-dragon",
+         "code": "26000063",
+         "arena": 12,
+         "elixir": 5
+      },
+      {
+         "name": "Electro Wizard",
+         "slug": "electro-wizard",
+         "code": "26000042",
+         "arena": 11,
+         "elixir": 4
+      },
+      {
+         "name": "Sparky",
+         "slug": "sparky",
+         "code": "26000033",
+         "arena": 11,
+         "elixir": 6
+      },
+      {
+         "name": "Goblin Cage",
+         "slug": "goblin-cage",
+         "code": "27000012",
+         "arena": 1,
+         "elixir": 4
+      },
+      {
+         "name": "Mirror",
+         "slug": "mirror",
+         "code": "28000006",
+         "arena": 15,
+         "elixir": null
+      },
+      {
+         "name": "Executioner",
+         "slug": "executioner",
+         "code": "26000045",
+         "arena": 14,
+         "elixir": 5
+      },
+      {
+         "name": "Graveyard",
+         "slug": "graveyard",
+         "code": "28000010",
+         "arena": 12,
+         "elixir": 5
+      },
+      {
+         "name": "Royal Ghost",
+         "slug": "royal-ghost",
+         "code": "26000050",
+         "arena": 12,
+         "elixir": 3
+      },
+      {
+         "name": "Skeleton Dragons",
+         "slug": "skeleton-dragons",
+         "code": "26000080",
+         "arena": 4,
+         "elixir": 4
+      },
+      {
+         "name": "Electro Spirit",
+         "slug": "electro-spirit",
+         "code": "26000084",
+         "arena": 4,
+         "elixir": 1
+      },
+      {
+         "name": "Minion Giant",
+         "slug": "minion-giant",
+         "code": "26000107",
+         "arena": 5,
+         "elixir": 4
+      },
+      {
+         "name": "Battle Healer",
+         "slug": "battle-healer",
+         "code": "26000068",
+         "arena": 8,
+         "elixir": 4
+      },
+      {
+         "name": "Vines",
+         "slug": "vines",
+         "code": "28000026",
+         "arena": 8,
+         "elixir": 3
+      },
+      {
+         "name": "Rune Giant",
+         "slug": "rune-giant",
+         "code": "26000101",
+         "arena": 9,
+         "elixir": 4
+      },
+      {
+         "name": "Berserker",
+         "slug": "berserker",
+         "code": "26000102",
+         "arena": 9,
+         "elixir": 2
+      },
+      {
+         "name": "Firecracker",
+         "slug": "firecracker",
+         "code": "26000064",
+         "arena": 12,
+         "elixir": 3
+      },
+      {
+         "name": "Phoenix",
+         "slug": "phoenix",
+         "code": "26000087",
+         "arena": 12,
+         "elixir": 4
+      },
+      {
+         "name": "Goblin Demolisher",
+         "slug": "goblin-demolisher",
+         "code": "26000095",
+         "arena": 12,
+         "elixir": 4
+      },
+      {
+         "name": "Electro Giant",
+         "slug": "electro-giant",
+         "code": "26000085",
+         "arena": 13,
+         "elixir": 7
+      },
+      {
+         "name": "Suspicious Bush",
+         "slug": "suspicious-bush",
+         "code": "26000097",
+         "arena": 13,
+         "elixir": 2
+      },
+      {
+         "name": "Elixir Golem",
+         "slug": "elixir-golem",
+         "code": "26000067",
+         "arena": 14,
+         "elixir": 3
+      },
+      {
+         "name": "Ronin",
+         "slug": "ronin",
+         "code": "26000106",
+         "arena": 14,
+         "elixir": 5
+      },
+      {
+         "name": "Goblin Drill",
+         "slug": "goblin-drill",
+         "code": "27000013",
+         "arena": 14,
+         "elixir": 4
+      },
+      {
+         "name": "Royal Delivery",
+         "slug": "royal-delivery",
+         "code": "28000018",
+         "arena": 14,
+         "elixir": 3
+      },
+      {
+         "name": "Goblin Curse",
+         "slug": "goblin-curse",
+         "code": "28000024",
+         "arena": 14,
+         "elixir": 2
+      },
+      {
+         "name": "Mother Witch",
+         "slug": "mother-witch",
+         "code": "26000083",
+         "arena": 15,
+         "elixir": 4
+      },
+      {
+         "name": "Goblin Machine",
+         "slug": "goblin-machine",
+         "code": "26000096",
+         "arena": 15,
+         "elixir": 5
+      },
+      {
+         "name": "Void",
+         "slug": "void",
+         "code": "28000023",
+         "arena": 15,
+         "elixir": 3
+      },
+      {
+         "name": "Spirit Empress",
+         "slug": "spirit-empress",
+         "code": "28000025",
+         "arena": 15,
+         "elixir": 6
+      },
+      {
+         "name": "Skeleton King",
+         "slug": "skeleton-king",
+         "code": "26000069",
+         "arena": 16,
+         "elixir": 4
+      },
+      {
+         "name": "Golden Knight",
+         "slug": "golden-knight",
+         "code": "26000074",
+         "arena": 16,
+         "elixir": 4
+      },
+      {
+         "name": "Mighty Miner",
+         "slug": "mighty-miner",
+         "code": "26000065",
+         "arena": 17,
+         "elixir": 4
+      },
+      {
+         "name": "Archer Queen",
+         "slug": "archer-queen",
+         "code": "26000072",
+         "arena": 17,
+         "elixir": 5
+      },
+      {
+         "name": "Boss Bandit",
+         "slug": "boss-bandit",
+         "code": "26000103",
+         "arena": 17,
+         "elixir": 6
+      },
+      {
+         "name": "Monk",
+         "slug": "monk",
+         "code": "26000077",
+         "arena": 18,
+         "elixir": 5
+      },
+      {
+         "name": "Little Prince",
+         "slug": "little-prince",
+         "code": "26000093",
+         "arena": 18,
+         "elixir": 3
+      },
+      {
+         "name": "Goblinstein",
+         "slug": "goblinstein",
+         "code": "26000099",
+         "arena": 18,
+         "elixir": 5
+      }
+   ]
+}

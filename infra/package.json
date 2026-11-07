@@ -1,0 +1,14 @@
+{
+   "name": "@deckr/infra",
+   "version": "1.0.0",
+   "private": true,
+   "type": "module",
+   "description": "Deckr's Railway infrastructure as code: web, API and MongoDB",
+   "scripts": {
+      "typecheck": "tsc -p tsconfig.json"
+   },
+   "devDependencies": {
+      "railway": "3.16.0",
+      "typescript": "7.0.2"
+   }
+}
