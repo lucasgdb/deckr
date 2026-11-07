@@ -87,6 +87,8 @@ const ptBr = {
    footer: {
       tagline: 'Deckr — montador de decks para Clash Royale',
       madeBy: 'Feito por Lucas Bittencourt',
+      privacy: 'Política de privacidade',
+      privacyUrl: 'https://lucasbittencourt.dev/pt-br/tool/deckr/privacy',
       opensInNewTab: '(abre lucasbittencourt.dev em uma nova aba)',
       /** Required by Supercell's Fan Content Policy. */
       disclaimer:

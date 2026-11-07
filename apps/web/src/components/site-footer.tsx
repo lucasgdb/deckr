@@ -18,16 +18,22 @@ export function SiteFooter() {
             {t.footer.tagline}
          </span>
          <LanguageLinks />
-         <a
-            href="https://lucasbittencourt.dev/"
-            target="_blank"
-            rel="noopener"
-            className="inline-flex items-center gap-1 rounded-full text-muted transition-colors hover:text-ink"
-         >
-            {t.footer.madeBy}
-            <ArrowUpRight aria-hidden className="size-3.5" />
-            <span className="sr-only">{t.footer.opensInNewTab}</span>
-         </a>
+         <span className="flex flex-wrap items-center gap-x-4 gap-y-2">
+            {/* Deckr's privacy policy is published with the other tools, on lucasbittencourt.dev. */}
+            <a href={t.footer.privacyUrl} className="rounded-full text-muted transition-colors hover:text-ink">
+               {t.footer.privacy}
+            </a>
+            <a
+               href="https://lucasbittencourt.dev/"
+               target="_blank"
+               rel="noopener"
+               className="inline-flex items-center gap-1 rounded-full text-muted transition-colors hover:text-ink"
+            >
+               {t.footer.madeBy}
+               <ArrowUpRight aria-hidden className="size-3.5" />
+               <span className="sr-only">{t.footer.opensInNewTab}</span>
+            </a>
+         </span>
          <p className="order-last basis-full text-pretty">
             {t.footer.disclaimer}{' '}
             <a

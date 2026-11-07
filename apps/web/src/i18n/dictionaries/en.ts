@@ -82,6 +82,8 @@ const en: Dictionary = {
    footer: {
       tagline: 'Deckr — deck builder for Clash Royale',
       madeBy: 'Made by Lucas Bittencourt',
+      privacy: 'Privacy policy',
+      privacyUrl: 'https://lucasbittencourt.dev/tool/deckr/privacy',
       opensInNewTab: '(opens lucasbittencourt.dev in a new tab)',
       disclaimer:
          'This material is unofficial and is not endorsed by Supercell. For more information see Supercell’s Fan Content Policy:',
