@@ -254,7 +254,8 @@ export function DeckBuilder() {
                                     {cycle ?? '—'}
                                  </Prepaint>
                               </dd>
-                              <dd>
+                              {/* A flex box, so the inline button isn't sat on the text baseline (which pushes the icon up). */}
+                              <dd className="flex">
                                  <Popover
                                     title={t.builder.statsHelpTitle}
                                     trigger={
