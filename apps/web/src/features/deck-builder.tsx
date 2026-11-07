@@ -174,7 +174,7 @@ export function DeckBuilder() {
       <>
          {/* The query string is only known in the browser; only this reader waits for it, not the whole page. */}
          <Suspense fallback={null}>
-            <DeckFromUrl onDeck={loadDeck} />
+            <DeckFromUrl ready={deckReady} onDeck={loadDeck} />
          </Suspense>
          <PageHeader
             title={t.builder.title}
@@ -458,13 +458,18 @@ export function DeckBuilder() {
    );
 }
 
-/** A deck handed over in the URL (from the profile or a shared link) opens in the builder, then the URL is cleaned. */
-function DeckFromUrl({ onDeck }: { onDeck: (deck: number[]) => void }) {
+/**
+ * A deck handed over in the URL (a shared link) opens in the builder, then the URL is cleaned. It waits for the draft
+ * to be restored (`ready`): this effect runs before the editor's, and the draft would otherwise replace the deck.
+ */
+function DeckFromUrl({ ready, onDeck }: { ready: boolean; onDeck: (deck: number[]) => void }) {
    const router = useRouter();
    const pathname = usePathname();
    const searchParams = useSearchParams();
 
    useEffect(() => {
+      if (!ready) return;
+
       const shared = searchParams.get('deck');
       const parsed = shared ? parseDeckLink(`?deck=${shared}`) : null;
 
@@ -472,7 +477,7 @@ function DeckFromUrl({ onDeck }: { onDeck: (deck: number[]) => void }) {
          onDeck(parsed);
          router.replace(pathname, { scroll: false });
       }
-   }, [searchParams, router, pathname, onDeck]);
+   }, [ready, searchParams, router, pathname, onDeck]);
 
    return null;
 }

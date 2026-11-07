@@ -2,7 +2,6 @@
 
 import { type PlayerProfile, playerTagSchema } from '@deckr/shared';
 import { ArrowLeftRight, Swords, Trophy } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { type FormEvent, type ReactNode, useRef, useState } from 'react';
 import { DeckGrid } from '@/components/deck-grid';
 import { Button, Dialog, ErrorState, Field, PrefixInput, Skeleton, TextSkeleton } from '@/components/ui';
@@ -17,7 +16,7 @@ import {
    type MetricKey,
    recentOpponents,
 } from '@/lib/compare';
-import { deckQuery } from '@/lib/deck-actions';
+import { useOpenInBuilder } from '@/lib/deck-editor';
 import { formatDecimal, formatNumber, formatPercent } from '@/lib/format';
 import { cn } from '@/lib/utils';
 
@@ -332,8 +331,8 @@ function Decks({
    comparison: Comparison;
    onTry: () => void;
 }) {
-   const { locale, t, href } = useI18n();
-   const router = useRouter();
+   const { locale, t } = useI18n();
+   const openInBuilder = useOpenInBuilder();
    const elixir = (value: number | null) => (value === null ? '—' : t.compare.elixir(formatDecimal(value, locale)));
 
    return (
@@ -353,7 +352,7 @@ function Decks({
                      className="-ml-2"
                      onClick={() => {
                         onTry();
-                        router.push(href(`/?${deckQuery(them.currentDeck)}`));
+                        openInBuilder(them.currentDeck);
                      }}
                   >
                      <Swords aria-hidden />

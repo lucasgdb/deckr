@@ -1,8 +1,10 @@
 'use client';
 
 import { CATALOG_VERSION, cards, DECK_SIZE, EMPTY_CARD } from '@deckr/shared';
+import { useRouter } from 'next/navigation';
 import { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
-import { shuffled } from './deck-actions';
+import { useI18n } from '@/i18n/provider';
+import { deckQuery, shuffled } from './deck-actions';
 
 /**
  * A slot in the deck being built. The id travels with the card when slots are reordered, which is what
@@ -16,6 +18,8 @@ export interface Slot {
 
 const HISTORY_LIMIT = 50;
 const DRAFT_KEY = 'deckr.draft';
+/** A deck another screen sent to the builder ("Try this deck"), waiting for the builder to open. */
+const INCOMING_KEY = 'deckr.incoming';
 
 let nextId = 0;
 
@@ -65,6 +69,44 @@ function writeDraft(slots: readonly Slot[]) {
    }
 }
 
+/** Hands a deck to the builder, which loads it as soon as it opens. False when storage is unavailable. */
+function handOffDeck(deck: readonly number[]): boolean {
+   try {
+      sessionStorage.setItem(INCOMING_KEY, JSON.stringify(deck));
+      return true;
+   } catch {
+      return false;
+   }
+}
+
+/** The deck handed to the builder, if any; it's taken only once. */
+function takeIncomingDeck(): number[] | null {
+   try {
+      const raw = sessionStorage.getItem(INCOMING_KEY);
+      sessionStorage.removeItem(INCOMING_KEY);
+      const deck = raw ? (JSON.parse(raw) as unknown) : null;
+
+      return Array.isArray(deck) && deck.length === DECK_SIZE && deck.every(isKnownCard) ? deck : null;
+   } catch {
+      return null;
+   }
+}
+
+/**
+ * Opens a deck in the builder from another screen (the profile, a battle, a comparison). The deck goes through
+ * session storage rather than the URL, so the address changes once and the builder loads it right after restoring
+ * the draft, as an ordinary change that Undo reverts. Without storage, it falls back to a `?deck=` link.
+ */
+export function useOpenInBuilder() {
+   const router = useRouter();
+   const { href } = useI18n();
+
+   return useCallback(
+      (deck: readonly number[]) => router.push(href(handOffDeck(deck) ? '/' : `/?${deckQuery(deck)}`)),
+      [router, href],
+   );
+}
+
 interface EditorState {
    slots: Slot[];
    /** Earlier decks, most recent last. */
@@ -102,13 +144,18 @@ export function useDeckEditor() {
    // False until the draft is restored: the deck shown before that is the server's empty one.
    const [ready, setReady] = useState(false);
 
-   // Restore the draft once, after hydration (the server renders an empty deck).
+   // Restore the draft once, after hydration (the server renders an empty deck). A deck sent from another screen
+   // is loaded on top of it, so Undo goes back to the draft.
    useEffect(() => {
       if (restored.current) return;
       restored.current = true;
 
       const draft = readDraft();
       if (draft) dispatch({ type: 'restore', slots: draft });
+
+      const incoming = takeIncomingDeck();
+      if (incoming) dispatch({ type: 'change', change: () => toSlots(incoming) });
+
       setReady(true);
    }, []);
 

@@ -13,7 +13,6 @@ import {
    Swords,
    Trophy,
 } from 'lucide-react';
-import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { CompareDialog } from '@/components/compare-dialog';
 import { DeckGrid } from '@/components/deck-grid';
@@ -36,7 +35,8 @@ import {
 import { useI18n } from '@/i18n/provider';
 import { errorMessage } from '@/lib/api';
 import { useCardPool } from '@/lib/card-pool';
-import { copyDeckLink, deckQuery, describeDeck, useOpenDeckHref } from '@/lib/deck-actions';
+import { copyDeckLink, describeDeck, useOpenDeckHref } from '@/lib/deck-actions';
+import { useOpenInBuilder } from '@/lib/deck-editor';
 import { formatChange, formatNumber, formatPercent, timeAgo } from '@/lib/format';
 import { openLogin, refreshPlayer, useSession } from '@/lib/session';
 import { cn } from '@/lib/utils';
@@ -213,8 +213,8 @@ function Stats({ player }: { player: PlayerProfile | null }) {
 }
 
 function DeckActions({ deck, name }: { deck: number[] | null; name: string }) {
-   const { t, href } = useI18n();
-   const router = useRouter();
+   const { t } = useI18n();
+   const openInBuilder = useOpenInBuilder();
    const cards = deck ?? [];
    const complete = deck !== null && isCompleteDeck(deck);
    const open = useOpenDeckHref(cards);
@@ -224,7 +224,7 @@ function DeckActions({ deck, name }: { deck: number[] | null; name: string }) {
       <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
          <Button
             className={actionBarItem}
-            onClick={() => router.push(href(`/?${deckQuery(cards)}`))}
+            onClick={() => openInBuilder(cards)}
             disabled={!deck}
             aria-label={t.profile.editLabel(name)}
          >
@@ -462,16 +462,12 @@ function BattleRow({ battle }: { battle: BattleSummary }) {
 }
 
 function OpponentDeckActions({ deck, name }: { deck: number[]; name: string }) {
-   const { t, href } = useI18n();
-   const router = useRouter();
+   const { t } = useI18n();
+   const openInBuilder = useOpenInBuilder();
 
    return (
       <>
-         <Button
-            variant="ghost"
-            onClick={() => router.push(href(`/?${deckQuery(deck)}`))}
-            aria-label={t.profile.editLabel(name)}
-         >
+         <Button variant="ghost" onClick={() => openInBuilder(deck)} aria-label={t.profile.editLabel(name)}>
             <Swords aria-hidden />
             {t.profile.tryDeck}
          </Button>
