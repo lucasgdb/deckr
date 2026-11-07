@@ -29,7 +29,7 @@ export function buildManifest(locale: Locale): Manifest {
 
    return {
       id: '/',
-      name: t.meta.title,
+      name: t.meta.appName,
       short_name: t.meta.siteName,
       description: t.meta.description,
       lang: localeConfig[locale].htmlLang,

@@ -4,97 +4,116 @@
       {
          "level": 0,
          "slug": "training-camp",
-         "name": "Training Camp"
+         "name": "Training Camp",
+         "namePtBr": "Campo de Treino"
       },
       {
          "level": 1,
          "slug": "goblin-stadium",
-         "name": "Goblin Stadium"
+         "name": "Goblin Stadium",
+         "namePtBr": "Estádio Goblin"
       },
       {
          "level": 2,
          "slug": "bone-pit",
-         "name": "Bone Pit"
+         "name": "Bone Pit",
+         "namePtBr": "Fosso dos Ossos"
       },
       {
          "level": 3,
          "slug": "barbarian-bowl",
-         "name": "Barbarian Bowl"
+         "name": "Barbarian Bowl",
+         "namePtBr": "Torneio Bárbaro"
       },
       {
          "level": 4,
          "slug": "spell-valley",
-         "name": "Spell Valley"
+         "name": "Spell Valley",
+         "namePtBr": "Vale dos Feitiços"
       },
       {
          "level": 5,
          "slug": "builders-workshop",
-         "name": "Builder's Workshop"
+         "name": "Builder's Workshop",
+         "namePtBr": "Oficina do Construtor"
       },
       {
          "level": 6,
          "slug": "pekkas-playhouse",
-         "name": "P.E.K.K.A's Playhouse"
+         "name": "P.E.K.K.A's Playhouse",
+         "namePtBr": "Parquinho da P.E.K.K.A"
       },
       {
          "level": 7,
          "slug": "royal-arena",
-         "name": "Royal Arena"
+         "name": "Royal Arena",
+         "namePtBr": "Arena Real"
       },
       {
          "level": 8,
          "slug": "frozen-peak",
-         "name": "Frozen Peak"
+         "name": "Frozen Peak",
+         "namePtBr": "Pico Congelado"
       },
       {
          "level": 9,
          "slug": "jungle-arena",
-         "name": "Jungle Arena"
+         "name": "Jungle Arena",
+         "namePtBr": "Arena da Selva"
       },
       {
          "level": 10,
          "slug": "hog-mountain",
-         "name": "Hog Mountain"
+         "name": "Hog Mountain",
+         "namePtBr": "Montanha do Porco"
       },
       {
          "level": 11,
          "slug": "electro-valley",
-         "name": "Electro Valley"
+         "name": "Electro Valley",
+         "namePtBr": "Eletrovale"
       },
       {
          "level": 12,
          "slug": "spooky-town",
-         "name": "Spooky Town"
+         "name": "Spooky Town",
+         "namePtBr": "Cidade Assombrada"
       },
       {
          "level": 13,
          "slug": "rascals-hideout",
-         "name": "Rascal's Hideout"
+         "name": "Rascal's Hideout",
+         "namePtBr": "Covil dos Patifes"
       },
       {
          "level": 14,
          "slug": "serenity-peak",
-         "name": "Serenity Peak"
+         "name": "Serenity Peak",
+         "namePtBr": "Pico Sereno"
       },
       {
          "level": 15,
          "slug": "miners-mine",
-         "name": "Miner's Mine"
+         "name": "Miner's Mine",
+         "namePtBr": "Mina do Mineiro"
       },
       {
          "level": 16,
          "slug": "executioners-kitchen",
-         "name": "Executioner's Kitchen"
+         "name": "Executioner's Kitchen",
+         "namePtBr": "Cozinha do Executor"
       },
       {
          "level": 17,
          "slug": "royal-crypt",
-         "name": "Royal Crypt"
+         "name": "Royal Crypt",
+         "namePtBr": "Cripta Real"
       },
       {
          "level": 18,
          "slug": "silent-sanctuary",
-         "name": "Silent Sanctuary"
+         "name": "Silent Sanctuary",
+         "namePtBr": "Santuário Silencioso"
       }
    ],
    "cards": [
@@ -110,672 +129,768 @@
          "slug": "arrows",
          "code": "28000001",
          "arena": 0,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Flechas"
       },
       {
          "name": "Minions",
          "slug": "minions",
          "code": "26000005",
          "arena": 0,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Servos"
       },
       {
          "name": "Archers",
          "slug": "archers",
          "code": "26000001",
          "arena": 0,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Arqueiras"
       },
       {
          "name": "Knight",
          "slug": "knight",
          "code": "26000000",
          "arena": 0,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Cavaleiro"
       },
       {
          "name": "Fireball",
          "slug": "fireball",
          "code": "28000000",
          "arena": 0,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Bola de Fogo"
       },
       {
          "name": "Mini P.E.K.K.A",
          "slug": "mini-pekka",
          "code": "26000018",
          "arena": 0,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Mini P.E.K.K.A"
       },
       {
          "name": "Musketeer",
          "slug": "musketeer",
          "code": "26000014",
          "arena": 0,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Mosqueteira"
       },
       {
          "name": "Giant",
          "slug": "giant",
          "code": "26000003",
          "arena": 0,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Gigante"
       },
       {
          "name": "Wall Breakers",
          "slug": "wall-breakers",
          "code": "26000058",
          "arena": 12,
-         "elixir": 2
+         "elixir": 2,
+         "namePtBr": "Destruidores de Muros"
       },
       {
          "name": "Prince",
          "slug": "prince",
          "code": "26000016",
          "arena": 7,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Príncipe"
       },
       {
          "name": "Baby Dragon",
          "slug": "baby-dragon",
          "code": "26000015",
          "arena": 6,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Bebê Dragão"
       },
       {
          "name": "Skeleton Army",
          "slug": "skeleton-army",
          "code": "26000012",
          "arena": 6,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Exército de Esqueletos"
       },
       {
          "name": "Spear Goblins",
          "slug": "spear-goblins",
          "code": "26000019",
          "arena": 1,
-         "elixir": 2
+         "elixir": 2,
+         "namePtBr": "Goblins Lanceiros"
       },
       {
          "name": "Goblins",
          "slug": "goblins",
          "code": "26000002",
          "arena": 1,
-         "elixir": 2
+         "elixir": 2,
+         "namePtBr": "Goblins"
       },
       {
          "name": "Goblin Hut",
          "slug": "goblin-hut",
          "code": "27000001",
          "arena": 1,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Cabana de Goblins"
       },
       {
          "name": "Hog Rider",
          "slug": "hog-rider",
          "code": "26000021",
          "arena": 5,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Corredor"
       },
       {
          "name": "Goblin Barrel",
          "slug": "goblin-barrel",
          "code": "28000004",
          "arena": 6,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Barril de Goblins"
       },
       {
          "name": "Hunter",
          "slug": "hunter",
          "code": "26000044",
          "arena": 10,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Caçador"
       },
       {
          "name": "Bomber",
          "slug": "bomber",
          "code": "26000013",
          "arena": 2,
-         "elixir": 2
+         "elixir": 2,
+         "namePtBr": "Bombardeiro"
       },
       {
          "name": "Skeletons",
          "slug": "skeletons",
          "code": "26000010",
          "arena": 2,
-         "elixir": 1
+         "elixir": 1,
+         "namePtBr": "Esqueletos"
       },
       {
          "name": "Tombstone",
          "slug": "tombstone",
          "code": "27000009",
          "arena": 2,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Lápide"
       },
       {
          "name": "Valkyrie",
          "slug": "valkyrie",
          "code": "26000011",
          "arena": 2,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Valquíria"
       },
       {
          "name": "Giant Skeleton",
          "slug": "giant-skeleton",
          "code": "26000020",
          "arena": 8,
-         "elixir": 6
+         "elixir": 6,
+         "namePtBr": "Esqueleto Gigante"
       },
       {
          "name": "Witch",
          "slug": "witch",
          "code": "26000007",
          "arena": 6,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Bruxa"
       },
       {
          "name": "Cannon",
          "slug": "cannon",
          "code": "27000000",
          "arena": 3,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Canhão"
       },
       {
          "name": "Barbarians",
          "slug": "barbarians",
          "code": "26000008",
          "arena": 3,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Bárbaros"
       },
       {
          "name": "Barbarian Hut",
          "slug": "barbarian-hut",
          "code": "27000005",
          "arena": 9,
-         "elixir": 6
+         "elixir": 6,
+         "namePtBr": "Cabana de Bárbaros"
       },
       {
          "name": "Battle Ram",
          "slug": "battle-ram",
          "code": "26000036",
          "arena": 3,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Aríete de Batalha"
       },
       {
          "name": "Barbarian Barrel",
          "slug": "barbarian-barrel",
          "code": "28000015",
          "arena": 9,
-         "elixir": 2
+         "elixir": 2,
+         "namePtBr": "Barril de Bárbaro"
       },
       {
          "name": "Golem",
          "slug": "golem",
          "code": "26000009",
          "arena": 10,
-         "elixir": 8
+         "elixir": 8,
+         "namePtBr": "Golem"
       },
       {
          "name": "Zap",
          "slug": "zap",
          "code": "28000008",
          "arena": 5,
-         "elixir": 2
+         "elixir": 2,
+         "namePtBr": "Zap"
       },
       {
          "name": "Minion Horde",
          "slug": "minion-horde",
          "code": "26000022",
          "arena": 10,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Horda de Servos"
       },
       {
          "name": "Inferno Tower",
          "slug": "inferno-tower",
          "code": "27000003",
          "arena": 4,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Torre Inferno"
       },
       {
          "name": "Mega Minion",
          "slug": "mega-minion",
          "code": "26000039",
          "arena": 3,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Megasservo"
       },
       {
          "name": "Lightning",
          "slug": "lightning",
          "code": "28000007",
          "arena": 8,
-         "elixir": 6
+         "elixir": 6,
+         "namePtBr": "Relâmpago"
       },
       {
          "name": "P.E.K.K.A",
          "slug": "pekka",
          "code": "26000004",
          "arena": 6,
-         "elixir": 7
+         "elixir": 7,
+         "namePtBr": "P.E.K.K.A"
       },
       {
          "name": "Miner",
          "slug": "miner",
          "code": "26000032",
          "arena": 11,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Mineiro"
       },
       {
          "name": "Lava Hound",
          "slug": "lava-hound",
          "code": "26000029",
          "arena": 13,
-         "elixir": 7
+         "elixir": 7,
+         "namePtBr": "Lava Hound"
       },
       {
          "name": "Bats",
          "slug": "bats",
          "code": "26000049",
          "arena": 5,
-         "elixir": 2
+         "elixir": 2,
+         "namePtBr": "Morcegos"
       },
       {
          "name": "Fire Spirit",
          "slug": "fire-spirit",
          "code": "26000031",
          "arena": 4,
-         "elixir": 1
+         "elixir": 1,
+         "namePtBr": "Espírito de Fogo"
       },
       {
          "name": "Furnace",
          "slug": "furnace",
          "code": "27000010",
          "arena": 10,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Fornalha"
       },
       {
          "name": "Wizard",
          "slug": "wizard",
          "code": "26000017",
          "arena": 4,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Mago"
       },
       {
          "name": "Tornado",
          "slug": "tornado",
          "code": "28000012",
          "arena": 15,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Tornado"
       },
       {
          "name": "Poison",
          "slug": "poison",
          "code": "28000009",
          "arena": 9,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Veneno"
       },
       {
          "name": "Magic Archer",
          "slug": "magic-archer",
          "code": "26000062",
          "arena": 13,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Arqueiro Mágico"
       },
       {
          "name": "Night Witch",
          "slug": "night-witch",
          "code": "26000048",
          "arena": 14,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Bruxa Sombria"
       },
       {
          "name": "Mortar",
          "slug": "mortar",
          "code": "27000002",
          "arena": 5,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Morteiro"
       },
       {
          "name": "Skeleton Barrel",
          "slug": "skeleton-barrel",
          "code": "26000056",
          "arena": 9,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Barril de Esqueletos"
       },
       {
          "name": "Rocket",
          "slug": "rocket",
          "code": "28000003",
          "arena": 5,
-         "elixir": 6
+         "elixir": 6,
+         "namePtBr": "Foguete"
       },
       {
          "name": "Flying Machine",
          "slug": "flying-machine",
          "code": "26000057",
          "arena": 5,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Máquina Voadora"
       },
       {
          "name": "X-Bow",
          "slug": "x-bow",
          "code": "27000008",
          "arena": 10,
-         "elixir": 6
+         "elixir": 6,
+         "namePtBr": "X-Besta"
       },
       {
          "name": "Balloon",
          "slug": "balloon",
          "code": "26000006",
          "arena": 7,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Balão"
       },
       {
          "name": "The Log",
          "slug": "the-log",
          "code": "28000011",
          "arena": 11,
-         "elixir": 2
+         "elixir": 2,
+         "namePtBr": "O Tronco"
       },
       {
          "name": "Inferno Dragon",
          "slug": "inferno-dragon",
          "code": "26000037",
          "arena": 11,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Dragão Infernal"
       },
       {
          "name": "Royal Recruits",
          "slug": "royal-recruits",
          "code": "26000047",
          "arena": 7,
-         "elixir": 7
+         "elixir": 7,
+         "namePtBr": "Recrutas Reais"
       },
       {
          "name": "Royal Giant",
          "slug": "royal-giant",
          "code": "26000024",
          "arena": 7,
-         "elixir": 6
+         "elixir": 6,
+         "namePtBr": "Gigante Real"
       },
       {
          "name": "Heal Spirit",
          "slug": "heal-spirit",
          "code": "28000016",
          "arena": 13,
-         "elixir": 1
+         "elixir": 1,
+         "namePtBr": "Espírito Curador"
       },
       {
          "name": "Three Musketeers",
          "slug": "three-musketeers",
          "code": "26000028",
          "arena": 7,
-         "elixir": 9
+         "elixir": 9,
+         "namePtBr": "Três Mosqueteiras"
       },
       {
          "name": "Dark Prince",
          "slug": "dark-prince",
          "code": "26000027",
          "arena": 7,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Príncipe das Trevas"
       },
       {
          "name": "Guards",
          "slug": "guards",
          "code": "26000025",
          "arena": 6,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Guardas"
       },
       {
          "name": "Mega Knight",
          "slug": "mega-knight",
          "code": "26000055",
          "arena": 11,
-         "elixir": 7
+         "elixir": 7,
+         "namePtBr": "Megacavaleiro"
       },
       {
          "name": "Princess",
          "slug": "princess",
          "code": "26000026",
          "arena": 11,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Princesa"
       },
       {
          "name": "Giant Snowball",
          "slug": "giant-snowball",
          "code": "28000017",
          "arena": 8,
-         "elixir": 2
+         "elixir": 2,
+         "namePtBr": "Bola de Neve"
       },
       {
          "name": "Ice Spirit",
          "slug": "ice-spirit",
          "code": "26000030",
          "arena": 8,
-         "elixir": 1
+         "elixir": 1,
+         "namePtBr": "Espírito de Gelo"
       },
       {
          "name": "Elixir Collector",
          "slug": "elixir-collector",
          "code": "27000007",
          "arena": 15,
-         "elixir": 6
+         "elixir": 6,
+         "namePtBr": "Coletor de Elixir"
       },
       {
          "name": "Ice Golem",
          "slug": "ice-golem",
          "code": "26000038",
          "arena": 8,
-         "elixir": 2
+         "elixir": 2,
+         "namePtBr": "Golem de Gelo"
       },
       {
          "name": "Freeze",
          "slug": "freeze",
          "code": "28000005",
          "arena": 8,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Gelo"
       },
       {
          "name": "Bowler",
          "slug": "bowler",
          "code": "26000034",
          "arena": 13,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Lançador"
       },
       {
          "name": "Lumberjack",
          "slug": "lumberjack",
          "code": "26000035",
          "arena": 14,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Lenhador"
       },
       {
          "name": "Ice Wizard",
          "slug": "ice-wizard",
          "code": "26000023",
          "arena": 12,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Mago de Gelo"
       },
       {
          "name": "Rascals",
          "slug": "rascals",
          "code": "26000053",
          "arena": 13,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Patifes"
       },
       {
          "name": "Goblin Gang",
          "slug": "goblin-gang",
          "code": "26000041",
          "arena": 9,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Gangue de Goblins"
       },
       {
          "name": "Earthquake",
          "slug": "earthquake",
          "code": "28000014",
          "arena": 12,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Terremoto"
       },
       {
          "name": "Dart Goblin",
          "slug": "dart-goblin",
          "code": "26000040",
          "arena": 9,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Goblin com Dardo"
       },
       {
          "name": "Goblin Giant",
          "slug": "goblin-giant",
          "code": "26000060",
          "arena": 9,
-         "elixir": 6
+         "elixir": 6,
+         "namePtBr": "Goblin Gigante"
       },
       {
          "name": "Bandit",
          "slug": "bandit",
          "code": "26000046",
          "arena": 13,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Bandida"
       },
       {
          "name": "Elite Barbarians",
          "slug": "elite-barbarians",
          "code": "26000043",
          "arena": 10,
-         "elixir": 6
+         "elixir": 6,
+         "namePtBr": "Bárbaros de Elite"
       },
       {
          "name": "Bomb Tower",
          "slug": "bomb-tower",
          "code": "27000004",
          "arena": 4,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Torre de Bombas"
       },
       {
          "name": "Royal Hogs",
          "slug": "royal-hogs",
          "code": "26000059",
          "arena": 7,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Porcos Reais"
       },
       {
          "name": "Rage",
          "slug": "rage",
          "code": "28000002",
          "arena": 14,
-         "elixir": 2
+         "elixir": 2,
+         "namePtBr": "Fúria"
       },
       {
          "name": "Cannon Cart",
          "slug": "cannon-cart",
          "code": "26000054",
          "arena": 15,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Carrinho de Canhão"
       },
       {
          "name": "Fisherman",
          "slug": "fisherman",
          "code": "26000061",
          "arena": 15,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Pescador"
       },
       {
          "name": "Ram Rider",
          "slug": "ram-rider",
          "code": "26000051",
          "arena": 11,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Domadora de Carneiro"
       },
       {
          "name": "Tesla",
          "slug": "tesla",
          "code": "27000006",
          "arena": 10,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Tesla"
       },
       {
          "name": "Zappies",
          "slug": "zappies",
          "code": "26000052",
          "arena": 10,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Eletrocutadores"
       },
       {
          "name": "Clone",
          "slug": "clone",
          "code": "28000013",
          "arena": 15,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Clone"
       },
       {
          "name": "Electro Dragon",
          "slug": "electro-dragon",
          "code": "26000063",
          "arena": 12,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Dragão Elétrico"
       },
       {
          "name": "Electro Wizard",
          "slug": "electro-wizard",
          "code": "26000042",
          "arena": 11,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Mago Elétrico"
       },
       {
          "name": "Sparky",
          "slug": "sparky",
          "code": "26000033",
          "arena": 11,
-         "elixir": 6
+         "elixir": 6,
+         "namePtBr": "Sparky"
       },
       {
          "name": "Goblin Cage",
          "slug": "goblin-cage",
          "code": "27000012",
          "arena": 1,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Jaula de Goblin"
       },
       {
          "name": "Mirror",
          "slug": "mirror",
          "code": "28000006",
          "arena": 15,
-         "elixir": null
+         "elixir": null,
+         "namePtBr": "Espelho"
       },
       {
          "name": "Executioner",
          "slug": "executioner",
          "code": "26000045",
          "arena": 14,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Executor"
       },
       {
          "name": "Graveyard",
          "slug": "graveyard",
          "code": "28000010",
          "arena": 12,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Cemitério"
       },
       {
          "name": "Royal Ghost",
          "slug": "royal-ghost",
          "code": "26000050",
          "arena": 12,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Fantasma Real"
       },
       {
          "name": "Skeleton Dragons",
          "slug": "skeleton-dragons",
          "code": "26000080",
          "arena": 4,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Dragões Esqueleto"
       },
       {
          "name": "Electro Spirit",
          "slug": "electro-spirit",
          "code": "26000084",
          "arena": 4,
-         "elixir": 1
+         "elixir": 1,
+         "namePtBr": "Espírito Elétrico"
       },
       {
          "name": "Minion Giant",
@@ -789,7 +904,8 @@
          "slug": "battle-healer",
          "code": "26000068",
          "arena": 8,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Curadora Guerreira"
       },
       {
          "name": "Vines",
@@ -817,14 +933,16 @@
          "slug": "firecracker",
          "code": "26000064",
          "arena": 12,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Pirotécnica"
       },
       {
          "name": "Phoenix",
          "slug": "phoenix",
          "code": "26000087",
          "arena": 12,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Fênix"
       },
       {
          "name": "Goblin Demolisher",
@@ -838,7 +956,8 @@
          "slug": "electro-giant",
          "code": "26000085",
          "arena": 13,
-         "elixir": 7
+         "elixir": 7,
+         "namePtBr": "Gigante Elétrico"
       },
       {
          "name": "Suspicious Bush",
@@ -852,7 +971,8 @@
          "slug": "elixir-golem",
          "code": "26000067",
          "arena": 14,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Golem de Elixir"
       },
       {
          "name": "Ronin",
@@ -866,14 +986,16 @@
          "slug": "goblin-drill",
          "code": "27000013",
          "arena": 14,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Escavadeira de Goblins"
       },
       {
          "name": "Royal Delivery",
          "slug": "royal-delivery",
          "code": "28000018",
          "arena": 14,
-         "elixir": 3
+         "elixir": 3,
+         "namePtBr": "Encomenda Real"
       },
       {
          "name": "Goblin Curse",
@@ -887,7 +1009,8 @@
          "slug": "mother-witch",
          "code": "26000083",
          "arena": 15,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Bruxa Mãe"
       },
       {
          "name": "Goblin Machine",
@@ -915,28 +1038,32 @@
          "slug": "skeleton-king",
          "code": "26000069",
          "arena": 16,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Rei Esqueleto"
       },
       {
          "name": "Golden Knight",
          "slug": "golden-knight",
          "code": "26000074",
          "arena": 16,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Cavaleiro Dourado"
       },
       {
          "name": "Mighty Miner",
          "slug": "mighty-miner",
          "code": "26000065",
          "arena": 17,
-         "elixir": 4
+         "elixir": 4,
+         "namePtBr": "Mineiro Bombado"
       },
       {
          "name": "Archer Queen",
          "slug": "archer-queen",
          "code": "26000072",
          "arena": 17,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Rainha Arqueira"
       },
       {
          "name": "Boss Bandit",
@@ -950,7 +1077,8 @@
          "slug": "monk",
          "code": "26000077",
          "arena": 18,
-         "elixir": 5
+         "elixir": 5,
+         "namePtBr": "Monge"
       },
       {
          "name": "Little Prince",

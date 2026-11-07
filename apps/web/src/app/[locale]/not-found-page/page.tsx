@@ -11,7 +11,8 @@ import { localeParam } from '@/i18n/params';
 export async function generateMetadata({ params }: PageProps<'/[locale]/not-found-page'>): Promise<Metadata> {
    const t = getDictionary(await localeParam(params));
 
-   return { title: t.notFound.title, robots: { index: false, follow: true } };
+   // No canonical or hreflang: they'd point at the home page the layout declares, and an error page has no address.
+   return { title: t.notFound.title, alternates: {}, robots: { index: false, follow: true } };
 }
 
 export default function NotFoundPage() {

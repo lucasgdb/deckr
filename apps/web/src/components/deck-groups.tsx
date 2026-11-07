@@ -51,8 +51,8 @@ export function DeckGroups({ smart, deck, onHighlight }: DeckGroupsProps) {
                      <ol className="flex flex-none gap-1" aria-label={role.label}>
                         {group.cards.map((card) => (
                            <li key={card} className="w-9">
-                              <Tooltip render={<div />} content={getCard(card).name}>
-                                 <CardArt index={card} alt={getCard(card).name} sizes="36px" />
+                              <Tooltip render={<div />} content={t.common.name(getCard(card))}>
+                                 <CardArt index={card} alt={t.common.name(getCard(card))} sizes="36px" />
                               </Tooltip>
                            </li>
                         ))}

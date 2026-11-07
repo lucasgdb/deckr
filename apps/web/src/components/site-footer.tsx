@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { localeConfig, locales, switchLocalePath } from '@/i18n';
 import { useI18n } from '@/i18n/provider';
+import { repoUrl } from '@/lib/site';
 import { cn } from '@/lib/utils';
 import { BrandMark } from './brand-mark';
 import { InstallApp } from './pwa';
@@ -29,6 +30,18 @@ export function SiteFooter() {
                {t.footer.privacy}
             </a>
             <a
+               href={`${repoUrl}/issues`}
+               className="flex h-11 items-center rounded-full text-muted transition-colors hover:text-ink pointer-fine:sm:h-auto"
+            >
+               {t.footer.reportIssue}
+            </a>
+            <a
+               href={repoUrl}
+               className="flex h-11 items-center rounded-full text-muted transition-colors hover:text-ink pointer-fine:sm:h-auto"
+            >
+               {t.footer.sourceCode}
+            </a>
+            <a
                href="https://lucasbittencourt.dev/"
                target="_blank"
                rel="noopener"
@@ -39,6 +52,7 @@ export function SiteFooter() {
                <span className="sr-only">{t.footer.opensInNewTab}</span>
             </a>
          </span>
+         <p className="order-last basis-full text-pretty">{t.footer.about}</p>
          <p className="order-last basis-full text-pretty">
             {t.footer.disclaimer}{' '}
             <a

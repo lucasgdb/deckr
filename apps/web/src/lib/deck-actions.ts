@@ -17,7 +17,7 @@ export function shuffled<T>(items: readonly T[]): T[] {
 
 /** "Hog Rider, Musketeer and 6 more" — how a deck is named in lists and dialogs. */
 export function describeDeck(deck: readonly number[], t: Dictionary): string {
-   const names = deck.filter((card) => card !== EMPTY_CARD).map((card) => getCard(card).name);
+   const names = deck.filter((card) => card !== EMPTY_CARD).map((card) => t.common.name(getCard(card)));
 
    return names.length === 0 ? t.deck.empty : t.deck.describe(names);
 }

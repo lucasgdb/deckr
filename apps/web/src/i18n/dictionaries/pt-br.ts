@@ -10,23 +10,26 @@ const plural = (count: number, one: string, other: string) => (count === 1 ? one
 const ptBr = {
    meta: {
       siteName: 'Deckr',
-      title: 'Deckr — Montador de decks para Clash Royale',
+      /** The home page's `<title>`: what people search for first, the brand last. */
+      title: 'Montador de deck Clash Royale e gerador aleatório · Deckr',
+      /** The installed app's name. */
+      appName: 'Deckr — Montador de decks para Clash Royale',
       description:
-         'Monte decks de Clash Royale com 8 cartas: sorteie a partir das suas cartas, cole links de decks, salve os seus favoritos e veja seu perfil, coleção e próximos baús.',
+         'Monte ou sorteie decks de Clash Royale com as suas cartas: sorteio por arquétipo do meta, elixir médio, ciclo de 4 cartas e link para abrir no jogo. Grátis.',
       pages: {
          builder: {
-            title: 'Montador de decks',
+            title: 'Montador e gerador de decks',
             description:
-               'Sorteie decks de 8 cartas a partir das cartas que você tem, escolha carta por carta, veja o custo médio de elixir e abra o deck direto no Clash Royale.',
+               'Monte ou sorteie decks de Clash Royale com as suas cartas: sorteio por arquétipo do meta, elixir médio, ciclo de 4 cartas e link para abrir no jogo. Grátis.',
          },
          decks: {
             title: 'Meus decks',
             description: 'Os decks que você salvou no Deckr, prontos para copiar, compartilhar ou abrir no jogo.',
          },
          cards: {
-            title: 'Cartas',
+            title: 'Cartas do Clash Royale por arena',
             description:
-               'Todas as cartas de Clash Royale por arena. Escolha quais entram nos sorteios de deck ou use a sua coleção.',
+               'Todas as cartas do Clash Royale com os nomes do jogo, organizadas pela arena que libera cada uma. Escolha quais entram no gerador de decks ou use a sua coleção.',
          },
          chests: {
             title: 'Próximos baús',
@@ -57,6 +60,8 @@ const ptBr = {
       elixirCost: 'Custo de elixir',
       emptySlot: 'Espaço vazio',
       cards: 'Cartas',
+      /** A card's or arena's name as the game shows it in Portuguese (English when no translation is known yet). */
+      name: (item: { name: string; namePtBr?: string }) => item.namePtBr ?? item.name,
       cardTooltip: (name: string, elixir: number | null) => `${name} · ${elixir ?? '?'} de elixir`,
       playerDataRefreshed: 'Dados do jogador atualizados',
       couldNotRefresh: (reason: string) => `Não foi possível atualizar. ${reason}`,
@@ -87,6 +92,9 @@ const ptBr = {
    footer: {
       tagline: 'Deckr — montador de decks para Clash Royale',
       madeBy: 'Feito por Lucas Bittencourt',
+      about: 'O Deckr é um projeto de fã, gratuito e de código aberto. Os nomes e as arenas das cartas seguem o jogo; os dados de jogador vêm da API oficial do Clash Royale.',
+      sourceCode: 'Código no GitHub',
+      reportIssue: 'Reportar um problema',
       privacy: 'Política de privacidade',
       privacyUrl: 'https://lucasbittencourt.dev/pt-br/tool/deckr/privacy',
       opensInNewTab: '(abre lucasbittencourt.dev em uma nova aba)',
@@ -106,6 +114,21 @@ const ptBr = {
                'O Deckr é um montador de decks gratuito para Clash Royale. Ele sorteia decks de 8 cartas a partir das cartas que você escolher, mostra o custo médio de elixir e o ciclo de 4 cartas, e abre o deck direto no jogo.',
          },
          {
+            question: 'Como funciona o sorteio inteligente?',
+            answer:
+               'Em vez de 8 cartas quaisquer, o sorteio inteligente escolhe um arquétipo do meta (como Hog Cycle, Log Bait, Golem Beatdown ou LavaLoon) e preenche cada função com cartas do seu pool: condição de vitória, apoio, defesa, controle aéreo, um feitiço pequeno, um maior e cartas de ciclo. O deck sai com cara de deck de verdade, e o Deckr mostra o papel de cada carta.',
+         },
+         {
+            question: 'Dá para sortear só com as cartas que eu tenho?',
+            answer:
+               'Sim. Na página Cartas, escolha até qual arena você chegou ou marque carta por carta o que entra no pool. Entrando com a sua conta, “Usar minha coleção” coloca no pool exatamente as cartas que você já liberou. Os sorteios, normais e inteligentes, só usam o pool.',
+         },
+         {
+            question: 'Como colar o deck de outro jogador?',
+            answer:
+               'No Clash Royale, compartilhe o deck e copie o link (ele tem ?deck= seguido de oito números). No Deckr, use “Colar” e cole o link: o deck aparece no montador, pronto para trocar cartas, salvar ou abrir no jogo.',
+         },
+         {
             question: 'Como abrir um deck do Deckr no Clash Royale?',
             answer:
                'Preencha os 8 espaços e use “Abrir no jogo”. No celular, o deck abre no app do Clash Royale; no computador, o link oficial (link.clashroyale.com) oferece abrir o jogo. Você também pode copiar o link e mandar para alguém.',
@@ -123,7 +146,7 @@ const ptBr = {
          {
             question: 'Preciso entrar com a minha conta?',
             answer:
-               'Não. Montar, sortear e salvar decks funciona sem conta, e os decks ficam neste navegador. Entrando com a sua tag de jogador e uma chave da API do Clash Royale, você vê seu perfil, coleção, batalhas e próximos baús, e os decks salvos vão para a sua conta.',
+               'Não. Montar, sortear e salvar decks funciona sem conta, e os decks ficam neste navegador. Entrando com a sua tag de jogador e uma chave da API do Clash Royale, você vê seu perfil, coleção e batalhas, pode sortear só com as cartas que já liberou, e os decks salvos vão para a sua conta.',
          },
          {
             question: 'O Deckr é um site oficial do Clash Royale?',
@@ -131,6 +154,35 @@ const ptBr = {
                'Não. O Deckr é um projeto de fã, feito por Lucas Bittencourt, sem ligação com a Supercell. Os dados do jogador vêm da API oficial do Clash Royale.',
          },
       ],
+   },
+
+   /** How to build a deck, on the builder page under the tool: plain text for players and search engines. */
+   guide: {
+      title: 'Como montar um bom deck no Clash Royale',
+      intro: 'Um deck tem 8 cartas, e os que funcionam costumam seguir a mesma receita. O sorteio inteligente do Deckr usa essa receita; para montar o seu à mão, confira cada ponto:',
+      steps: [
+         {
+            title: 'Uma condição de vitória',
+            body: 'É a carta que derruba torres, como Corredor, Gigante, Golem, Balão ou X-Besta. Escolha uma (ou duas que combinam, como Lava Hound e Balão) e monte o resto do deck para levá-la até a torre.',
+         },
+         {
+            title: 'Dois feitiços',
+            body: 'Um pequeno, como Zap, O Tronco ou Flechas, para enxames como Exército de Esqueletos e Gangue de Goblins; e um maior, como Bola de Fogo, Veneno ou Foguete, para tropas de apoio e para fechar a partida na torre.',
+         },
+         {
+            title: 'Defesa e controle aéreo',
+            body: 'Uma construção ou tropa que segura tanques, como Canhão, Torre Inferno ou Mini P.E.K.K.A, e pelo menos duas cartas que acertam tropas aéreas, como Mosqueteira, Mago Elétrico ou Morcegos.',
+         },
+         {
+            title: 'Elixir médio entre 3 e 4',
+            body: 'Decks de ciclo, como Hog Cycle, ficam perto de 3 e voltam rápido à condição de vitória; decks pesados, como Golem Beatdown, passam de 4 e apostam em um grande ataque. O montador mostra o elixir médio e o ciclo de 4 cartas enquanto você escolhe.',
+         },
+      ],
+      pool: {
+         before: 'Use só as cartas que você tem: na página ',
+         link: 'Cartas',
+         after: ', escolha até qual arena você chegou ou carregue a sua coleção, e os sorteios passam a usar só essas cartas.',
+      },
    },
 
    deck: {
@@ -148,14 +200,14 @@ const ptBr = {
    },
 
    builder: {
-      title: 'Montador de decks',
+      title: 'Montador de deck para Clash Royale',
       summaryFew: (owned: number, total: number) =>
          `Só ${owned} de ${total} cartas estão no seu pool, então os sorteios deixam espaços vazios.`,
       summary: (owned: number, total: number) => `Os sorteios usam as ${owned} de ${total} cartas do seu pool.`,
       roll: 'Sortear um deck',
       rollOthers: (count: number) => `Sortear as outras ${count}`,
       ready: 'Deck pronto: copie o link, abra no Clash Royale ou salve.',
-      start: 'Sorteie um deck, escolha as cartas uma a uma ou cole um link.',
+      start: 'Sorteie um deck aleatório, use o sorteio inteligente para um deck do meta, escolha carta por carta ou cole um link.',
       slotsLeft: (count: number) =>
          `O Clash Royale só aceita decks completos: ${plural(count, 'falta 1 espaço', `faltam ${count} espaços`)}.`,
       yourDeck: 'Seu deck',
@@ -259,7 +311,7 @@ const ptBr = {
    },
 
    pool: {
-      title: 'Cartas',
+      title: 'Cartas do Clash Royale',
       /** "{owned} de {total} cartas…", with the two numbers styled by the page. */
       summary: { between: ' de ', after: ' cartas estão no seu pool. Os sorteios só usam essas.' },
       useCollection: 'Usar minha coleção',

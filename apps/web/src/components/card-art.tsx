@@ -8,11 +8,13 @@ interface CardArtProps {
    /** Empty when a visible label already names the card. */
    alt?: string;
    sizes: string;
+   /** Above the fold on first paint: load it right away, ahead of other images, instead of lazily. */
+   eager?: boolean;
    className?: string;
 }
 
 /** A card's art in the game's frame, or a named placeholder in the same frame when no art is available. */
-export function CardArt({ index, alt = '', sizes, className }: CardArtProps) {
+export function CardArt({ index, alt = '', sizes, eager, className }: CardArtProps) {
    const src = cardImage(index);
    const frame = 'aspect-[302/363] w-full';
 
@@ -26,7 +28,7 @@ export function CardArt({ index, alt = '', sizes, className }: CardArtProps) {
                className,
             )}
          >
-            {getCard(index).name}
+            {alt || getCard(index).name}
          </div>
       );
    }
@@ -38,6 +40,7 @@ export function CardArt({ index, alt = '', sizes, className }: CardArtProps) {
          width={CARD_WIDTH}
          height={CARD_HEIGHT}
          sizes={sizes}
+         {...(eager ? { loading: 'eager', fetchPriority: 'high' } : {})}
          draggable={false}
          className={cn(frame, 'object-contain', className)}
       />

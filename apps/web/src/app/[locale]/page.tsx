@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import { DeckGuide } from '@/components/deck-guide';
 import { Faq } from '@/components/faq';
 import { JsonLd } from '@/components/json-ld';
 import { DeckBuilder } from '@/features/deck-builder';
@@ -17,6 +18,7 @@ export default async function DeckBuilderPage({ params }: PageProps<'/[locale]'>
       <>
          <JsonLd data={homeStructuredData(locale)} />
          <DeckBuilder />
+         <DeckGuide locale={locale} />
          <Faq locale={locale} />
       </>
    );

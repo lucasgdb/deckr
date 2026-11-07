@@ -22,6 +22,12 @@ const inter = Inter({ subsets: ['latin'], variable: '--font-inter', display: 'sw
  */
 export const dynamicParams = false;
 
+/**
+ * Pages are regenerated at most once a day. Without it they'd be cached as "forever" (`s-maxage` of a year), and a
+ * CDN in front of the app could keep serving a page from an old deploy.
+ */
+export const revalidate = 86400;
+
 export function generateStaticParams() {
    return locales.map((locale) => ({ locale }));
 }

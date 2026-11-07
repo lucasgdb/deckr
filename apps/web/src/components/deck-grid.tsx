@@ -48,7 +48,7 @@ export function DeckGrid({ deck, variant = 'hand', label }: DeckGridProps) {
             const art = (
                <CardArt
                   index={index}
-                  alt={card.name}
+                  alt={t.common.name(card)}
                   sizes={hand ? '(min-width: 1024px) 130px, 25vw' : '(min-width: 640px) 110px, 25vw'}
                />
             );
@@ -64,7 +64,7 @@ export function DeckGrid({ deck, variant = 'hand', label }: DeckGridProps) {
                      art
                   ) : (
                      // No name under the art here, so it shows on hover. The image's alt text names it for screen readers.
-                     <Tooltip render={<div />} content={t.common.cardTooltip(card.name, card.elixir)}>
+                     <Tooltip render={<div />} content={t.common.cardTooltip(t.common.name(card), card.elixir)}>
                         {art}
                      </Tooltip>
                   )}
@@ -73,7 +73,7 @@ export function DeckGrid({ deck, variant = 'hand', label }: DeckGridProps) {
                         aria-hidden
                         className={cn('mt-1.5 truncate text-center text-xs', empty ? 'text-faint' : 'text-muted')}
                      >
-                        {empty ? '—' : card.name}
+                        {empty ? '—' : t.common.name(card)}
                      </p>
                   ) : null}
                </li>

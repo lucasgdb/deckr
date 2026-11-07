@@ -12,7 +12,7 @@ export function PageHeader({ title, summary, actions }: PageHeaderProps) {
    return (
       <div className="flex flex-wrap items-end justify-between gap-x-6 gap-y-4 pt-6 pb-5 sm:pt-9 sm:pb-6">
          <div className="min-w-0">
-            <h1 className="text-xl font-semibold tracking-[-0.01em]">{title}</h1>
+            <h1 className="text-2xl font-semibold tracking-[-0.015em] text-balance">{title}</h1>
             {summary ? <p className="mt-1 text-pretty text-muted">{summary}</p> : null}
          </div>
          {/* Phones: the actions fill the width in equal parts, easy to reach with a thumb. */}

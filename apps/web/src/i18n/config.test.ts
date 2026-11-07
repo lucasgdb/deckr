@@ -28,3 +28,13 @@ test('switching language keeps the page', () => {
    assert.equal(switchLocalePath('/next', 'en'), '/en/next');
    assert.equal(switchLocalePath('/en', 'pt-br'), '/');
 });
+
+test('the internal /pt-br path (what the server render sees after the rewrite) maps to the root URLs', () => {
+   assert.deepEqual(splitLocalePath('/pt-br'), { locale: 'pt-br', path: '/' });
+   assert.deepEqual(splitLocalePath('/pt-br/cards'), { locale: 'pt-br', path: '/cards' });
+   assert.equal(switchLocalePath('/pt-br', 'en'), '/en');
+   assert.equal(switchLocalePath('/pt-br/cards', 'en'), '/en/cards');
+   assert.equal(switchLocalePath('/pt-br/cards', 'pt-br'), '/cards');
+   // Only a whole `/pt-br` segment is the internal prefix.
+   assert.deepEqual(splitLocalePath('/pt-brasil'), { locale: 'pt-br', path: '/pt-brasil' });
+});

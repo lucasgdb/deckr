@@ -8,7 +8,11 @@ import { isIndexable, type PageKey, pages, siteUrl } from './site';
  * `alternates` and `openGraph` from parent layouts instead of merging them, so every page sets them in full.
  */
 
-export const pageUrl = (path: string, locale: Locale = defaultLocale) => `${siteUrl}${localizePath(path, locale)}`;
+/** Absolute URL of a page. The root is written without a trailing slash, as Next.js writes the canonical tag. */
+export function pageUrl(path: string, locale: Locale = defaultLocale): string {
+   const localized = localizePath(path, locale);
+   return localized === '/' ? siteUrl : `${siteUrl}${localized}`;
+}
 
 /** hreflang: every language's version of the page, plus `x-default` (Portuguese, the root URLs). */
 export function languageAlternates(path: string): Record<string, string> {

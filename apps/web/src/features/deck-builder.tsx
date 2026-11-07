@@ -93,6 +93,9 @@ export function DeckBuilder() {
    const [highlight, setHighlight] = useState<readonly number[] | null>(null);
 
    const rollSmart = () => {
+      // The buttons look ready before the pool is read from storage (a greyed-out main button reads as broken), so
+      // a click in that instant is ignored instead of rolling from the default pool.
+      if (!poolReady) return;
       const lockedCards = slots.filter((slot) => slot.locked).map((slot) => slot.card);
       const result = smartDeck(owned, lockedCards);
 
@@ -165,6 +168,7 @@ export function DeckBuilder() {
    );
 
    const empties = DECK_SIZE - filled;
+   const rollBlocked = owned.length === 0 || locked === DECK_SIZE;
 
    return (
       <>
@@ -177,21 +181,18 @@ export function DeckBuilder() {
             summary={summary}
             actions={
                <>
-                  <Button
-                     onClick={rollSmart}
-                     disabled={!poolReady || owned.length === 0 || locked === DECK_SIZE}
-                     title={t.smart.rollHint}
-                  >
+                  <Button onClick={rollSmart} disabled={poolReady && rollBlocked} title={t.smart.rollHint}>
                      <WandSparkles aria-hidden />
                      {t.smart.roll}
                   </Button>
                   <Button
                      variant="primary"
                      onClick={() => {
+                        if (!poolReady) return;
                         editor.roll(owned);
                         setSmart(null);
                      }}
-                     disabled={!poolReady || owned.length === 0 || locked === DECK_SIZE}
+                     disabled={poolReady && rollBlocked}
                   >
                      <Dices aria-hidden />
                      {locked > 0 ? t.builder.rollOthers(DECK_SIZE - locked) : t.builder.roll}
@@ -260,7 +261,7 @@ export function DeckBuilder() {
                                        <Button
                                           variant="ghost"
                                           size="icon"
-                                          className="-my-2.5 size-10 pointer-fine:sm:-my-1 pointer-fine:sm:size-6"
+                                          className="-my-3 size-11 pointer-fine:sm:-my-1 pointer-fine:sm:size-6"
                                           aria-label={t.builder.statsHelpLabel}
                                        >
                                           <CircleHelp aria-hidden />

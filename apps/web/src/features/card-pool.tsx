@@ -30,7 +30,9 @@ import { cn } from '@/lib/utils';
 function presetItems(custom: boolean, t: Dictionary): SelectItem<string>[] {
    return [
       { value: 'all', label: t.pool.allArenas },
-      ...arenas.slice(0, -1).map((arena) => ({ value: arena.slug, label: t.arenas.label(arena.level, arena.name) })),
+      ...arenas
+         .slice(0, -1)
+         .map((arena) => ({ value: arena.slug, label: t.arenas.label(arena.level, t.common.name(arena)) })),
       ...(custom ? [{ value: 'custom', label: t.pool.ownPick, disabled: true }] : []),
    ];
 }
@@ -113,10 +115,11 @@ export function CardPool() {
          />
 
          <div className="flex flex-col gap-gap" aria-busy={ready ? undefined : true}>
-            {arenas.map((arena) => (
+            {arenas.map((arena, position) => (
                <ArenaSection
                   key={arena.slug}
                   arena={arena}
+                  first={position === 0}
                   pool={pool}
                   ready={ready}
                   collection={collection}
@@ -131,6 +134,7 @@ export function CardPool() {
 
 function ArenaSection({
    arena,
+   first,
    pool,
    ready,
    collection,
@@ -138,6 +142,8 @@ function ArenaSection({
    onUpToHere,
 }: {
    arena: Arena;
+   /** The top section: its cards are on screen when the page opens, so their art loads first. */
+   first: boolean;
    pool: readonly boolean[];
    /** False while the pool and session load; `pool` is then the default (every card). */
    ready: boolean;
@@ -155,7 +161,7 @@ function ArenaSection({
          <CardHeader className="justify-start gap-x-4">
             <ArenaArt slug={arena.slug} level={arena.level} />
             <div className="min-w-0 flex-1 basis-40">
-               <CardTitle id={titleId}>{arena.name}</CardTitle>
+               <CardTitle id={titleId}>{t.common.name(arena)}</CardTitle>
                <CardDescription className="num">
                   {arena.level === 0 ? t.arenas.starting : t.arenas.level(arena.level)}
                   {arena.cards.length === 0 ? null : (
@@ -180,7 +186,7 @@ function ArenaSection({
                   className="-ml-2 sm:ml-0"
                   onClick={onUpToHere}
                   disabled={!ready}
-                  aria-label={t.pool.upToHereLabel(arena.name)}
+                  aria-label={t.pool.upToHereLabel(t.common.name(arena))}
                >
                   {t.pool.upToHere}
                </Button>
@@ -195,6 +201,7 @@ function ArenaSection({
                   <li key={index}>
                      <CardToggle
                         index={index}
+                        eager={first}
                         inPool={pool[index] === true}
                         ready={ready}
                         owned={collection ? (collection.get(index) ?? null) : undefined}
@@ -219,12 +226,14 @@ const levelLine = 'num -mt-1 text-[11px] text-faint';
  */
 function CardToggle({
    index,
+   eager,
    inPool,
    ready,
    owned,
    onToggle,
 }: {
    index: number;
+   eager: boolean;
    inPool: boolean;
    /** False while the pool and session load: placeholders cover the art and level if this browser has them stored. */
    ready: boolean;
@@ -235,7 +244,7 @@ function CardToggle({
    const { t } = useI18n();
    // Animate only changes the player makes, not the pool arriving from storage on load.
    const [touched, setTouched] = useState(false);
-   const name = getCard(index).name;
+   const name = t.common.name(getCard(index));
 
    return (
       <Toggle
@@ -252,6 +261,8 @@ function CardToggle({
          <span className="relative block w-full">
             <CardArt
                index={index}
+               alt={name}
+               eager={eager}
                sizes={artSizes}
                className={cn(
                   'block',

@@ -13,7 +13,10 @@ export const DECK_SIZE = 8;
 
 export interface Card {
    index: number;
+   /** English name, as the Clash Royale API returns it. */
    name: string;
+   /** The in-game Portuguese name, when known (cards newer than the translation source fall back to `name`). */
+   namePtBr?: string;
    /** Art file name (without extension) under the web app's `public/cards`. */
    slug: string;
    /** Clash Royale card id used in deck links; empty for the placeholder. */
@@ -29,6 +32,8 @@ export interface Arena {
    level: number;
    slug: string;
    name: string;
+   /** The in-game Portuguese name. */
+   namePtBr?: string;
    /** Indexes of the cards that unlock in this arena. */
    cards: number[];
 }

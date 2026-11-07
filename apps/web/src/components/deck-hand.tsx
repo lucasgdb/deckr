@@ -163,7 +163,7 @@ function SlotItem({ slot, index, onOpen, onToggleLock, onMove, onRemove, dimmed 
             <Tile
                ref={handleRef}
                onClick={onOpen}
-               aria-label={t.hand.filledSlot(position, card.name, slot.locked)}
+               aria-label={t.hand.filledSlot(position, t.common.name(card), slot.locked)}
                className={cn(
                   'relative cursor-grab transition-[filter] duration-150',
                   isDragging && 'cursor-grabbing drop-shadow-[0_16px_24px_rgb(0_0_0/0.65)]',
@@ -198,7 +198,7 @@ function SlotItem({ slot, index, onOpen, onToggleLock, onMove, onRemove, dimmed 
                            variant="ghost"
                            size="icon"
                            className="group/menu size-10 bg-transparent text-ink hover:bg-transparent pointer-fine:sm:size-7"
-                           aria-label={t.hand.actionsFor(card.name)}
+                           aria-label={t.hand.actionsFor(t.common.name(card))}
                         />
                      }
                   >
@@ -216,7 +216,7 @@ function SlotItem({ slot, index, onOpen, onToggleLock, onMove, onRemove, dimmed 
                <span className="text-faint">—</span>
             ) : (
                <>
-                  <span className="truncate text-muted">{card.name}</span>
+                  <span className="truncate text-muted">{t.common.name(card)}</span>
                   <ElixirCost cost={card.elixir} className="flex-none max-sm:hidden" />
                </>
             )}

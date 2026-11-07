@@ -14,7 +14,8 @@
       "typecheck": "next typegen && tsc -p tsconfig.json",
       "test": "node --test \"src/**/*.test.ts\"",
       "images": "node scripts/optimize-images.mjs",
-      "icons": "node scripts/pwa-icons.mjs"
+      "icons": "node scripts/pwa-icons.mjs",
+      "indexnow": "node scripts/indexnow.mjs"
    },
    "dependencies": {
       "@base-ui/react": "1.9.0",

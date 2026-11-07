@@ -127,5 +127,7 @@ export function describePreset(preset: PoolPreset, t: Dictionary): string {
    if (preset.kind === 'all') return t.pool.everyArena;
    if (preset.kind === 'custom') return t.pool.ownPick;
 
-   return preset.arena.level === 0 ? t.pool.trainingOnly : t.pool.upToArena(preset.arena.level, preset.arena.name);
+   return preset.arena.level === 0
+      ? t.pool.trainingOnly
+      : t.pool.upToArena(preset.arena.level, t.common.name(preset.arena));
 }

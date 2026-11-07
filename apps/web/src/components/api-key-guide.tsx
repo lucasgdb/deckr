@@ -30,7 +30,7 @@ export function CopyIp({ ip, className }: { ip: string | null | undefined; class
             <Button
                variant="ghost"
                size="icon"
-               className="size-10 pointer-fine:sm:size-8"
+               className="size-11 pointer-fine:sm:size-8"
                onClick={copy}
                aria-label={copied ? steps.copied : steps.copyIp}
             >

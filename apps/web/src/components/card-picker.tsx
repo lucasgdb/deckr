@@ -22,7 +22,10 @@ const costItems = (t: Dictionary): { value: Cost; label: string }[] => [
 
 const arenaItems = (t: Dictionary) => [
    { value: 'all', label: t.picker.anyArena },
-   ...arenas.map((arena: Arena) => ({ value: String(arena.level), label: t.arenas.label(arena.level, arena.name) })),
+   ...arenas.map((arena: Arena) => ({
+      value: String(arena.level),
+      label: t.arenas.label(arena.level, t.common.name(arena)),
+   })),
 ];
 
 const normalize = (text: string) =>
@@ -65,7 +68,9 @@ export function CardPicker({ open, onOpenChange, slot, current, deck, onPick, on
    ];
 
    const results = playableCards.filter((card) => {
-      if (query && !normalize(card.name).includes(normalize(query))) return false;
+      // Both names match, so "Hog" finds Corredor too.
+      if (query && ![card.name, t.common.name(card)].some((name) => normalize(name).includes(normalize(query))))
+         return false;
       if (source === 'pool' && !pool[card.index]) return false;
       if (source === 'collection' && !collection.has(card.index)) return false;
       if (cost !== 'any' && (cost === '7+' ? (card.elixir ?? 0) < 7 : card.elixir !== Number(cost))) return false;
@@ -73,7 +78,8 @@ export function CardPicker({ open, onOpenChange, slot, current, deck, onPick, on
       return true;
    });
 
-   const title = current === EMPTY_CARD ? t.picker.addTitle(slot) : t.picker.replaceTitle(getCard(current).name);
+   const title =
+      current === EMPTY_CARD ? t.picker.addTitle(slot) : t.picker.replaceTitle(t.common.name(getCard(current)));
 
    return (
       <Dialog open={open} onOpenChange={onOpenChange} size="lg" title={title}>
@@ -140,7 +146,7 @@ export function CardPicker({ open, onOpenChange, slot, current, deck, onPick, on
                            <Tile
                               onClick={() => onPick(card.index)}
                               disabled={chosen}
-                              aria-label={t.picker.cardLabel(card.name, card.elixir, elsewhere)}
+                              aria-label={t.picker.cardLabel(t.common.name(card), card.elixir, elsewhere)}
                               className="flex flex-col items-center gap-1 p-1 hover:bg-active data-disabled:opacity-100"
                            >
                               <CardArt
@@ -148,7 +154,7 @@ export function CardPicker({ open, onOpenChange, slot, current, deck, onPick, on
                                  sizes="96px"
                                  className={cn((chosen || elsewhere) && 'opacity-40')}
                               />
-                              <span className="w-full truncate text-center text-xs">{card.name}</span>
+                              <span className="w-full truncate text-center text-xs">{t.common.name(card)}</span>
                               <span className="flex items-center gap-1.5">
                                  <ElixirCost cost={card.elixir} />
                                  {chosen ? <span className="text-[11px] text-gold">{t.picker.inSlot}</span> : null}

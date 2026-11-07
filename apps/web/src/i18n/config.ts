@@ -45,8 +45,17 @@ export function localizePath(path: string, locale: Locale): string {
    return `${prefix}${path}`;
 }
 
-/** `/en/cards` → `{ locale: 'en', path: '/cards' }`; `/cards` → `{ locale: 'pt-br', path: '/cards' }`. */
+/**
+ * `/en/cards` → `{ locale: 'en', path: '/cards' }`; `/cards` → `{ locale: 'pt-br', path: '/cards' }`. Also takes the
+ * internal `/pt-br/cards`, which is what `usePathname()` returns while a rewritten Portuguese page renders on the server.
+ */
 export function splitLocalePath(pathname: string): { locale: Locale; path: string } {
+   const internal = `/${defaultLocale}`;
+
+   if (pathname === internal || pathname.startsWith(`${internal}/`)) {
+      return { locale: defaultLocale, path: pathname.slice(internal.length) || '/' };
+   }
+
    for (const locale of locales) {
       const prefix = localeConfig[locale].pathPrefix;
 

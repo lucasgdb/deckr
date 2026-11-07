@@ -5,23 +5,24 @@ const plural = (count: number, one: string, other: string) => (count === 1 ? one
 const en: Dictionary = {
    meta: {
       siteName: 'Deckr',
-      title: 'Deckr — Deck builder for Clash Royale',
+      title: 'Clash Royale Deck Builder & Random Deck Generator · Deckr',
+      appName: 'Deckr — Deck builder for Clash Royale',
       description:
-         'Build 8-card Clash Royale decks: roll them from the cards you have, paste deck links, save the ones you like and check your profile, collection and upcoming chests.',
+         'Build or roll Clash Royale decks from the cards you own: meta-archetype rolls, average elixir, 4-card cycle and a link that opens the deck in game. Free.',
       pages: {
          builder: {
-            title: 'Deck builder',
+            title: 'Deck builder & generator',
             description:
-               'Roll 8-card decks from the cards you have, pick cards one by one, check the average elixir cost and open the deck straight in Clash Royale.',
+               'Build or roll Clash Royale decks from the cards you own: meta-archetype rolls, average elixir, 4-card cycle and a link that opens the deck in game. Free.',
          },
          decks: {
             title: 'My decks',
             description: 'The decks you saved on Deckr, ready to copy, share or open in the game.',
          },
          cards: {
-            title: 'Cards',
+            title: 'All Clash Royale cards by arena',
             description:
-               'Every Clash Royale card by arena. Choose which ones deck rolls use, or use your own collection.',
+               'Every Clash Royale card, grouped by the arena that unlocks it. Pick which ones the deck generator uses, or load your own collection.',
          },
          chests: {
             title: 'Upcoming chests',
@@ -52,6 +53,7 @@ const en: Dictionary = {
       elixirCost: 'Elixir cost',
       emptySlot: 'Empty slot',
       cards: 'Cards',
+      name: (item) => item.name,
       cardTooltip: (name, elixir) => `${name} · ${elixir ?? '?'} elixir`,
       playerDataRefreshed: 'Player data refreshed',
       couldNotRefresh: (reason) => `Couldn’t refresh. ${reason}`,
@@ -82,6 +84,9 @@ const en: Dictionary = {
    footer: {
       tagline: 'Deckr — deck builder for Clash Royale',
       madeBy: 'Made by Lucas Bittencourt',
+      about: 'Deckr is a free, open-source fan project. Card names and arenas follow the game; player data comes from the official Clash Royale API.',
+      sourceCode: 'Code on GitHub',
+      reportIssue: 'Report a problem',
       privacy: 'Privacy policy',
       privacyUrl: 'https://lucasbittencourt.dev/tool/deckr/privacy',
       opensInNewTab: '(opens lucasbittencourt.dev in a new tab)',
@@ -97,6 +102,21 @@ const en: Dictionary = {
             question: 'What is Deckr?',
             answer:
                'Deckr is a free deck builder for Clash Royale. It rolls 8-card decks from the cards you choose, shows the average elixir cost and the 4-card cycle, and opens the deck straight in the game.',
+         },
+         {
+            question: 'How does smart roll work?',
+            answer:
+               'Instead of any 8 cards, smart roll picks a meta archetype (such as Hog Cycle, Log Bait, Golem Beatdown or LavaLoon) and fills each role with cards from your pool: win condition, support, defense, air control, a small spell, a bigger one and cycle cards. The deck plays like a real deck, and Deckr shows what each card is there for.',
+         },
+         {
+            question: 'Can I roll only from the cards I own?',
+            answer:
+               'Yes. On the Cards page, pick the arena you’ve reached or switch cards in and out of the pool one by one. Logged in, “Use my collection” puts exactly the cards you’ve unlocked in the pool. Both random and smart rolls only use the pool.',
+         },
+         {
+            question: 'How do I paste another player’s deck?',
+            answer:
+               'In Clash Royale, share the deck and copy the link (it has ?deck= followed by eight numbers). In Deckr, use “Paste” and paste the link: the deck shows up in the builder, ready to swap cards, save or open in the game.',
          },
          {
             question: 'How do I open a Deckr deck in Clash Royale?',
@@ -116,7 +136,7 @@ const en: Dictionary = {
          {
             question: 'Do I need to log in?',
             answer:
-               'No. Building, rolling and saving decks works without an account, and decks stay in this browser. Logging in with your player tag and a Clash Royale API key shows your profile, collection, battles and upcoming chests, and saves decks to your account.',
+               'No. Building, rolling and saving decks works without an account, and decks stay in this browser. Logging in with your player tag and a Clash Royale API key shows your profile, collection and battles, lets you roll only from cards you’ve unlocked, and saves decks to your account.',
          },
          {
             question: 'Is Deckr an official Clash Royale site?',
@@ -124,6 +144,34 @@ const en: Dictionary = {
                'No. Deckr is a fan project by Lucas Bittencourt, not affiliated with Supercell. Player data comes from the official Clash Royale API.',
          },
       ],
+   },
+
+   guide: {
+      title: 'How to build a good Clash Royale deck',
+      intro: 'A deck has 8 cards, and the ones that work tend to follow the same recipe. Deckr’s smart roll follows it; to build yours by hand, check each point:',
+      steps: [
+         {
+            title: 'One win condition',
+            body: 'The card that takes towers, such as Hog Rider, Giant, Golem, Balloon or X-Bow. Pick one (or two that work together, like Lava Hound and Balloon) and build the rest of the deck to get it to the tower.',
+         },
+         {
+            title: 'Two spells',
+            body: 'A small one, like Zap, The Log or Arrows, for swarms like Skeleton Army and Goblin Gang; and a bigger one, like Fireball, Poison or Rocket, for support troops and to finish a tower.',
+         },
+         {
+            title: 'Defense and air control',
+            body: 'A building or troop that stops tanks, such as Cannon, Inferno Tower or Mini P.E.K.K.A, and at least two cards that hit air troops, such as Musketeer, Electro Wizard or Bats.',
+         },
+         {
+            title: 'Average elixir between 3 and 4',
+            body: 'Cycle decks like Hog Cycle sit near 3 and get back to their win condition fast; heavy decks like Golem Beatdown go above 4 and bet on one big push. The builder shows the average elixir and the 4-card cycle as you pick.',
+         },
+      ],
+      pool: {
+         before: 'Only use the cards you have: on the ',
+         link: 'Cards',
+         after: ' page, pick the arena you’ve reached or load your collection, and rolls will only use those cards.',
+      },
    },
 
    deck: {
@@ -140,13 +188,13 @@ const en: Dictionary = {
    },
 
    builder: {
-      title: 'Deck builder',
+      title: 'Clash Royale deck builder',
       summaryFew: (owned, total) => `Only ${owned} of ${total} cards are in your pool, so rolls leave slots empty.`,
       summary: (owned, total) => `Rolls draw from the ${owned} of ${total} cards in your pool.`,
       roll: 'Roll a deck',
       rollOthers: (count) => `Roll the other ${count}`,
       ready: 'Deck ready: copy the link, open it in Clash Royale or save it.',
-      start: 'Roll a deck, pick cards one by one, or paste a link.',
+      start: 'Roll a random deck, use smart roll for a meta deck, pick cards one by one, or paste a link.',
       slotsLeft: (count) =>
          `Clash Royale only takes full decks: ${count} ${plural(count, 'slot', 'slots')} still empty.`,
       yourDeck: 'Your deck',
@@ -247,7 +295,7 @@ const en: Dictionary = {
    },
 
    pool: {
-      title: 'Cards',
+      title: 'Clash Royale cards',
       summary: { between: ' of ', after: ' cards are in your pool. Deck rolls only use these.' },
       useCollection: 'Use my collection',
       upTo: 'Unlocked up to',

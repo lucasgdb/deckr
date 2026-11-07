@@ -209,7 +209,7 @@ export function LoginDialog() {
 }
 
 const helpTrigger = (label: string) => (
-   <Button variant="ghost" size="icon" className="-my-2 size-10 pointer-fine:sm:size-7" aria-label={label}>
+   <Button variant="ghost" size="icon" className="-my-2.5 size-11 pointer-fine:sm:size-7" aria-label={label}>
       <CircleHelp aria-hidden />
    </Button>
 );
