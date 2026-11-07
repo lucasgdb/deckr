@@ -2,9 +2,6 @@ import { networkInterfaces } from 'node:os';
 import { fileURLToPath } from 'node:url';
 import type { NextConfig } from 'next';
 
-/** Where `/api/*` is forwarded. Read at build time, so Docker passes it as a build argument. */
-const apiUrl = process.env.API_URL ?? 'http://localhost:3001';
-
 /**
  * Hosts allowed to use dev-only resources (hot reload's websocket) besides `localhost`. Next blocks other origins,
  * which silently turns off hot reload when the app is opened at 127.0.0.1 or this machine's IP (e.g. WSL's, from
@@ -74,9 +71,6 @@ const config: NextConfig = {
    },
    async headers() {
       return [{ source: '/:path*', headers: securityHeaders }];
-   },
-   async rewrites() {
-      return [{ source: '/api/:path*', destination: `${apiUrl}/api/:path*` }];
    },
 };
 

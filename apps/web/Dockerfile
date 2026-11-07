@@ -9,17 +9,17 @@ COPY packages/shared/package.json packages/shared/
 RUN pnpm install --frozen-lockfile --filter @deckr/web...
 COPY packages/shared packages/shared
 COPY apps/web apps/web
-# Where Next forwards /api/*; rewrites are fixed at build time.
-ARG API_URL=http://api:3001
 # Public origin for canonical and hreflang URLs, the sitemap and robots.txt. Empty: the build isn't indexed.
 ARG SITE_URL=
-ENV API_URL=$API_URL SITE_URL=$SITE_URL NEXT_TELEMETRY_DISABLED=1
+ENV SITE_URL=$SITE_URL NEXT_TELEMETRY_DISABLED=1
 RUN pnpm --filter @deckr/web build
 
 FROM node:24-alpine
 # Pages rendered on demand (404s) build their metadata at request time, so they need it too.
 ARG SITE_URL=
-ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000 HOSTNAME=0.0.0.0 SITE_URL=$SITE_URL
+# Where /api/* is forwarded (app/api/[...path]/route.ts), read at runtime; Railway sets it as a service variable.
+ARG API_URL=http://api:3001
+ENV NODE_ENV=production NEXT_TELEMETRY_DISABLED=1 PORT=3000 HOSTNAME=0.0.0.0 SITE_URL=$SITE_URL API_URL=$API_URL
 WORKDIR /app
 COPY --from=build --chown=node:node /app/apps/web/.next/standalone ./
 COPY --from=build --chown=node:node /app/apps/web/.next/static ./apps/web/.next/static
